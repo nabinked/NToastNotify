@@ -1,6 +1,9 @@
 ﻿{
   "version": "1.0.0-*",
-
+  "description": "Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects",
+  "copyright": "Nabin Karki Thapa",
+  "title": "NToastNotify",
+  "authors": ["Nabin Kakri Thapa"],
   "dependencies": {
     "NETStandard.Library": "1.6.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
@@ -12,21 +15,28 @@
     "toastr": "2.1.1",
     "Microsoft.Extensions.FileProviders.Embedded": "1.0.0"
   },
-
   "tools": {
     "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final"
   },
-
   "frameworks": {
     "netstandard1.6": {
-      "imports": [ "dnxcore50", "net451" ]
+      "imports": [
+        "dnxcore50",
+        "net451"
+      ]
     }
   },
   "buildOptions": {
     "embed": "Views/**/*.cshtml"
   },
-  "runtimes": { 
-    "win7-x86": {} 
-  }
+  "runtimes": {
+    "win7-x86": {}
+  },
+  "scripts": {
+    "postcompile": [
 
+    ]
+    
+    
+  }
 }
