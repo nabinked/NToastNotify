@@ -1,0 +1,26 @@
+﻿@using NToastNotify
+@inject IToastNotification Notification
+
+@if (Model != null)
+{
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            @if (Notification.ToastMessages.Any())
+            {
+                foreach (var message in Notification.ToastMessages)
+                {
+                    if (!message.IsDisplayed)
+                    {
+            //toastr options
+            @:toastr.options = @Html.Raw(message.ToastOptionsJson);
+                                    @:console.log(toastr.options);
+                                    //show toaster
+            @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title');
+                                                                    message.IsDisplayed = true;
+                    }
+
+                }
+            }
+        })
+    </script>
+}

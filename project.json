@@ -1,0 +1,32 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "version": "1.0.0-preview2-final",
+      "type": "build"
+    },
+    "Newtonsoft.Json": "9.0.1",
+    "toastr": "2.1.1",
+    "Microsoft.Extensions.FileProviders.Embedded": "1.0.0"
+  },
+
+  "tools": {
+    "Microsoft.AspNetCore.Razor.Tools": "1.0.0-preview2-final"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": [ "dnxcore50", "net451" ]
+    }
+  },
+  "buildOptions": {
+    "embed": "Views/**/*.cshtml"
+  },
+  "runtimes": { 
+    "win7-x86": {} 
+  }
+
+}
