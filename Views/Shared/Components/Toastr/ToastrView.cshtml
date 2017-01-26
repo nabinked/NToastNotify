@@ -1,0 +1,40 @@
+﻿@using System.Threading.Tasks
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc.ViewFeatures
+@using Newtonsoft.Json
+@using NToastNotify
+@inject ITempDataProvider TempDataProvider
+@inject IHttpContextAccessor ContextAccessor
+
+@{
+    object messages = TempData[AppSettings.Key];
+    var toastMessages = messages == null ? new List<ToastMessage>() : JsonConvert.DeserializeObject<IList<ToastMessage>>((string)messages);
+}
+
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        @if (toastMessages != null && toastMessages.Any())
+        {
+            foreach (var message in toastMessages)
+            {
+                if (!message.IsDisplayed)
+                {
+                    //toastr options
+                        @:toastr.options = @Html.Raw(message.ToastOptionsJson);
+                                        @*show toaster*@
+                        @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title');
+                    message.IsDisplayed = true;
+
+                }
+
+
+            }
+        }
+        else
+        {
+            //No Messages Found writing default toast options.
+            @:toastr.options = @Html.Raw(ToastOptions.DefaultToastOptionsJson);
+                                                                        }
+    })
+</script>
