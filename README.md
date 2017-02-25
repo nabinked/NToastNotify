@@ -88,6 +88,10 @@ namespace NToastNotify.Web.Controllers
 }
 ```
 and they will be rendered as 
-![Home Page][https://github.com/nabinked/ntoastnotify/sample/ntoastnotify.web/wwwroot/images/home.png]
-![About Page][https://github.com/nabinked/ntoastnotify/sample/ntoastnotify.web/wwwroot/images/about.png]
-![Contact Page][https://github.com/nabinked/ntoastnotify/sample/ntoastnotify.web/wwwroot/images/contact.png]
+
+##### Home Page
+![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/home.png)
+##### About Page
+![About Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/about.PNG)
+##### Contact Page
+![Contact Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/contact.PNG)
