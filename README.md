@@ -17,7 +17,9 @@ services.AddNToastNotify(new ToastOption()
 ```C#
 services.AddNToastNotify();
 ```
-> This line must be added above the `services.AddMvc()` line.
+> This must be added above the `services.AddMvc()` line. 
+The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
+
 
 ### 3. Include the reference to [toastr](http://codeseven.github.io/toastr/) Css and Javascript files in your html.
 ```html
