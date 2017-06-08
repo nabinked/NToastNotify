@@ -53,15 +53,52 @@ namespace NToastNotify
         {
             var toastMessage = new ToastMessage(message, title, notificationType, _globaloptions);
             AddToastMessage(toastMessage);
-
-
         }
 
         public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType, ToastOption toastOptions)
         {
             var toastMessage = new ToastMessage(message, title, notificationType, toastOptions.MergeWith(_globaloptions));
             AddToastMessage(toastMessage);
-
+        }
+        
+        public void AddSuccessToastMessage(string title, string message)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success, _globaloptions);
+        }
+        
+        public void AddSuccessToastMessage(string title, string message, ToastOption toastOptions)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success, toastOptions.MergeWith(_globaloptions));
+        }
+        
+        public void AddWarningToastMessage(string title, string message)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning, _globaloptions);
+        }
+        
+        public void AddWarningToastMessage(string title, string message, ToastOption toastOptions)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning, toastOptions.MergeWith(_globaloptions));
+        }
+        
+        public void AddInfoToastMessage(string title, string message)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Info, _globaloptions);
+        }
+        
+        public void AddInfoToastMessage(string title, string message, ToastOption toastOptions)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Info, toastOptions.MergeWith(_globaloptions));
+        }
+        
+        public void AddErrorToastMessage(string title, string message)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Error, _globaloptions);
+        }
+        
+        public void AddErrorToastMessage(string title, string message, ToastOption toastOptions)
+        {
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Error, toastOptions.MergeWith(_globaloptions));
         }
 
         private void AddToastMessage(ToastMessage toastMessage)
