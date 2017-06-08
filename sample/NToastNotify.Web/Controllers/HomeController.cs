@@ -32,7 +32,6 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
             _toastNotification.AddToastMessage("Success About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
             {
                 PositionClass = NToastNotify.Constants.ToastPositions.BottomFullWidth
@@ -43,7 +42,6 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
             _toastNotification.AddToastMessage("Redirected...", "You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
             {
                 PositionClass = NToastNotify.Constants.ToastPositions.TopCenter

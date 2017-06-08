@@ -12,19 +12,22 @@ namespace NToastNotify
     public class ToastNotification : IToastNotification
     {
         private readonly HttpContext _context;
-
-        private readonly string _key = AppSettings.Key;
+        private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
         private ITempDataDictionary _tempData;
-        private ToastOption _globaloptions;
+        private readonly ToastOption _globaloptions;
+        private readonly string _key = AppSettings.Key;
 
-        public ToastNotification(ITempDataProvider tempDataProvider, IHttpContextAccessor contextAccessor, ToastOption toastOptions)
+
+        public ToastNotification(IHttpContextAccessor contextAccessor,
+            ITempDataDictionaryFactory tempDataDictionaryFactory, ToastOption toastOptions)
         {
-            this._globaloptions = toastOptions;
+            _tempDataDictionaryFactory = tempDataDictionaryFactory;
+            _globaloptions = toastOptions;
             _context = contextAccessor.HttpContext;
         }
 
         /// <summary>
-        /// Gets or sets <see cref="ITempDataDictionary"/> used by <see cref="ViewResult"/>.
+        /// Gets or sets <see cref="ITempDataDictionary"/>/>.
         /// </summary>
         public ITempDataDictionary TempData
         {
@@ -32,8 +35,7 @@ namespace NToastNotify
             {
                 if (_tempData == null)
                 {
-                    var factory = _context?.RequestServices?.GetRequiredService<ITempDataDictionaryFactory>();
-                    _tempData = factory?.GetTempData(_context);
+                    _tempData = _tempDataDictionaryFactory?.GetTempData(_context);
                 }
 
                 return _tempData;
@@ -52,29 +54,48 @@ namespace NToastNotify
         public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType)
         {
             var toastMessage = new ToastMessage(message, title, notificationType, _globaloptions);
-            AddToastMessage(toastMessage);
+            AddMessages(toastMessage);
 
 
         }
 
-        public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType, ToastOption toastOptions)
+        public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType,
+            ToastOption toastOptions)
         {
             var toastMessage = new ToastMessage(message, title, notificationType, toastOptions.MergeWith(_globaloptions));
-            AddToastMessage(toastMessage);
+            AddMessages(toastMessage);
 
         }
 
-        private void AddToastMessage(ToastMessage toastMessage)
+        public IEnumerable<ToastMessage> GetToastMessages()
+        {
+            return GetMessages();
+        }
+
+        #region Privates
+        private void AddMessages(ToastMessage toastMessage)
         {
 
             IList<ToastMessage> messages = new List<ToastMessage>();
             if (TempData.ContainsKey(_key))
             {
-                messages = JsonConvert.DeserializeObject<IList<ToastMessage>>((string)TempData[_key]) ?? new List<ToastMessage>();
+                messages = JsonConvert.DeserializeObject<IList<ToastMessage>>((string)TempData[_key]) ??
+                           new List<ToastMessage>();
             }
             messages.Add(toastMessage);
             var messagesSerialized = JsonConvert.SerializeObject(messages);
             TempData[_key] = messagesSerialized;
         }
+
+        private IEnumerable<ToastMessage> GetMessages()
+        {
+            object messages = TempData[_key];
+            var toastMessages = messages == null
+                ? new List<ToastMessage>()
+                : JsonConvert.DeserializeObject<IList<ToastMessage>>((string)messages);
+            return toastMessages;
+        }
+
+        #endregion
     }
 }

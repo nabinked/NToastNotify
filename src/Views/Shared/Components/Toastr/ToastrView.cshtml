@@ -1,28 +1,16 @@
-﻿@using System.Threading.Tasks
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Mvc.ViewFeatures
-@using Newtonsoft.Json
-@using NToastNotify
-@inject ITempDataProvider TempDataProvider
-@inject IHttpContextAccessor ContextAccessor
-
-@{
-    object messages = TempData[AppSettings.Key];
-    var toastMessages = messages == null ? new List<ToastMessage>() : JsonConvert.DeserializeObject<IList<ToastMessage>>((string)messages);
-}
-
+﻿@using NToastNotify
+@model List<ToastMessage>
 
 <script type="text/javascript" language="javascript">
     document.addEventListener('DOMContentLoaded',function () {
-        @if (toastMessages != null && toastMessages.Any())
+        @if (Model != null && Model.Any())
         {
-            foreach (var message in toastMessages)
+            foreach (var message in Model)
             {
                     //toastr options
-                        @:toastr.options = @Html.Raw(message.ToastOptionsJson);
-                                        @*show toaster*@
-                        @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title');
-
+                    @:toastr.options = @Html.Raw(message.ToastOptionsJson);
+                    @*show toaster*@
+                    @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title');
             }
         }
         else
