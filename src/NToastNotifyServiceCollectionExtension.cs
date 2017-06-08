@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
@@ -25,12 +26,18 @@ namespace NToastNotify
                 options.FileProviders.Add(embeddedFileProvider);
             });
             services.AddScoped<IToastNotification, ToastNotification>();
-            //Check if a temp data provider is already registered.
+            //Check if a TempDataProvider is already registered.
             var provider = services.BuildServiceProvider();
             var tempDataProvider = provider.GetService<ITempDataProvider>();
             if (tempDataProvider == null)
             {
                 services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            }
+            //check if HttpContextAccessor is not registered.
+            var httpContextAccessor = provider.GetService<IHttpContextAccessor>();
+            if (httpContextAccessor == null)
+            {
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             }
             var defaults = defaultOptions ?? ToastOption.Defaults;
             services.AddSingleton(defaults);

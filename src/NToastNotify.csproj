@@ -5,10 +5,10 @@
     <AssemblyTitle>NToastNotify</AssemblyTitle>
     <VersionPrefix>1.0.6</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>NToastNotify</AssemblyName>
     <RuntimeIdentifiers>win7-x86</RuntimeIdentifiers>
-     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
@@ -17,15 +17,9 @@
     <EmbeddedResource Include="Views\**\*.cshtml;compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>10.0.2 </Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc">
-      <Version>2.0.0-preview1-final</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded">
-      <Version>2.0.0-preview1-final </Version>
-    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.1"/>
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
