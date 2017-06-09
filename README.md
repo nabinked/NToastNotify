@@ -10,7 +10,7 @@
 services.AddNToastNotify(new ToastOption()
             {
                 ProgressBar = false,
-                PositionClass = Constants.ToastPositions.BottomCenter
+                PositionClass = ToastPositions.BottomCenter
             });
 ```
 **Or Simply**
@@ -56,7 +56,7 @@ namespace NToastNotify.Web.Controllers
 
             _toastNotification.AddToastMessage("Success Title", "My Success Message", ToastEnums.ToastType.Success, new ToastOption()
             {
-                PositionClass = NToastNotify.Constants.ToastPositions.BottomRight
+                PositionClass = ToastPositions.BottomRight
             });
 
             return View();
@@ -67,7 +67,7 @@ namespace NToastNotify.Web.Controllers
         {
             _toastNotification.AddToastMessage("Success About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
             {
-                PositionClass = NToastNotify.Constants.ToastPositions.BottomFullWidth
+                PositionClass = ToastPositions.BottomFullWidth
             });
 
             return View();
@@ -77,7 +77,7 @@ namespace NToastNotify.Web.Controllers
         {
             _toastNotification.AddToastMessage("Redirected...", "You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
             {
-                PositionClass = NToastNotify.Constants.ToastPositions.TopCenter
+                PositionClass = ToastPositions.TopCenter
             });
             return RedirectToAction("About"); ;
         }
