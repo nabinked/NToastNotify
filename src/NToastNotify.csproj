@@ -3,7 +3,7 @@
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
-    <VersionPrefix>1.0.6</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
     <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>NToastNotify</AssemblyName>
@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.1"/>
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.1" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>

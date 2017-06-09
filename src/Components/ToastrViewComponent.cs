@@ -1,23 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace NToastNotify.Components
 {
     [ViewComponent(Name = "NToastNotify.Toastr")]
     public class ToastrViewComponent : ViewComponent
     {
+        private readonly ToastOption _globalOption;
         public IToastNotification ToastNotification { get; set; }
 
-        public ToastrViewComponent(IToastNotification toastNotification)
+        public ToastrViewComponent(IToastNotification toastNotification, ToastOption globalOption)
         {
+            _globalOption = globalOption;
             ToastNotification = toastNotification;
         }
 
         public IViewComponentResult Invoke()
         {
-            return View("ToastrView", ToastNotification.GetToastMessages());
+            var model = new ToastNotificationViewModel()
+            {
+                ToastMessages = ToastNotification.GetToastMessages(),
+                GlobalOptionJson = _globalOption.MergeWith(ToastOption.Defaults).Json
+            };
+            return View("ToastrView", model);
         }
 
     }

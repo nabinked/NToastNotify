@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace NToastNotify.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IToastNotification _toastNotification;
+        private readonly IToastNotification _toastNotification;
 
         public HomeController(IToastNotification toastNotification)
         {
@@ -16,25 +12,20 @@ namespace NToastNotify.Web.Controllers
         }
         public IActionResult Index()
         {
-            _toastNotification.AddToastMessage("Success Title", "My Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
-            {
-                PositionClass = NToastNotify.Constants.ToastPositions.BottomFullWidth
-            });
-
             _toastNotification.AddToastMessage("Success Title", "My Success Message", ToastEnums.ToastType.Success, new ToastOption()
             {
-                PositionClass = NToastNotify.Constants.ToastPositions.BottomRight
+                PositionClass = ToastPositions.BottomLeft
             });
 
+            _toastNotification.AddWarningToastMessage("WAIT WHAT HEADING??", "My Default Warning Message");
             return View();
-
         }
 
         public IActionResult About()
         {
             _toastNotification.AddToastMessage("Success About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
             {
-                PositionClass = NToastNotify.Constants.ToastPositions.BottomFullWidth
+                PositionClass = ToastPositions.BottomFullWidth
             });
 
             return View();
@@ -44,13 +35,14 @@ namespace NToastNotify.Web.Controllers
         {
             _toastNotification.AddToastMessage("Redirected...", "You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
             {
-                PositionClass = NToastNotify.Constants.ToastPositions.TopCenter
+                PositionClass = ToastPositions.TopCenter
             });
             return RedirectToAction("About"); ;
         }
 
         public IActionResult Error()
         {
+            _toastNotification.AddErrorToastMessage("ERROR", "There was something wrong with this request.");
             return View();
         }
     }

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using NToastNotify.Constants;
 
 namespace NToastNotify
 {
@@ -24,11 +23,11 @@ namespace NToastNotify
         public bool? CloseOnHover { get; set; }
         public int? ExtendedTimeOut { get; set; }
         /// <summary>
-        /// Use the <see cref="NToastNotify.Constants.IconClasses"/> to set the available values
+        /// Use the <see cref="IconClasses"/> to set the available values
         /// </summary>
         public string IconClass { get; set; }
         /// <summary>
-        /// Use the <see cref="NToastNotify.Constants.ToastPositions"/> to set the available values
+        /// Use the <see cref="ToastPositions"/> to set the available values
         /// </summary>
         public string PositionClass { get; set; }
         public int? TimeOut { get; set; }
@@ -45,46 +44,44 @@ namespace NToastNotify
         public bool? CloseButton { get; set; }
         public string Onclick { get; set; }
 
-        public static string DefaultsJson => JsonConvert.SerializeObject(Defaults, new JsonSerializerSettings() { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-        public static ToastOption Defaults
+        [JsonIgnore]
+        public string Json => JsonConvert.SerializeObject(this, new JsonSerializerSettings()
         {
-            get
-            {
-                return new ToastOption()
-                {
-                    TapToDismiss = true,
-                    ToastClass = "toast",
-                    ContainerId = "toast-container",
-                    Debug = false,
-                    ShowMethod = "fadeIn",
-                    ShowDuration = 300,
-                    ShowEasing = "swing",
-                    HideMethod = "fadeOut",
-                    HideDuration = 1000,
-                    HideEasing = "linear",
-                    CloseMethod = false,
-                    CloseDuration = false,
-                    CloseEasing = false,
-                    CloseOnHover = true,
-                    ExtendedTimeOut = 1000,
-                    IconClass = IconClasses.Info,
-                    PositionClass = ToastPositions.TopRight,
-                    TimeOut = 5000,
-                    TitleClass = "toast-title",
-                    MessageClass = "toast-message",
-                    EscapeHtml = false,
-                    Target = "body",
-                    CloseHtml = "<button type='button'>&times;</button>",
-                    CloseClass = "toast-close-button",
-                    NewestOnTop = true,
-                    PreventDuplicates = false,
-                    ProgressBar = true,
-                    Rtl = false,
-                    CloseButton = true
-                };
+            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            NullValueHandling = NullValueHandling.Ignore
+        });
 
-
-            }
-        }
+        public static ToastOption Defaults => new ToastOption()
+        {
+            TapToDismiss = true,
+            ToastClass = "toast",
+            ContainerId = "toast-container",
+            Debug = false,
+            ShowMethod = "fadeIn",
+            ShowDuration = 300,
+            ShowEasing = "swing",
+            HideMethod = "fadeOut",
+            HideDuration = 1000,
+            HideEasing = "linear",
+            CloseMethod = false,
+            CloseDuration = false,
+            CloseEasing = false,
+            CloseOnHover = true,
+            ExtendedTimeOut = 1000,
+            IconClass = IconClasses.Info,
+            PositionClass = ToastPositions.TopRight,
+            TimeOut = 5000,
+            TitleClass = "toast-title",
+            MessageClass = "toast-message",
+            EscapeHtml = false,
+            Target = "body",
+            CloseHtml = "<button type='button'>&times;</button>",
+            CloseClass = "toast-close-button",
+            NewestOnTop = true,
+            PreventDuplicates = false,
+            ProgressBar = true,
+            Rtl = false,
+            CloseButton = true
+        };
     }
 }

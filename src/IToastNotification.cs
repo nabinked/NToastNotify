@@ -23,5 +23,7 @@ namespace NToastNotify
         void AddErrorToastMessage(string title, string message);
         
         void AddErrorToastMessage(string title, string message, ToastOption toastOptions);
+
+        IEnumerable<ToastMessage> GetToastMessages();
     }
 }

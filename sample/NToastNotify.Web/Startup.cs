@@ -32,7 +32,7 @@ namespace NToastNotify.Web
             services.AddNToastNotify(new ToastOption()
             {
                 ProgressBar = false,
-                PositionClass = Constants.ToastPositions.BottomCenter
+                PositionClass = ToastPositions.BottomCenter
             });
             // Add framework services.
             services.AddMvc();

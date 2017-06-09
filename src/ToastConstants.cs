@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
-namespace NToastNotify.Constants
+﻿namespace NToastNotify
 {
     public class ToastPositions
     {

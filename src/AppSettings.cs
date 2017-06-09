@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NToastNotify
+﻿namespace NToastNotify
 {
     public class AppSettings
     {

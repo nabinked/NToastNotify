@@ -1,22 +1,17 @@
 ﻿@using NToastNotify
-@model List<ToastMessage>
+@model ToastNotificationViewModel
 
 <script type="text/javascript" language="javascript">
-    document.addEventListener('DOMContentLoaded',function () {
-        @if (Model != null && Model.Any())
+    document.addEventListener('DOMContentLoaded', function () {
+        toastr.options = @Html.Raw(Model.GlobalOptionJson);
+        @if (Model != null && Model.ToastMessages.Any())
         {
-            foreach (var message in Model)
+            foreach (var message in Model.ToastMessages)
             {
-                    //toastr options
-                    @:toastr.options = @Html.Raw(message.ToastOptionsJson);
-                    @*show toaster*@
-                    @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title');
+                //toastr options
+                @*show toaster*@
+                @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title' @if (message.ToastOptions != null){<text>,</text> @Html.Raw(message.ToastOptions.Json)});
             }
         }
-        else
-        {
-            //No Messages Found writing default toast options.
-            @:toastr.options = @Html.Raw(ToastOption.DefaultsJson);
-        }
-    })
+    });
 </script>
