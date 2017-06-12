@@ -8,17 +8,28 @@ namespace NToastNotify
         void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType,
             ToastOption toastOptions);
         
+        void AddSuccessToastMessage(string message);
+        
         void AddSuccessToastMessage(string title, string message);
         
         void AddSuccessToastMessage(string title, string message, ToastOption toastOptions);
+        
+        
+        void AddWarningToastMessage(string message);
         
         void AddWarningToastMessage(string title, string message);
         
         void AddWarningToastMessage(string title, string message, ToastOption toastOptions);
         
+        
+        void AddInfoToastMessage(string message);
+        
         void AddInfoToastMessage(string title, string message);
         
         void AddInfoToastMessage(string title, string message, ToastOption toastOptions);
+        
+        
+        void AddErrorToastMessage(string message);
         
         void AddErrorToastMessage(string title, string message);
         
