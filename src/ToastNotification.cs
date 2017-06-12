@@ -57,6 +57,12 @@ namespace NToastNotify
             AddMessages(toastMessage);
         }
 
+        public void AddSuccessToastMessage(string message)
+        {
+            var toastMessage = new ToastMessage(message, "Success", ToastEnums.ToastType.Success);
+            AddMessages(toastMessage);
+        }
+        
         public void AddSuccessToastMessage(string title, string message)
         {
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success);
@@ -66,6 +72,12 @@ namespace NToastNotify
         public void AddSuccessToastMessage(string title, string message, ToastOption toastOptions)
         {
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success, toastOptions);
+            AddMessages(toastMessage);
+        }
+        
+        public void AddWarningToastMessage(string message)
+        {
+            var toastMessage = new ToastMessage(message, "Warning", ToastEnums.ToastType.Warning);
             AddMessages(toastMessage);
         }
 
@@ -80,6 +92,12 @@ namespace NToastNotify
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning, toastOptions);
             AddMessages(toastMessage);
         }
+        
+        public void AddInfoToastMessage(string message)
+        {
+            var toastMessage = new ToastMessage(message, "Info", ToastEnums.ToastType.Info);
+            AddMessages(toastMessage);
+        }
 
         public void AddInfoToastMessage(string title, string message)
         {
@@ -90,6 +108,12 @@ namespace NToastNotify
         public void AddInfoToastMessage(string title, string message, ToastOption toastOptions)
         {
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Info, toastOptions);
+            AddMessages(toastMessage);
+        }
+        
+        public void AddErrorToastMessage(string message)
+        {
+            var toastMessage = new ToastMessage(message, "Error", ToastEnums.ToastType.Error);
             AddMessages(toastMessage);
         }
 
