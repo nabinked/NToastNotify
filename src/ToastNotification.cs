@@ -49,84 +49,37 @@ namespace NToastNotify
         public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType)
         {
             var toastMessage = new ToastMessage(message, title, notificationType);
-            AddMessages(toastMessage);
+            AddMessage(toastMessage);
         }
         public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType, ToastOption toastOptions)
         {
             var toastMessage = new ToastMessage(message, title, notificationType, toastOptions);
-            AddMessages(toastMessage);
+            AddMessage(toastMessage);
         }
 
-        public void AddSuccessToastMessage(string message)
-        {
-            var toastMessage = new ToastMessage(message, "Success", ToastEnums.ToastType.Success);
-            AddMessages(toastMessage);
-        }
-        
-        public void AddSuccessToastMessage(string title, string message)
+
+        public void AddSuccessToastMessage(string message = "Task Succesfull", string title = "Success", ToastOption option = null)
         {
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success);
-            AddMessages(toastMessage);
+            AddMessage(toastMessage);
         }
 
-        public void AddSuccessToastMessage(string title, string message, ToastOption toastOptions)
-        {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success, toastOptions);
-            AddMessages(toastMessage);
-        }
-        
-        public void AddWarningToastMessage(string message)
-        {
-            var toastMessage = new ToastMessage(message, "Warning", ToastEnums.ToastType.Warning);
-            AddMessages(toastMessage);
-        }
-
-        public void AddWarningToastMessage(string title, string message)
-        {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning);
-            AddMessages(toastMessage);
-        }
-
-        public void AddWarningToastMessage(string title, string message, ToastOption toastOptions)
-        {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning, toastOptions);
-            AddMessages(toastMessage);
-        }
-        
-        public void AddInfoToastMessage(string message)
-        {
-            var toastMessage = new ToastMessage(message, "Info", ToastEnums.ToastType.Info);
-            AddMessages(toastMessage);
-        }
-
-        public void AddInfoToastMessage(string title, string message)
+        public void AddInfoToastMessage(string message, string title = "Info", ToastOption option = null)
         {
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Info);
-            AddMessages(toastMessage);
+            AddMessage(toastMessage);
         }
 
-        public void AddInfoToastMessage(string title, string message, ToastOption toastOptions)
+        public void AddWarningToastMessage(string message, string title = "Warning", ToastOption option = null)
         {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Info, toastOptions);
-            AddMessages(toastMessage);
-        }
-        
-        public void AddErrorToastMessage(string message)
-        {
-            var toastMessage = new ToastMessage(message, "Error", ToastEnums.ToastType.Error);
-            AddMessages(toastMessage);
+            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning);
+            AddMessage(toastMessage);
         }
 
-        public void AddErrorToastMessage(string title, string message)
+        public void AddErrorToastMessage(string message = "There was an error.", string title = "Error", ToastOption option = null)
         {
             var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Error);
-            AddMessages(toastMessage);
-        }
-
-        public void AddErrorToastMessage(string title, string message, ToastOption toastOptions)
-        {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Error, toastOptions);
-            AddMessages(toastMessage);
+            AddMessage(toastMessage);
         }
 
         public IEnumerable<ToastMessage> GetToastMessages()
@@ -135,7 +88,7 @@ namespace NToastNotify
         }
 
         #region Privates
-        private void AddMessages(ToastMessage toastMessage)
+        private void AddMessage(ToastMessage toastMessage)
         {
 
             IList<ToastMessage> messages = new List<ToastMessage>();

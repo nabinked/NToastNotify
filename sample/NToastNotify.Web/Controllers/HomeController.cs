@@ -12,12 +12,20 @@ namespace NToastNotify.Web.Controllers
         }
         public IActionResult Index()
         {
-            _toastNotification.AddToastMessage("Success Title", "My Success Message", ToastEnums.ToastType.Success, new ToastOption()
+            //Testing Default Methods
+            //Success
+            _toastNotification.AddSuccessToastMessage();
+            //Info
+            _toastNotification.AddInfoToastMessage("This is an info message");
+            //Warning
+            _toastNotification.AddWarningToastMessage("This is a warning message");
+            //Wrror
+            _toastNotification.AddErrorToastMessage();
+
+            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", ToastEnums.ToastType.Success, new ToastOption()
             {
                 PositionClass = ToastPositions.BottomLeft
             });
-
-            _toastNotification.AddWarningToastMessage("WAIT WHAT HEADING??", "My Default Warning Message");
             return View();
         }
 
