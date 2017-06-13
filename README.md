@@ -38,62 +38,64 @@ This renders the View necessary for the view component
 
 ```c#
 namespace NToastNotify.Web.Controllers
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly IToastNotification _toastNotification;
+
+    public HomeController(IToastNotification toastNotification)
     {
-        private IToastNotification _toastNotification;
+        _toastNotification = toastNotification;
+    }
+    public IActionResult Index()
+    {
+        //Testing Default Methods
+        //Success
+        _toastNotification.AddSuccessToastMessage();
+        //Info
+        _toastNotification.AddInfoToastMessage("This is an info message");
+        //Warning
+        _toastNotification.AddWarningToastMessage("This is a warning message");
+        //Wrror
+        _toastNotification.AddErrorToastMessage();
 
-        public HomeController(IToastNotification toastNotification)
+        _toastNotification.AddToastMessage("Custom Title", "My Custom Message", ToastEnums.ToastType.Success, new ToastOption()
         {
-            _toastNotification = toastNotification;
-        }
-        public IActionResult Index()
+            PositionClass = ToastPositions.BottomLeft
+        });
+        return View();
+    }
+
+    public IActionResult About()
+    {
+        _toastNotification.AddToastMessage("Success About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
         {
-            _toastNotification.AddToastMessage("Success Title", "My Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
-            {
-                PositionClass = NToastNotify.Constants.ToastPositions.BottomFullWidth
-            });
+            PositionClass = ToastPositions.BottomFullWidth
+        });
 
-            _toastNotification.AddToastMessage("Success Title", "My Success Message", ToastEnums.ToastType.Success, new ToastOption()
-            {
-                PositionClass = ToastPositions.BottomRight
-            });
+        return View();
+    }
 
-            return View();
-
-        }
-
-        public IActionResult About()
+    public IActionResult Contact()
+    {
+        _toastNotification.AddToastMessage("Redirected...", "You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
         {
-            _toastNotification.AddToastMessage("Success About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
-            {
-                PositionClass = ToastPositions.BottomFullWidth
-            });
+            PositionClass = ToastPositions.TopCenter
+        });
+        return RedirectToAction("About"); ;
+    }
 
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            _toastNotification.AddToastMessage("Redirected...", "You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
-            {
-                PositionClass = ToastPositions.TopCenter
-            });
-            return RedirectToAction("About"); ;
-        }
-
-        public IActionResult Error()
-        {
-            return View();
-        }
+    public IActionResult Error()
+    {
+        _toastNotification.AddErrorToastMessage("ERROR", "There was something wrong with this request.");
+        return View();
     }
 }
 ```
 and they will be rendered as 
 
 ##### Home Page
-![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/home.png)
+![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/home-2-0-1.png)
 ##### About Page
-![About Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/about.PNG)
+![About Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/about-2-0-1.PNG)
 ##### Contact Page
-![Contact Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/contact.PNG)
+![Contact Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/contact-2-0-1.PNG)
