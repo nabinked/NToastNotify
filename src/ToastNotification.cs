@@ -10,14 +10,17 @@ namespace NToastNotify
     {
         private readonly HttpContext _context;
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
+        private readonly NToastNotifyOptions _defaultMessageOptions;
         private ITempDataDictionary _tempData;
         private readonly string _key = AppSettings.Key;
 
 
         public ToastNotification(IHttpContextAccessor contextAccessor,
-            ITempDataDictionaryFactory tempDataDictionaryFactory)
+            ITempDataDictionaryFactory tempDataDictionaryFactory,
+            NToastNotifyOptions nToastNotifyOptions)
         {
             _tempDataDictionaryFactory = tempDataDictionaryFactory;
+            _defaultMessageOptions = nToastNotifyOptions.MergeWith(NToastNotifyOptions.Defaults);
             _context = contextAccessor.HttpContext;
         }
 
@@ -46,6 +49,8 @@ namespace NToastNotify
             }
         }
 
+        public NToastNotifyOptions NToastNotifyOptions { get; }
+
         public void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType)
         {
             var toastMessage = new ToastMessage(message, title, notificationType);
@@ -58,27 +63,27 @@ namespace NToastNotify
         }
 
 
-        public void AddSuccessToastMessage(string message = "Task Succesfull", string title = "Success", ToastOption option = null)
+        public void AddSuccessToastMessage(string message = null, string title = null, ToastOption toastOptions = null)
         {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Success);
+            var toastMessage = new ToastMessage(message ?? _defaultMessageOptions.SuccessMessage, title ?? _defaultMessageOptions.SuccessTitle, ToastEnums.ToastType.Success, toastOptions);
             AddMessage(toastMessage);
         }
 
-        public void AddInfoToastMessage(string message, string title = "Info", ToastOption option = null)
+        public void AddInfoToastMessage(string message, string title = null, ToastOption toastOptions = null)
         {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Info);
+            var toastMessage = new ToastMessage(message ?? _defaultMessageOptions.InfoMessage, title ?? _defaultMessageOptions.InfoTitle, ToastEnums.ToastType.Info, toastOptions);
             AddMessage(toastMessage);
         }
 
-        public void AddWarningToastMessage(string message, string title = "Warning", ToastOption option = null)
+        public void AddWarningToastMessage(string message = null, string title = null, ToastOption toastOptions = null)
         {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Warning);
+            var toastMessage = new ToastMessage(message ?? _defaultMessageOptions.WarningMessage, title ?? _defaultMessageOptions.WarningTitle, ToastEnums.ToastType.Warning, toastOptions);
             AddMessage(toastMessage);
         }
 
-        public void AddErrorToastMessage(string message = "There was an error.", string title = "Error", ToastOption option = null)
+        public void AddErrorToastMessage(string message = null, string title = null, ToastOption toastOptions = null)
         {
-            var toastMessage = new ToastMessage(message, title, ToastEnums.ToastType.Error);
+            var toastMessage = new ToastMessage(message ?? _defaultMessageOptions.ErrorMessage, title ?? _defaultMessageOptions.ErrorTitle, ToastEnums.ToastType.Error, toastOptions);
             AddMessage(toastMessage);
         }
 

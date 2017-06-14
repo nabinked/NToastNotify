@@ -14,12 +14,14 @@ namespace NToastNotify.Web.Controllers
         {
             //Testing Default Methods
             //Success
+            _toastNotification.AddSuccessToastMessage("Same for success message", "Success title specified in controller action");
+            // Success with default options (taking into account the overwritten defaults when initializing in Startup.cs)
             _toastNotification.AddSuccessToastMessage();
             //Info
-            _toastNotification.AddInfoToastMessage("This is an info message");
+            _toastNotification.AddInfoToastMessage();
             //Warning
-            _toastNotification.AddWarningToastMessage("This is a warning message");
-            //Wrror
+            _toastNotification.AddWarningToastMessage();
+            //Error
             _toastNotification.AddErrorToastMessage();
 
             _toastNotification.AddToastMessage("Custom Title", "My Custom Message", ToastEnums.ToastType.Success, new ToastOption()
@@ -31,11 +33,11 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult About()
         {
-            _toastNotification.AddToastMessage("Success About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
+            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
             {
                 PositionClass = ToastPositions.BottomFullWidth
             });
-
+            
             return View();
         }
 

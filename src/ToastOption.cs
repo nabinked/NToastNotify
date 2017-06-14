@@ -45,17 +45,15 @@ namespace NToastNotify
         public string Onclick { get; set; }
         
         // Default message and title options
-        public string DefaultSuccessTitle {get; set;}
-        public string DefaultSuccessMessage {get; set;}
+        public string SuccessTitle {get; set;}
+        public string SuccessMessage {get; set;}
         
-        public string DefaultInfoTitle {get; set;}
-        public string DefaultInfoMessage{get; set;}
+        public string InfoTitle {get; set;}
         
-        public string DefaultWarningTitle {get; set;}        
-        public string DefaultWarningMessage {get; set;}
+        public string WarningTitle {get; set;}        
         
-        public string DefaultErrorTitle {get; set;}
-        public string DefaultErrorMessage {get; set;}
+        public string ErrorTitle {get; set;}
+        public string ErrorMessage {get; set;}
         
 
         [JsonIgnore]
@@ -95,7 +93,13 @@ namespace NToastNotify
             PreventDuplicates = false,
             ProgressBar = true,
             Rtl = false,
-            CloseButton = true
+            CloseButton = true,
+            SuccessTitle = "Success",
+            SuccessMessage = "Task completed successfully",
+            InfoTitle = "Info",
+            WarningTitle = "Warning",
+            ErrorTitle = "Error",
+            ErrorMessage = "Task could not complete successfully"
         };
     }
 }

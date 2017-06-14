@@ -33,6 +33,9 @@ namespace NToastNotify.Web
             {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
+            }, new NToastNotifyOptions()
+            {
+                SuccessMessage = "Overwritten default success message"
             });
             // Add framework services.
             services.AddMvc();

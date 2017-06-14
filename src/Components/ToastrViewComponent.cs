@@ -5,8 +5,8 @@ namespace NToastNotify.Components
     [ViewComponent(Name = "NToastNotify.Toastr")]
     public class ToastrViewComponent : ViewComponent
     {
-        private readonly ToastOption _globalOption;
-        public IToastNotification ToastNotification { get; set; }
+        private readonly ToastOption _globalOption;                 // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
+        public IToastNotification ToastNotification { get; set; }   // Passed from DI
 
         public ToastrViewComponent(IToastNotification toastNotification, ToastOption globalOption)
         {

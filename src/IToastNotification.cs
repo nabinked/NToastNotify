@@ -8,13 +8,13 @@ namespace NToastNotify
         void AddToastMessage(string title, string message, ToastEnums.ToastType notificationType,
             ToastOption toastOptions);
 
-        void AddSuccessToastMessage(string message = "Task Succesfull.", string title = "Success", ToastOption option = null);
+        void AddSuccessToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
 
-        void AddInfoToastMessage(string message, string title = "Info", ToastOption option = null);
+        void AddInfoToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
 
-        void AddWarningToastMessage(string message, string title = "Warning", ToastOption option = null);
+        void AddWarningToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
 
-        void AddErrorToastMessage(string message = "There was an error.", string title = "Error", ToastOption option = null);
+        void AddErrorToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
 
         IEnumerable<ToastMessage> GetToastMessages();
     }

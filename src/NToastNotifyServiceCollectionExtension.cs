@@ -10,7 +10,7 @@ namespace NToastNotify
 {
     public static class NToastNotifyServiceCollectionExtension
     {
-        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastOption defaultOptions = null)
+        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastOption defaultOptions = null, NToastNotifyOptions nToastNotifyOptions = null)
         {
             if (services == null)
             {
@@ -38,8 +38,14 @@ namespace NToastNotify
             {
                 services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             }
+
+            // Add the toastr default options that will be rendered by the viewcomponent
             var defaults = defaultOptions ?? ToastOption.Defaults;
             services.AddSingleton(defaults);
+
+            // Add the NToastifyOptions to the services container for DI retrieval (options that are not rendered as they are not part of the Toastr.js plugin)
+            var defaultNToastNotifyOptions = nToastNotifyOptions ?? NToastNotifyOptions.Defaults;
+            services.AddSingleton(defaultNToastNotifyOptions);     
             return services;
         }
     }
