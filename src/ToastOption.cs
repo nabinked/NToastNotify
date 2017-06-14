@@ -43,6 +43,20 @@ namespace NToastNotify
         public bool? Rtl { get; set; }
         public bool? CloseButton { get; set; }
         public string Onclick { get; set; }
+        
+        // Default message and title options
+        public string DefaultSuccessTitle {get; set;}
+        public string DefaultSuccessMessage {get; set;}
+        
+        public string DefaultInfoTitle {get; set;}
+        public string DefaultInfoMessage{get; set;}
+        
+        public string DefaultWarningTitle {get; set;}        
+        public string DefaultWarningMessage {get; set;}
+        
+        public string DefaultErrorTitle {get; set;}
+        public string DefaultErrorMessage {get; set;}
+        
 
         [JsonIgnore]
         public string Json => JsonConvert.SerializeObject(this, new JsonSerializerSettings()
