@@ -10,3 +10,4 @@ IF "%1"=="Release" (
     nuget push "%2" %nugetApiKey% -source "nuget.org"    
     )    
 )
+exit 0;
