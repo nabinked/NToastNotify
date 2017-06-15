@@ -13,14 +13,18 @@ namespace NToastNotify.Web.Controllers
         public IActionResult Index()
         {
             //Testing Default Methods
+            
             //Success
             _toastNotification.AddSuccessToastMessage("Same for success message", "Success title specified in controller action");
             // Success with default options (taking into account the overwritten defaults when initializing in Startup.cs)
             _toastNotification.AddSuccessToastMessage();
+            
             //Info
             _toastNotification.AddInfoToastMessage();
+            
             //Warning
             _toastNotification.AddWarningToastMessage();
+            
             //Error
             _toastNotification.AddErrorToastMessage();
 

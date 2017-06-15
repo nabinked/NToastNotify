@@ -31,6 +31,6 @@
   </PropertyGroup>
   <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
     <Exec Command="dotnet pack --no-build --output nupkgs" />
-    <Exec Command="call nugetpush $(Configuration) $(MSBuildProjectDirectory)/nupkgs/$(AssemblyName).$(Version).nupkg" />
+    <Exec Command="call nugetpush $(Configuration) $(MSBuildProjectDirectory)\nupkgs\$(AssemblyName).$(Version).nupkg" />
   </Target>
 </Project>

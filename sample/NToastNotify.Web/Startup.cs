@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,20 +23,17 @@ namespace NToastNotify.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-
             services.AddNToastNotify(new ToastOption()
             {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
-            }, new NToastNotifyOptions()
+            }, new NToastNotifyOption()
             {
                 SuccessMessage = "Overwritten default success message"
             });
+
             // Add framework services.
             services.AddMvc();
-
-           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,10 +45,6 @@ namespace NToastNotify.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
-                // Browser Link is not compatible with Kestrel 1.1.0
-                // For details on enabling Browser Link, see https://go.microsoft.com/fwlink/?linkid=840936
-                // app.UseBrowserLink();
             }
             else
             {

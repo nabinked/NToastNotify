@@ -6,7 +6,7 @@
     /// and storing them in the TempData
     /// TODO: Rename this class to better represent what it does???
     /// </summary>
-    public class NToastNotifyOptions
+    public class NToastNotifyOption
     {
         // Default message and title options
         public string SuccessTitle { get; set; }
@@ -21,16 +21,16 @@
         public string ErrorTitle { get; set; }
         public string ErrorMessage { get; set; }
 
-        public static NToastNotifyOptions Defaults => new NToastNotifyOptions()
+        public static NToastNotifyOption Defaults => new NToastNotifyOption()
         {
             SuccessTitle = "Success",
-            SuccessMessage = "Task completed successfully",
+            SuccessMessage = "Task completed successfully.",
             InfoTitle = "Info",
-            InfoMessage = "This is an information notification",
+            InfoMessage = "This is an information notification.",
             WarningTitle = "Warning",
-            WarningMessage = "This is a warning notification",
+            WarningMessage = "This is a warning notification.",
             ErrorTitle = "Error",
-            ErrorMessage = "Task could not complete successfully"
+            ErrorMessage = "Task could not complete successfully."
         };
     }
 }
