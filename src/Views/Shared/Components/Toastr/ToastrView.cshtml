@@ -4,7 +4,7 @@
 <script type="text/javascript" language="javascript">
     document.addEventListener('DOMContentLoaded', function () {
         toastr.options = @Html.Raw(Model.GlobalOptionJson);
-        @if (Model != null && Model.ToastMessages.Any())
+        @if (Model != null && Model.ToastMessages!=null && Model.ToastMessages.Any())
         {
             foreach (var message in Model.ToastMessages)
             {

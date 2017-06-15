@@ -32,6 +32,8 @@ namespace NToastNotify.Web.Controllers
             {
                 PositionClass = ToastPositions.BottomLeft
             });
+
+            var messages = _toastNotification.PeekToastMessages();
             return View();
         }
 
@@ -57,6 +59,11 @@ namespace NToastNotify.Web.Controllers
         public IActionResult Error()
         {
             _toastNotification.AddErrorToastMessage("ERROR", "There was something wrong with this request.");
+            return View();
+        }
+
+        public IActionResult Empty()
+        {
             return View();
         }
     }
