@@ -8,13 +8,16 @@ namespace NToastNotify.Tests
         public void MergeWith_ValidArguments_ReturnMergedObject()
         {
             //Arrange
-            var primaryObject = new { prop1 = "p1", prop2 = "p2", prop3 = "p3" };
-            var secondaryObject = new { prop1 = "s1", prop3 = "s3" };
+            var obj1 = new ToastOption(){
+                PositionClass = "primary"
+            };
+            var obj2 = new ToastOption(){ 
+               CloseClass = "Close" 
+             };
             //Act
-            primaryObject.MergeWith<object>(secondaryObject);
+            obj2.MergeWith(obj1);
 
             //Assert
-            Assert.Same(secondaryObject.prop3, primaryObject.prop3);
         }
     }
 }
