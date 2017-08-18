@@ -13,18 +13,18 @@ namespace NToastNotify.Web.Controllers
         public IActionResult Index()
         {
             //Testing Default Methods
-            
+
             //Success
             _toastNotification.AddSuccessToastMessage("Same for success message", "Success title specified in controller action");
             // Success with default options (taking into account the overwritten defaults when initializing in Startup.cs)
             _toastNotification.AddSuccessToastMessage();
-            
+
             //Info
             _toastNotification.AddInfoToastMessage();
-            
+
             //Warning
             _toastNotification.AddWarningToastMessage();
-            
+
             //Error
             _toastNotification.AddErrorToastMessage();
 
@@ -43,13 +43,13 @@ namespace NToastNotify.Web.Controllers
             {
                 PositionClass = ToastPositions.BottomFullWidth
             });
-            
+
             return View();
         }
 
         public IActionResult Contact()
         {
-            _toastNotification.AddToastMessage("Redirected...", "You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
+            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
             {
                 PositionClass = ToastPositions.TopCenter
             });

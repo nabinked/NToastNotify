@@ -22,8 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0-preview2-final" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0-preview2-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
