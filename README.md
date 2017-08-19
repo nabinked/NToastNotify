@@ -2,8 +2,10 @@
 ##### ASP.NET abstraction for javascript toastr to render server side managed Toast Notifications.
 
 ## Get Started
-### 1. Install From Nuget
-`Install-Package NToastNotify`
+### 1. Install From [Nuget](https://www.nuget.org/packages/NToastNotify/)
+Visual Studio Nuget Package Manager - `Install-Package NToastNotify`
+
+dotnet CLI - `dotnet add package NToastNotify`
 
 ### 2. Add NtoastNotify to the ASP.NET Core Services
 ```C#
@@ -22,6 +24,7 @@ The ToastOption parameter acts as the global options for the toast library. If n
 
 
 ### 3. Include the reference to [toastr](http://codeseven.github.io/toastr/) Css and Javascript files in your html.
+Download the toastr library files if you haven't done that already and include them in your project.
 ```html
 <link href="toastr.css" rel="stylesheet"/>
 <script src="toastr.js"></script>
