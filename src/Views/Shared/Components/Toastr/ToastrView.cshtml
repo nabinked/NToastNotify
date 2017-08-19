@@ -1,4 +1,5 @@
 ﻿@using NToastNotify
+@using NToastNotify.Helpers
 @model ToastNotificationViewModel
 
 <script type="text/javascript" language="javascript">
@@ -10,7 +11,7 @@
             {
                 //toastr options
                 @*show toaster*@
-                @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message', '@message.Title' @if (message.ToastOptions != null){<text>,</text> @Html.Raw(message.ToastOptions.Json)});
+                @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message.ToHtmlString()', '@message.Title' @if (message.ToastOptions != null){<text>,</text> @Html.Raw(message.ToastOptions.Json)});
             }
         }
     });
