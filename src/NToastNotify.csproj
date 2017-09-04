@@ -3,13 +3,13 @@
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
-    <VersionPrefix>3.0.1</VersionPrefix>
+    <VersionPrefix>3.0.2</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
     <PackageProjectUrl>https://github.com/nabinked/NToastNotify</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>ASP.NET Core MVC toastr toast notification server side rendered </PackageTags>
     <RepositoryUrl>https://github.com/nabinked/NToastNotify</RepositoryUrl>
-    <PackageReleaseNotes>Added a fix to Html Strings</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed PeekMessages not peeking.</PackageReleaseNotes>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>NToastNotify</AssemblyName>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>

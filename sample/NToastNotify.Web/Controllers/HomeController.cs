@@ -49,7 +49,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult Contact()
         {
-            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> You were redirected from Contact Page.", ToastEnums.ToastType.Info, new ToastOption()
+            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", ToastEnums.ToastType.Info, new ToastOption()
             {
                 PositionClass = ToastPositions.TopCenter
             });
