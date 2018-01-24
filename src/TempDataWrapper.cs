@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 
@@ -33,7 +32,7 @@ namespace NToastNotify
         {
             if (TempData.ContainsKey(key))
             {
-                return JsonConvert.DeserializeObject<T>(TempData[key].ToString());
+                return JsonConvert.DeserializeObject<T>(TempData.Peek(key).ToString());
             }
             return default(T);
         }
