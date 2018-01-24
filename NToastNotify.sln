@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.27130.2024
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NToastNotify", "src\NToastNotify.csproj", "{70FC6753-E13C-4FF0-8FC1-914B9478A11F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NToastNotify.Web", "sample\NToastNotify.Web\NToastNotify.Web.csproj", "{7F6ACC1A-2ABC-4F6B-A193-A5165E5E4555}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NToastNotify.Tests", "tests\NToastNotify.Tests\NToastNotify.Tests.csproj", "{29A138CE-857C-48A7-9695-7FCAB9569D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NToastNotify.Tests", "tests\NToastNotify.Tests\NToastNotify.Tests.csproj", "{29A138CE-857C-48A7-9695-7FCAB9569D8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{70B483EB-17CD-4DA9-B746-E03785D5CCB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NToastNotify.Web.FeatureFolders", "sample\NToastNotify.Web.FeatureFolders\NToastNotify.Web.FeatureFolders.csproj", "{23ADA630-80E4-4604-BA4E-0E75E95A9719}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,8 +59,27 @@ Global
 		{29A138CE-857C-48A7-9695-7FCAB9569D8B}.Release|x64.Build.0 = Release|Any CPU
 		{29A138CE-857C-48A7-9695-7FCAB9569D8B}.Release|x86.ActiveCfg = Release|Any CPU
 		{29A138CE-857C-48A7-9695-7FCAB9569D8B}.Release|x86.Build.0 = Release|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Debug|x64.Build.0 = Debug|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Debug|x86.Build.0 = Debug|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Release|x64.ActiveCfg = Release|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Release|x64.Build.0 = Release|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Release|x86.ActiveCfg = Release|Any CPU
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7F6ACC1A-2ABC-4F6B-A193-A5165E5E4555} = {70B483EB-17CD-4DA9-B746-E03785D5CCB3}
+		{23ADA630-80E4-4604-BA4E-0E75E95A9719} = {70B483EB-17CD-4DA9-B746-E03785D5CCB3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4720901-6BAC-48CE-A03E-85759AC6B66E}
 	EndGlobalSection
 EndGlobal

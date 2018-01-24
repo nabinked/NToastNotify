@@ -3,16 +3,23 @@
 @model ToastNotificationViewModel
 
 <script type="text/javascript" language="javascript">
-    document.addEventListener('DOMContentLoaded', function () {
-        toastr.options = @Html.Raw(Model.GlobalOptionJson);
-        @if (Model != null && Model.ToastMessages!=null && Model.ToastMessages.Any())
-        {
-            foreach (var message in Model.ToastMessages)
-            {
-                //toastr options
-                @*show toaster*@
-                @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message.ToHtmlString()', '@message.Title' @if (message.ToastOptions != null){<text>,</text> @Html.Raw(message.ToastOptions.Json)});
+        document && document.addEventListener('DOMContentLoaded',function() {
+            if (typeof toastr !== 'undefined' ) {
+                toastr.options = @Html.Raw(Model.GlobalOptionJson);
+                @if (Model?.ToastMessages != null && Model.ToastMessages.Any())
+                {
+                    foreach (var message in Model.ToastMessages)
+                    {
+                        //toastr options
+                        @*show toaster*@
+                        @:toastr['@message.ToastType.ToString("F").ToLower()']('@message.Message.ToHtmlString()', '@message.Title' @if (message.ToastOptions != null){<text>,</text> @Html.Raw(message.ToastOptions.Json)});
+
+                    }
+                }
+
+            } else {
+                alert("The toastr library  is not loaded. Please download toastr (JS and CSS both) and make sure its available globally in your pages for toast notification to work.");
             }
-        }
-    });
+        });
+
 </script>

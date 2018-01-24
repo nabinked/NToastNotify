@@ -10,14 +10,14 @@ namespace NToastNotify
 {
     public static class NToastNotifyServiceCollectionExtension
     {
-        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastOption defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null)
+        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastOption defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
         {
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
-            var assembly = typeof(Components.ToastrViewComponent).GetTypeInfo().Assembly;
+            var assembly = typeof(Components.ToastrViewComponent).Assembly;
             //Create an EmbeddedFileProvider for that assembly
             var embeddedFileProvider = new EmbeddedFileProvider(assembly, "NToastNotify");
             //Add the file provider to the Razor view engine
@@ -26,6 +26,11 @@ namespace NToastNotify
                 options.FileProviders.Add(embeddedFileProvider);
             });
 
+            //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
+            mvcBuilder?.AddRazorOptions(o =>
+            {
+                o.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+            });
             //Add the ToastNotification implementation
             services.AddScoped<IToastNotification, ToastNotification>();
 
@@ -56,6 +61,13 @@ namespace NToastNotify
             nToastNotifyOptions = nToastNotifyOptions ?? NToastNotifyOption.Defaults;
             services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
             return services;
+        }
+
+        public static IMvcBuilder AddNToastNotify(this IMvcBuilder mvcBuilder, ToastOption defaultOptions = null,
+            NToastNotifyOption nToastNotifyOptions = null)
+        {
+            AddNToastNotify(mvcBuilder.Services, defaultOptions, nToastNotifyOptions, mvcBuilder);
+            return mvcBuilder;
         }
     }
 }
