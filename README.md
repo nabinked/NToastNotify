@@ -19,7 +19,6 @@ services.AddNToastNotify(new ToastOption()
 ```C#
 services.AddNToastNotify();
 ```
-> This must be added above the `services.AddMvc()` line. 
 The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
 
