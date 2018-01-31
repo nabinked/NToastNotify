@@ -33,7 +33,6 @@ namespace NToastNotify.Web.Controllers
                 PositionClass = ToastPositions.BottomLeft
             });
 
-            var messages = _toastNotification.PeekToastMessages();
             return View();
         }
 
@@ -53,7 +52,7 @@ namespace NToastNotify.Web.Controllers
             {
                 PositionClass = ToastPositions.TopCenter
             });
-            return RedirectToAction("About"); ;
+            return RedirectToAction("About");
         }
 
         public IActionResult Error()

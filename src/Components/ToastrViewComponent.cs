@@ -8,12 +8,12 @@ namespace NToastNotify.Components
     [ViewComponent(Name = "NToastNotify.Toastr")]
     public class ToastrViewComponent : ViewComponent
     {
+        private readonly IToastNotification _toastNotification;
         private readonly ToastOption _globalOption;                 // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
-        private readonly ITempDataWrapper _tempDataWrapper;
 
-        public ToastrViewComponent(ITempDataWrapper tempDataWrapper, ToastOption globalOption)
+        public ToastrViewComponent(IToastNotification toastNotification, ToastOption globalOption)
         {
-            _tempDataWrapper = tempDataWrapper;
+            _toastNotification = toastNotification;
             _globalOption = globalOption;
         }
 
@@ -21,7 +21,7 @@ namespace NToastNotify.Components
         {
             var model = new ToastNotificationViewModel()
             {
-                ToastMessages = _tempDataWrapper.Get<IEnumerable<ToastMessage>>(Constants.TempDataKey),
+                ToastMessages = _toastNotification.GetToastMessages(),
                 GlobalOptionJson = _globalOption.MergeWith(ToastOption.Defaults).Json
             };
             return View("ToastrView", model);

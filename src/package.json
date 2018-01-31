@@ -1,0 +1,28 @@
+{
+  "name": "ntoastnotify",
+  "version": "1.0.0",
+  "description": "asp.net core abstraction for toastrjs serverside rendered toast notifications",
+  "main": "./js/src/index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabinked/NToastNotify.git"
+  },
+  "author": "Nabin Karki Thapa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nabinked/NToastNotify/issues"
+  },
+  "homepage": "https://github.com/nabinked/NToastNotify#readme",
+  "devDependencies": {
+    "@types/toastr": "^2.1.35",
+    "awesome-typescript-loader": "^3.4.1",
+    "toastr": "^2.1.4",
+    "webpack": "^3.10.0"
+  }
+}

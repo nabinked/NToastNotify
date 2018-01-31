@@ -38,8 +38,9 @@ namespace NToastNotify.Web.FeatureFolders
             }
 
             app.UseStaticFiles();
-
+            app.UseNToastNotify();
             app.UseMvcWithDefaultRoute();
+
         }
     }
 }

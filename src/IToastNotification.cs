@@ -55,9 +55,15 @@ namespace NToastNotify
         void AddErrorToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
 
         /// <summary>
-        /// Gets the list of <see cref="ToastMessage"/> added so far.
+        /// Peeks the list of <see cref="ToastMessage"/> added so far. Peeking messages does not delete the messages
         /// </summary>
         /// <returns></returns>
         IEnumerable<ToastMessage> PeekToastMessages();
+
+        /// <summary>
+        /// Gets the list of <see cref="ToastMessage"/> added so far. Getting list of messages will remove them from the list of Toast Messages.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ToastMessage> GetToastMessages();
     }
 }

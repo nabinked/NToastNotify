@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System;
+using Microsoft.AspNetCore.Builder;
 
 namespace NToastNotify
 {
@@ -60,6 +61,7 @@ namespace NToastNotify
             // Add the NToastifyOptions to the services container for DI retrieval (options that are not rendered as they are not part of the toastr.js plugin)
             nToastNotifyOptions = nToastNotifyOptions ?? NToastNotifyOption.Defaults;
             services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
+            services.AddScoped<NtoastNotifyMiddleware>();
             return services;
         }
 
@@ -69,5 +71,11 @@ namespace NToastNotify
             AddNToastNotify(mvcBuilder.Services, defaultOptions, nToastNotifyOptions, mvcBuilder);
             return mvcBuilder;
         }
+
+        public static IApplicationBuilder UseNToastNotify(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<NtoastNotifyMiddleware>();
+        }
+
     }
 }

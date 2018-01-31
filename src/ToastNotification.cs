@@ -61,6 +61,11 @@ namespace NToastNotify
             return _tempDataWrapper.Peek<IEnumerable<ToastMessage>>(_key);
         }
 
+        public IEnumerable<ToastMessage> GetToastMessages()
+        {
+            return _tempDataWrapper.Get<IEnumerable<ToastMessage>>(_key);
+        }
+
         #region Privates
         private void AddMessage(ToastMessage toastMessage)
         {
