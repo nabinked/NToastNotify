@@ -7,6 +7,7 @@ interface NToastNotify {
     defaults: NToastNotifyOptions;
     handleEvents(): void;
     addXmlRequestCallback(callback: Function): void;
+    xmlRequestOnLoadHandler(event: Event): void;
     domContentLoadedHandler(): void;
 }
 
@@ -21,7 +22,7 @@ interface ToastMessage {
     title: string;
     toastOptions: ToastrOptions;
 }
-let nToastNotify: NToastNotify = {
+export let nToastNotify: NToastNotify = {
     options: null,
     init(options) {
         this.options = Object.assign({}, this.defaults, options);
@@ -31,6 +32,7 @@ let nToastNotify: NToastNotify = {
         document && document.addEventListener('DOMContentLoaded', this.domContentLoadedHandler.bind(this));
     },
     addXmlRequestCallback(callback) {
+        var self = this;
         var oldSend: (data: any) => void;
         var i: number;
         if ((XMLHttpRequest as any).callbacks) {
@@ -42,15 +44,19 @@ let nToastNotify: NToastNotify = {
             // store the native send()
             oldSend = XMLHttpRequest.prototype.send;
             // override the native send()
-            XMLHttpRequest.prototype.open = function () {
+            XMLHttpRequest.prototype.send = function () {
                 // process the callback queue
                 for (i = 0; i < (XMLHttpRequest as any).callbacks.length; i++) {
                     (XMLHttpRequest as any).callbacks[i](this);
                 }
+                this.onload = self.xmlRequestOnLoadHandler.bind(self);
                 // call the native send()
                 oldSend.apply(this, arguments);
             }
         }
+    },
+    xmlRequestOnLoadHandler(e: Event) {
+        console.log(arguments);
     },
     domContentLoadedHandler() {
         if (toastr) {
