@@ -23,7 +23,7 @@ namespace NToastNotify
             ToastOption toastOptions);
         
         /// <summary>
-        /// Adds a toast message of type <see cref="ToastEnums.ToastType.Success"/>
+        /// Adds a toast message of type <see cref="ToastEnums.ToastType.success"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
@@ -65,5 +65,11 @@ namespace NToastNotify
         /// </summary>
         /// <returns></returns>
         IEnumerable<ToastMessage> GetToastMessages();
+
+        /// <summary>
+        /// Remove all toast notifications
+        /// </summary>
+        /// <returns></returns>
+        bool RemoveAll();
     }
 }

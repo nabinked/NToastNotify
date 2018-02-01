@@ -66,6 +66,11 @@ namespace NToastNotify
             return _tempDataWrapper.Get<IEnumerable<ToastMessage>>(_key);
         }
 
+        public bool RemoveAll()
+        {
+            return _tempDataWrapper.Remove(_key);
+        }
+
         #region Privates
         private void AddMessage(ToastMessage toastMessage)
         {
@@ -73,7 +78,7 @@ namespace NToastNotify
             messages.Add(toastMessage);
             _tempDataWrapper.Add(_key, messages);
         }
-        
+
         #endregion
     }
 }

@@ -40,5 +40,11 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Ajax()
+        {
+            _toastNotification.AddSuccessToastMessage("Yay!! You got an ajax toast notification.", "AJAX Success");
+            return Content("AJAX CALL");
+        }
     }
 }

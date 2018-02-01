@@ -31,7 +31,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
   </PropertyGroup>
-  <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
+  <Target Name="PostReleaseCompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Release'  ">
+    <Exec Command="npm run publish" />
     <Exec Command="dotnet pack --no-build --output nupkgs" />
     <Exec Command="call nugetpush $(Configuration) $(MSBuildProjectDirectory)\nupkgs\$(AssemblyName).$(Version).nupkg" />
   </Target>

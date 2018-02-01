@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "webpack"
+    "dev": "webpack",
+    "publish": "webpack --env=prod"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "awesome-typescript-loader": "^3.4.1",
     "toastr": "^2.1.4",
     "typescript": "^2.6.2",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }

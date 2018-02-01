@@ -4,6 +4,7 @@ var webpack = require('webpack');
 module.exports = env => {
     const isDevBuild = !(env && env.prod);
     return {
+        watch: true,
         entry: './Js/src/Index.ts',
         resolve: {
             extensions: ['.ts', '.js']
@@ -12,7 +13,7 @@ module.exports = env => {
             path: path.resolve(__dirname, 'Js/dist'),
             filename: 'index.js',
             library: 'nToastNotify',
-            libraryTarget: 'window'
+            libraryTarget: 'var'
         },
         // Add the loader for .ts files.
         module: {

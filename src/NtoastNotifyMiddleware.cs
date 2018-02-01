@@ -31,9 +31,9 @@ namespace NToastNotify
             {
                 if (httpContext.Response.StatusCode < 300 || httpContext.Response.StatusCode > 399)
                 {
-                    httpContext.Response.Headers.Add("NToastNotify-Message", JsonConvert.SerializeObject(_toastNotification.GetToastMessages()));
-                    httpContext.Response.Headers.Add("NToastNotify-Foo", "Bar");
-
+                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey,
+                        JsonConvert.SerializeObject(_toastNotification.GetToastMessages(), JsonSerialization.JsonSerializerSettings));
+                    _toastNotification.RemoveAll();
                 }
             }
             return Task.FromResult(0);

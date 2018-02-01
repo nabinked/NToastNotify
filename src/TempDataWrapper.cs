@@ -41,5 +41,10 @@ namespace NToastNotify
         {
             TempData[key] = JsonConvert.SerializeObject(value);
         }
+
+        public bool Remove(string key)
+        {
+            return TempData.ContainsKey(key) && TempData.Remove(key);
+        }
     }
 }

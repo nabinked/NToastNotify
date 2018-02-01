@@ -1,13 +1,14 @@
-﻿@using NToastNotify
+﻿@using Newtonsoft.Json
+@using Newtonsoft.Json.Serialization
+@using NToastNotify
 @using NToastNotify.Helpers
 @model ToastNotificationViewModel
-
 <script src="~/NToastNotify/js/dist/index.js"></script>
 <script type="text/javascript" language="javascript">
     if (nToastNotify) {
-        nToastNotify.init({
-            messages: '@Html.Raw(Json.Serialize(Model.ToastMessages))',
-            globalToastMessageOptions:'@Html.Raw(Model.GlobalOptionJson)'
+        nToastNotify.default.init({
+            messages: @Html.Raw(JsonConvert.SerializeObject(Model.ToastMessages,JsonSerialization.JsonSerializerSettings)),
+            globalToastMessageOptions: @Html.Raw(Model.GlobalOptionJson)
         });
     };
 </script>

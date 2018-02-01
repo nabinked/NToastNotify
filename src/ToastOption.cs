@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
@@ -43,25 +44,21 @@ namespace NToastNotify
         public bool? Rtl { get; set; }
         public bool? CloseButton { get; set; }
         public string Onclick { get; set; }
-        
+
         // Default message and title options
-        public string SuccessTitle {get; set;}
-        public string SuccessMessage {get; set;}
-        
-        public string InfoTitle {get; set;}
-        
-        public string WarningTitle {get; set;}        
-        
-        public string ErrorTitle {get; set;}
-        public string ErrorMessage {get; set;}
-        
+        public string SuccessTitle { get; set; }
+        public string SuccessMessage { get; set; }
+
+        public string InfoTitle { get; set; }
+
+        public string WarningTitle { get; set; }
+
+        public string ErrorTitle { get; set; }
+        public string ErrorMessage { get; set; }
+
 
         [JsonIgnore]
-        public string Json => JsonConvert.SerializeObject(this, new JsonSerializerSettings()
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            NullValueHandling = NullValueHandling.Ignore
-        });
+        public string Json => JsonConvert.SerializeObject(this, JsonSerialization.JsonSerializerSettings);
 
         public static ToastOption Defaults => new ToastOption()
         {

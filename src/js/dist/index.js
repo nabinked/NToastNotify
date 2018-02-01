@@ -1,4 +1,4 @@
-window["nToastNotify"] =
+var nToastNotify =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -72,59 +72,63 @@ window["nToastNotify"] =
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(1);
-exports.nToastNotify = {
+var nToastNotify = {
     options: null,
     init: function (options) {
         this.options = Object.assign({}, this.defaults, options);
         this.handleEvents();
+        this.interceptXmlRequest();
     },
     handleEvents: function () {
         document && document.addEventListener('DOMContentLoaded', this.domContentLoadedHandler.bind(this));
     },
-    addXmlRequestCallback: function (callback) {
+    interceptXmlRequest: function () {
         var self = this;
-        var oldSend;
-        var i;
-        if (XMLHttpRequest.callbacks) {
-            // we've already overridden send() so just add the callback
-            XMLHttpRequest.callbacks.push(callback);
-        }
-        else {
-            // create a callback queue
-            XMLHttpRequest.callbacks = [callback];
-            // store the native send()
-            oldSend = XMLHttpRequest.prototype.send;
-            // override the native send()
-            XMLHttpRequest.prototype.send = function () {
-                // process the callback queue
-                for (i = 0; i < XMLHttpRequest.callbacks.length; i++) {
-                    XMLHttpRequest.callbacks[i](this);
-                }
-                this.onload = self.xmlRequestOnLoadHandler.bind(self);
-                // call the native send()
-                oldSend.apply(this, arguments);
-            };
-        }
+        // store the native send()
+        var oldSend = XMLHttpRequest.prototype.send;
+        // override the native send()
+        XMLHttpRequest.prototype.send = function () {
+            // process the callback queue
+            this.onload = self.xmlRequestOnLoadHandler.bind(self, this);
+            // call the native send()
+            oldSend.apply(this, arguments);
+        };
     },
-    xmlRequestOnLoadHandler: function (e) {
-        console.log(arguments);
+    xmlRequestOnLoadHandler: function (xmlHttpRequest) {
+        var messages = JSON.parse(xmlHttpRequest.getResponseHeader(this.options.responseHeaderKey));
+        this.showToasts(messages);
     },
     domContentLoadedHandler: function () {
         if (toastr) {
             toastr.options = this.options.globalToastMessageOptions;
-            if (this.options.messages && this.options.messages.length) {
-                this.options.messages.forEach(function (message, index, array) {
-                    toastr[message.toastType](message.message, message.title, message.toastOptions);
-                });
-            }
+            this.showToasts(this.options.messages);
         }
+    },
+    showToasts: function (messages) {
+        var _this = this;
+        if (messages && messages.length) {
+            messages.forEach(function (message, index, array) {
+                _this.showToast(message);
+            });
+        }
+    },
+    showToast: function (message) {
+        var args = [];
+        args.push(message.message);
+        args.push(message.title);
+        if (message.toastOptions) {
+            args.push(message.toastOptions);
+        }
+        toastr[message.toastType.toLowerCase()].apply(toastr, args);
     },
     defaults: {
         firstLoadEvent: 'DOMContentLoaded',
         globalToastMessageOptions: null,
-        messages: []
+        messages: [],
+        responseHeaderKey: 'NToastNotify-Messages'
     }
 };
+exports.default = nToastNotify;
 
 
 /***/ }),

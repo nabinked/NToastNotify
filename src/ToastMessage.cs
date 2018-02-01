@@ -1,4 +1,7 @@
-﻿namespace NToastNotify
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+
+namespace NToastNotify
 {
     public class ToastMessage
     {
@@ -11,6 +14,7 @@
         }
         public string Title { get; set; }
         public string Message { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public ToastEnums.ToastType ToastType { get; set; }
         public ToastOption ToastOptions { get; set; }
     }
