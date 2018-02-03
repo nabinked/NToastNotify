@@ -52,27 +52,14 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
 
         public IActionResult Ajax()
         {
-            //Testing Default Methods
+            _toastNotification.AddInfoToastMessage("This page will make ajax requests and show notifications.");
+            return View();
+        }
 
-            //Success
-            _toastNotification.AddSuccessToastMessage("Same for success message", "Success title specified in controller action");
-            // Success with default options (taking into account the overwritten defaults when initializing in Startup.cs)
-            _toastNotification.AddSuccessToastMessage();
-
-            //Info
-            _toastNotification.AddInfoToastMessage();
-
-            //Warning
-            _toastNotification.AddWarningToastMessage();
-
-            //Error
-            _toastNotification.AddErrorToastMessage();
-
-            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.ToastType.Success, new ToastOption()
-            {
-                PositionClass = ToastPositions.BottomLeft
-            });
-            return Content("AJAX CALL");
+        public IActionResult AjaxCall()
+        {
+            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request.", "AJAX CALL " + DateTime.Now.ToLongTimeString());
+            return PartialView("_PartialView");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace NToastNotify.Web.Controllers
 {
@@ -28,7 +29,7 @@ namespace NToastNotify.Web.Controllers
             //Error
             _toastNotification.AddErrorToastMessage();
 
-            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", ToastEnums.ToastType.Success, new ToastOption()
+            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.ToastType.Success, new ToastOption()
             {
                 PositionClass = ToastPositions.BottomLeft
             });
@@ -38,7 +39,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult About()
         {
-            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", ToastEnums.ToastType.Warning, new ToastOption()
+            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", Enums.ToastType.Warning, new ToastOption()
             {
                 PositionClass = ToastPositions.BottomFullWidth
             });
@@ -48,7 +49,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult Contact()
         {
-            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", ToastEnums.ToastType.Info, new ToastOption()
+            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", Enums.ToastType.Info, new ToastOption()
             {
                 PositionClass = ToastPositions.TopCenter
             });
@@ -65,6 +66,18 @@ namespace NToastNotify.Web.Controllers
         {
 
             return View();
+        }
+
+        public IActionResult Ajax()
+        {
+            _toastNotification.AddInfoToastMessage("This page will make ajax requests and show notifications.");
+            return View();
+        }
+
+        public IActionResult AjaxCall()
+        {
+            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request.", "AJAX CALL " + DateTime.Now.ToLongTimeString());
+            return PartialView("_PartialView");
         }
     }
 }
