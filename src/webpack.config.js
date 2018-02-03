@@ -4,14 +4,15 @@ var webpack = require('webpack');
 module.exports = env => {
     const isDevBuild = !(env && env.prod);
     return {
-        watch: true,
-        entry: './Js/src/Index.ts',
+        entry: {
+            toastr: './Js/src/toastr.ts'
+        },
         resolve: {
             extensions: ['.ts', '.js']
         },
         output: {
             path: path.resolve(__dirname, 'Js/dist'),
-            filename: 'index.js',
+            filename: '[name].js',
             library: 'nToastNotify',
             libraryTarget: 'var'
         },

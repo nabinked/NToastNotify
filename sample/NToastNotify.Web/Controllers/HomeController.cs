@@ -63,6 +63,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult Empty()
         {
+
             return View();
         }
     }

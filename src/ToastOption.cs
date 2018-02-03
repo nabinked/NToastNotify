@@ -58,7 +58,7 @@ namespace NToastNotify
 
 
         [JsonIgnore]
-        public string Json => JsonConvert.SerializeObject(this, JsonSerialization.JsonSerializerSettings);
+        public string Json => this.ToJson();
 
         public static ToastOption Defaults => new ToastOption()
         {

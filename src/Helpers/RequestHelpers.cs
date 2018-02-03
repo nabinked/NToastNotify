@@ -7,19 +7,20 @@ namespace NToastNotify.Helpers
 {
     public static class RequestHelpers
     {
-        private const string RequestedWithHeader = "X-Requested-With";
-        private const string XmlHttpRequest = "XMLHttpRequest";
-
         public static bool IsAjaxRequest(this HttpRequest request)
         {
             if (request == null)
             {
-                throw new ArgumentNullException("request");
+                throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.Headers != null)
+            if (!string.IsNullOrWhiteSpace(request.Headers[Constants.RequestHeaderKey]))
             {
-                return request.Headers[RequestedWithHeader] == XmlHttpRequest;
+                return true;
+            };
+            if (!string.IsNullOrWhiteSpace(request.Headers[Constants.RequestHeaderKey.ToLower()]))
+            {
+                return true;
             }
 
             return false;

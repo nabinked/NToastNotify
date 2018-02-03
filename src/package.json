@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "webpack",
-    "publish": "webpack --env=prod"
+    "dev": "webpack --watch",
+    "publish": "webpack --env.prod"
   },
   "repository": {
     "type": "git",

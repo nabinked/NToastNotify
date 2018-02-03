@@ -21,6 +21,8 @@
         public string ErrorTitle { get; set; }
         public string ErrorMessage { get; set; }
 
+        public Enums.SupportedLibrary Library { get; set; }
+
         public static NToastNotifyOption Defaults => new NToastNotifyOption()
         {
             SuccessTitle = "Success",
@@ -30,7 +32,8 @@
             WarningTitle = "Warning",
             WarningMessage = "This is a warning notification.",
             ErrorTitle = "Error",
-            ErrorMessage = "Task could not complete successfully."
+            ErrorMessage = "Task could not complete successfully.",
+            Library = Enums.SupportedLibrary.Toastr
         };
     }
 }

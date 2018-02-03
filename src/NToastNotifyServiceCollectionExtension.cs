@@ -91,6 +91,7 @@ namespace NToastNotify
             // Add the NToastifyOptions to the services container for DI retrieval (options that are not rendered as they are not part of the toastr.js plugin)
             nToastNotifyOptions = nToastNotifyOptions ?? NToastNotifyOption.Defaults;
             services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
+            services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
             services.AddScoped<NtoastNotifyMiddleware>();
             return mvcBuilder;
         }

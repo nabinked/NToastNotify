@@ -29,12 +29,8 @@ namespace NToastNotify
             var httpContext = (HttpContext)context;
             if (httpContext.Request.IsAjaxRequest())
             {
-                if (httpContext.Response.StatusCode < 300 || httpContext.Response.StatusCode > 399)
-                {
-                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey,
-                        JsonConvert.SerializeObject(_toastNotification.GetToastMessages(), JsonSerialization.JsonSerializerSettings));
-                    _toastNotification.RemoveAll();
-                }
+                httpContext.Response.Headers.Add(Constants.ResponseHeaderKey,
+                        JsonConvert.SerializeObject(_toastNotification.ReadAllMessages(), JsonSerialization.JsonSerializerSettings));
             }
             return Task.FromResult(0);
         }
