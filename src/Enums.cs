@@ -1,6 +1,6 @@
 ﻿namespace NToastNotify
 {
-    public class ToastEnums
+    public class Enums
     {
         public enum ToastType
         {
@@ -8,6 +8,11 @@
             Warning,
             Info,
             Error
+        }
+
+        public enum SupportedLibrary
+        {
+            Toastr
         }
     }
 }

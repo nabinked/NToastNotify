@@ -4,7 +4,9 @@ namespace NToastNotify
 {
     public class ToastNotificationViewModel
     {
-        public IEnumerable<ToastMessage> ToastMessages { get; set; }
+        public string ToastMessagesJson { get; set; }
         public string GlobalOptionJson { get; set; }
+        public string RequestHeaderKey { get; set; }
+        public string LibraryName { get; set; }
     }
 }
