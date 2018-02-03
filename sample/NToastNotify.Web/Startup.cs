@@ -23,17 +23,15 @@ namespace NToastNotify.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddNToastNotify(new ToastOption()
+            // Add framework services.
+            services.AddMvc().AddNToastNotify(new ToastOption()
             {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
             }, new NToastNotifyOption()
             {
                 SuccessMessage = "Overwritten default success message"
-            });
-
-            // Add framework services.
-            services.AddMvc();
+            }); ;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +50,7 @@ namespace NToastNotify.Web
             }
 
             app.UseStaticFiles();
+            app.UseNToastNotify();
 
             app.UseMvc(routes =>
             {
