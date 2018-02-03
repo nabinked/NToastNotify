@@ -1,28 +1,38 @@
 # NToastNotify
 ##### ASP.NET abstraction for javascript toastr to render server side managed Toast Notifications.
-
+ - ##### Server side toast notification rendering.
+ - ##### Toast notification on AJAX calls. XMLHTTPRequests - Full Support. fetch API - Partial Support (See sample).
+ - ##### Supports Feature folder project structure.
+ - ##### Will Support multiple client libraries such. Currently only toastr.js. Plans for noty.js.
 ## Get Started
 ### 1. Install From [Nuget](https://www.nuget.org/packages/NToastNotify/)
 Visual Studio Nuget Package Manager - `Install-Package NToastNotify`
 
 dotnet CLI - `dotnet add package NToastNotify`
 
-### 2. Add NtoastNotify to the ASP.NET Core Services
+### 2. Add NtoastNotify to the ASP.NET Core Services. Use the extension method on IMVCBuilder
 ```C#
-services.AddNToastNotify(new ToastOption()
-            {
-                ProgressBar = false,
-                PositionClass = ToastPositions.BottomCenter
-            });
+services.AddMvc().AddNToastNotify(new ToastOption()
+ {
+            ProgressBar = false,
+            PositionClass = ToastPositions.BottomCenter
+});
 ```
 **Or Simply**
 ```C#
-services.AddNToastNotify();
+services.AddMvc().AddFeatureFolders().AddNToastNotify();
 ```
 The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
+### 3. Add the middleware
+```c#
+ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+ {
+        app.UseNToastNotify();
+ }
+```
 
-### 3. Include the reference to [toastr](http://codeseven.github.io/toastr/) Css and Javascript files in your html.
+### 4. Include the reference to [toastr](http://codeseven.github.io/toastr/) Css and Javascript files in your html.
 Download the toastr library files if you haven't done that already and include them in your project.
 ```html
 <link href="toastr.css" rel="stylesheet"/>
@@ -30,7 +40,7 @@ Download the toastr library files if you haven't done that already and include t
 ```
 **NOTE: toastr library depends on jQuery**
 
-### 4. Add the following line in you html file. Preferably in your Layout Page.
+### 5. Add the following line in you html file. Preferably in your Layout Page.
 ```c#
 @await Component.InvokeAsync("NToastNotify.Toastr")
 ```
