@@ -5,11 +5,11 @@
 @model ToastNotificationViewModel
 <script src="~/NToastNotify/js/dist/@(Model.LibraryName).js"></script>
 <script type="text/javascript" language="javascript">
-    if (nToastNotify && nToastNotify.@Model.LibraryName) {
-        nToastNotify.@(Model.LibraryName).init({
-            messages: @Html.Raw(Model.ToastMessagesJson),
-            globalToastMessageOptions: @Html.Raw(Model.GlobalOptionJson),
-            requestHeaderKey:'@Model.RequestHeaderKey'
-        });
-    };
+            if (nToastNotify && nToastNotify.@Model.LibraryName) {
+                nToastNotify.@(Model.LibraryName).init({
+                    messages: @Html.Raw(Model.ToastMessagesJson),
+                    globalToastMessageOptions: @Html.Raw(Model.GlobalOptionJson),
+                    requestHeaderKey: '@Model.RequestHeaderKey'
+                });
+            };
 </script>

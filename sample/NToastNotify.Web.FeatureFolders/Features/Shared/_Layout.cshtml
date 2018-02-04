@@ -15,7 +15,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -41,6 +41,8 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
+        @await Component.InvokeAsync("NToastNotify.Toastr")
+
         <hr />
         <footer>
             <p>&copy; 2018 - NToastNotify.Web.FeatureFolders</p>
@@ -68,7 +70,8 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    @await Component.InvokeAsync("NToastNotify.Toastr")
+
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>
