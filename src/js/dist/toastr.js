@@ -1,1 +1,246 @@
-var nToastNotify=function(e){function t(n){if(s[n])return s[n].exports;var o=s[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var s={};return t.m=e,t.c=s,t.d=function(e,s,n){t.o(e,s)||Object.defineProperty(e,s,{configurable:!1,enumerable:!0,get:n})},t.n=function(e){var s=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(s,"a",s),s},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),s(1);var n={options:null,fetchHeaderValue:"Fetch",init:function(e){this.options=Object.assign({},this.defaults,e),this.handleEvents(),this.interceptXmlRequest(),this.interceptNativeFetch()},handleEvents:function(){document&&document.addEventListener("DOMContentLoaded",this.domContentLoadedHandler.bind(this))},getResponseHeaderKey:function(){return this.options.responseHeaderKey},interceptNativeFetch:function(){var e=this,t=window.fetch;t&&(window.fetch=function(){var s=arguments[0];e.prepareRequestInfo(s);var n=arguments.length>1?arguments[1]:{};return e.prepareReuqestInit(n),t.apply(this,[s,n])})},prepareRequestInfo:function(e){e instanceof Request&&e.headers.append(this.options.requestHeaderKey,this.fetchHeaderValue)},prepareReuqestInit:function(e){if(e)if(e.headers)e.headers instanceof Headers?e.headers.set(this.options.requestHeaderKey,this.fetchHeaderValue):e.headers instanceof Object?e.headers[this.options.requestHeaderKey]=this.fetchHeaderValue:console.warn("NToastNotify header not set. Toast notification will not work");else{var t=new Headers;t.set(this.options.requestHeaderKey,this.fetchHeaderValue),e.headers=t}},interceptXmlRequest:function(){var e=this,t=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.send=function(){this.setRequestHeader(e.options.requestHeaderKey,"XMLHttpRequest"),this.onload=e.xmlRequestOnLoadHandler.bind(e,this),t.apply(this,arguments)}},xmlRequestOnLoadHandler:function(e){var t=this.xmlGetMessagesFromResponse(e);this.showToasts(t)},xmlGetMessagesFromResponse:function(e){var t=e.getResponseHeader(this.options.responseHeaderKey);return t?JSON.parse(t):null},fetchGetMessagesFromResponse:function(e){var t=e.headers.get(this.options.responseHeaderKey);return t?JSON.parse(t):null},domContentLoadedHandler:function(){toastr&&(toastr.options=this.options.globalToastMessageOptions,this.showToasts(this.options.messages))},showToasts:function(e){var t=this;e&&e.length&&e.forEach(function(e,s,n){t.show(e)})},show:function(e){var t=[];t.push(e.message),t.push(e.title),e.toastOptions&&t.push(e.toastOptions),toastr[e.toastType.toLowerCase()].apply(toastr,t)},defaults:{firstLoadEvent:"DOMContentLoaded",globalToastMessageOptions:null,messages:[],responseHeaderKey:"NToastNotify-Messages",requestHeaderKey:"NToastNotify-Request-Type"}};t.toastr=n},function(e,t){"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e){"use strict";if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var t=Object(e),s=1;s<arguments.length;s++){var n=arguments[s];if(null!=n)for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(t[o]=n[o])}return t},writable:!0,configurable:!0})}]);
+var nToastNotify =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(1);
+var libToastr = {
+    options: null,
+    fetchHeaderValue: 'Fetch',
+    init: function (options) {
+        this.options = Object.assign({}, this.defaults, options);
+        this.handleEvents();
+        this.interceptXmlRequest();
+        this.interceptNativeFetch();
+    },
+    isToastrLibLoaded: function () {
+        return typeof toastr !== 'undefined';
+    },
+    loadLib: function () {
+        this.loadScript();
+    },
+    loadScript: function () {
+        var _this = this;
+        var script = document.createElement('script');
+        script.setAttribute('src', this.options.tostrLibCdnSrcScript);
+        script.onload = function (e) {
+            _this.init(_this.options);
+        };
+        document.head.appendChild(script);
+    },
+    handleEvents: function () {
+        document && document.addEventListener('DOMContentLoaded', this.domContentLoadedHandler.bind(this));
+    },
+    getResponseHeaderKey: function () {
+        return this.options.responseHeaderKey;
+    },
+    interceptNativeFetch: function () {
+        var self = this;
+        var oldFetch = window.fetch;
+        if (oldFetch) {
+            window.fetch = function () {
+                var input = arguments[0];
+                self.prepareRequestInfo(input);
+                var init = arguments.length > 1 ? arguments[1] : {};
+                self.prepareReuqestInit(init);
+                return oldFetch.apply(this, [input, init]);
+            };
+        }
+    },
+    prepareRequestInfo: function (input) {
+        if (input instanceof Request) {
+            input.headers.append(this.options.requestHeaderKey, this.fetchHeaderValue);
+        }
+    },
+    prepareReuqestInit: function (init) {
+        if (init) {
+            //if headers is not defined yet. define one
+            if (!init.headers) {
+                var newHeaders = new Headers();
+                newHeaders.set(this.options.requestHeaderKey, this.fetchHeaderValue);
+                init.headers = newHeaders;
+            }
+            else {
+                if (init.headers instanceof Headers) {
+                    init.headers.set(this.options.requestHeaderKey, this.fetchHeaderValue);
+                }
+                else if (init.headers instanceof Object) {
+                    init.headers[this.options.requestHeaderKey] = this.fetchHeaderValue;
+                }
+                else {
+                    console.warn('NToastNotify header not set. Toast notification will not work');
+                }
+            }
+        }
+    },
+    interceptXmlRequest: function () {
+        var self = this;
+        // store the native send()
+        var oldSend = XMLHttpRequest.prototype.send;
+        // override the native send()
+        XMLHttpRequest.prototype.send = function () {
+            this.setRequestHeader(self.options.requestHeaderKey, 'XMLHttpRequest');
+            // process the callback queue
+            this.onload = self.xmlRequestOnLoadHandler.bind(self, this);
+            // call the native send()
+            oldSend.apply(this, arguments);
+        };
+    },
+    xmlRequestOnLoadHandler: function (xmlHttpRequest) {
+        var messages = this.xmlGetMessagesFromResponse(xmlHttpRequest);
+        this.showToasts(messages);
+    },
+    xmlGetMessagesFromResponse: function (xmlHttpRequest) {
+        var messagesStr = xmlHttpRequest.getResponseHeader(this.options.responseHeaderKey);
+        if (messagesStr) {
+            return JSON.parse(messagesStr);
+        }
+        return null;
+    },
+    fetchGetMessagesFromResponse: function (response) {
+        var messageStr = response.headers.get(this.options.responseHeaderKey);
+        if (messageStr) {
+            return JSON.parse(messageStr);
+        }
+        else {
+            return null;
+        }
+    },
+    domContentLoadedHandler: function () {
+        if (toastr) {
+            toastr.options = this.options.globalToastMessageOptions;
+            this.showToasts(this.options.messages);
+        }
+    },
+    showToasts: function (messages) {
+        var _this = this;
+        if (messages && messages.length) {
+            messages.forEach(function (message, index, array) {
+                _this.show(message);
+            });
+        }
+    },
+    show: function (message) {
+        var args = [];
+        args.push(message.message);
+        args.push(message.title);
+        if (message.toastOptions) {
+            args.push(message.toastOptions);
+        }
+        toastr[message.toastType.toLowerCase()].apply(toastr, args);
+    },
+    defaults: {
+        firstLoadEvent: 'DOMContentLoaded',
+        globalToastMessageOptions: null,
+        messages: [],
+        responseHeaderKey: 'NToastNotify-Messages',
+        requestHeaderKey: 'NToastNotify-Request-Type',
+        tostrLibCdnSrcScript: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
+    }
+};
+exports.toastr = libToastr;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+if (typeof Object.assign != 'function') {
+    // Must be writable: true, enumerable: false, configurable: true
+    Object.defineProperty(Object, 'assign', {
+        value: function (target) {
+            'use strict';
+            if (target == null) {
+                throw new TypeError('Cannot convert undefined or null to object');
+            }
+            var to = Object(target);
+            for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+                if (nextSource != null) {
+                    for (var nextKey in nextSource) {
+                        // Avoid bugs when hasOwnProperty is shadowed
+                        if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+        writable: true,
+        configurable: true
+    });
+}
+
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=toastr.js.map
