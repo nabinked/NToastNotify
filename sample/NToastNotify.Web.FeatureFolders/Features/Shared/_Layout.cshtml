@@ -16,8 +16,12 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
+    @await Component.InvokeAsync("NToastNotify.Toastr")
+
 </head>
+
 <body>
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -41,7 +45,6 @@
     </nav>
     <div class="container body-content">
         @RenderBody()
-        @await Component.InvokeAsync("NToastNotify.Toastr")
 
         <hr />
         <footer>
