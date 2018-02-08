@@ -26,6 +26,7 @@ namespace NToastNotify.Components
             {
                 ToastMessagesJson = _toastNotification.ReadAllMessages().ToJson(),
                 GlobalOptionJson = _globalOption.MergeWith(ToastOption.Defaults).Json,
+                ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
                 LibraryName = _nToastNotifyOption.Library.ToString().ToLower()
             };

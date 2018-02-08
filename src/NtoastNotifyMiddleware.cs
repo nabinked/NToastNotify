@@ -31,7 +31,6 @@ namespace NToastNotify
         private Task Callback(object context)
         {
             var httpContext = (HttpContext)context;
-            _logger.LogInformation("CallBack method called");
             if (httpContext.Request.IsAjaxRequest())
             {
                 if (_toastNotification.GetToastMessages().ToList().Count > 0)

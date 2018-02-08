@@ -24,7 +24,7 @@ interface NToastNotify {
 
 interface NToastNotifyOptions {
     firstLoadEvent: string;
-    globalToastMessageOptions: ToastrOptions;
+    globalToastrOptions: ToastrOptions;
     messages: ToastMessage[];
     responseHeaderKey: string;
     requestHeaderKey: string;
@@ -141,7 +141,7 @@ let libToastr: NToastNotify = {
     },
     domContentLoadedHandler() {
         if (toastr) {
-            toastr.options = this.options.globalToastMessageOptions;
+            toastr.options = this.options.globalToastrOptions;
             this.showToasts(this.options.messages);
         }
     },
@@ -164,10 +164,10 @@ let libToastr: NToastNotify = {
     },
     defaults: {
         firstLoadEvent: 'DOMContentLoaded',
-        globalToastMessageOptions: <ToastrOptions>null,
+        globalToastrOptions: <ToastrOptions>null,
         messages: [],
-        responseHeaderKey: 'NToastNotify-Messages',
-        requestHeaderKey: 'NToastNotify-Request-Type',
+        responseHeaderKey: null,
+        requestHeaderKey: null,
         tostrLibCdnSrcScript: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
     }
 }
