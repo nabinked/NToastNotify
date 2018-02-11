@@ -5,7 +5,8 @@ module.exports = env => {
     const isDevBuild = !(env && env.prod);
     return {
         entry: {
-            toastr: './Js/src/toastr.ts'
+            toastr: './Js/src/toastr/index.ts',
+            noty: './Js/src/noty/index.ts'
         },
         resolve: {
             extensions: ['.ts', '.js']

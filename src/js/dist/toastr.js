@@ -1,1 +1,75 @@
-var nToastNotify=function(e){function t(n){if(s[n])return s[n].exports;var o=s[n]={i:n,l:!1,exports:{}};return e[n].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var s={};return t.m=e,t.c=s,t.d=function(e,s,n){t.o(e,s)||Object.defineProperty(e,s,{configurable:!1,enumerable:!0,get:n})},t.n=function(e){var s=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(s,"a",s),s},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=0)}([function(e,t,s){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),s(1);var n={options:null,fetchHeaderValue:"Fetch",init:function(e){this.options=Object.assign({},this.defaults,e),this.handleEvents(),this.interceptXmlRequest(),this.interceptNativeFetch()},isToastrLibLoaded:function(){return"undefined"!=typeof toastr},loadLib:function(){this.loadScript()},loadScript:function(){var e=this,t=document.createElement("script");t.setAttribute("src",this.options.tostrLibCdnSrcScript),t.onload=function(t){e.init(e.options)},document.head.appendChild(t)},handleEvents:function(){document&&document.addEventListener("DOMContentLoaded",this.domContentLoadedHandler.bind(this))},getResponseHeaderKey:function(){return this.options.responseHeaderKey},interceptNativeFetch:function(){var e=this,t=window.fetch;t&&(window.fetch=function(){var s=arguments[0];e.prepareRequestInfo(s);var n=arguments.length>1?arguments[1]:{};return e.prepareReuqestInit(n),t.apply(this,[s,n])})},prepareRequestInfo:function(e){e instanceof Request&&e.headers.append(this.options.requestHeaderKey,this.fetchHeaderValue)},prepareReuqestInit:function(e){if(e)if(e.headers)e.headers instanceof Headers?e.headers.set(this.options.requestHeaderKey,this.fetchHeaderValue):e.headers instanceof Object?e.headers[this.options.requestHeaderKey]=this.fetchHeaderValue:console.warn("NToastNotify header not set. Toast notification will not work");else{var t=new Headers;t.set(this.options.requestHeaderKey,this.fetchHeaderValue),e.headers=t}},interceptXmlRequest:function(){var e=this,t=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.send=function(){this.setRequestHeader(e.options.requestHeaderKey,"XMLHttpRequest"),this.onload=e.xmlRequestOnLoadHandler.bind(e,this),t.apply(this,arguments)}},xmlRequestOnLoadHandler:function(e){var t=this.xmlGetMessagesFromResponse(e);this.showToasts(t)},xmlGetMessagesFromResponse:function(e){var t=e.getResponseHeader(this.options.responseHeaderKey);return t?JSON.parse(t):null},fetchGetMessagesFromResponse:function(e){var t=e.headers.get(this.options.responseHeaderKey);return t?JSON.parse(t):null},domContentLoadedHandler:function(){toastr&&(toastr.options=this.options.globalToastrOptions,this.showToasts(this.options.messages))},showToasts:function(e){var t=this;e&&e.length&&e.forEach(function(e,s,n){t.show(e)})},show:function(e){var t=[];t.push(e.message),t.push(e.title),e.toastOptions&&t.push(e.toastOptions),toastr[e.toastType.toLowerCase()].apply(toastr,t)},defaults:{firstLoadEvent:"DOMContentLoaded",globalToastrOptions:null,messages:[],responseHeaderKey:null,requestHeaderKey:null,tostrLibCdnSrcScript:"https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"}};t.toastr=n},function(e,t){"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e){"use strict";if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var t=Object(e),s=1;s<arguments.length;s++){var n=arguments[s];if(null!=n)for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(t[o]=n[o])}return t},writable:!0,configurable:!0})}]);
+var nToastNotify =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=toastr.js.map
