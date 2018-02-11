@@ -1,14 +1,14 @@
-﻿import { NToastNotify, ToastMessage, LibOptions } from './../NToastNotify'
+﻿import { NToastNotify, ToastMessage, NToastNotifyOptions } from './../NToastNotify'
 
-let libOptions: LibOptions = {
-    scriptSrc: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
-    varName: 'toastr',
-    styleHref: ''
+let ntoastNotifyOptions: NToastNotifyOptions = {
+    libScriptSrc: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
+    libVarName: 'toastr',
+    libStyleHref: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css'
 
 }
 export class NToastNotifyToastr extends NToastNotify {
-    constructor(options?: LibOptions) {
-        super(options || libOptions);
+    constructor(options?: NToastNotifyOptions) {
+        super(options || ntoastNotifyOptions);
     }
     show(message: ToastMessage): void {
         const args: any[] = [];
@@ -21,5 +21,9 @@ export class NToastNotifyToastr extends NToastNotify {
             toastr[message.toastType.toLowerCase()](...args);
         }
     }
+    overrideLibDefaults(): void {
+        toastr.options = this.options.globalLibOptions
+    }
+
 
 }

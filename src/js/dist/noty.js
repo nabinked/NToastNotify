@@ -61,67 +61,11 @@ var nToastNotify =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var NToastNotifyNoty_1 = __webpack_require__(2);
-exports.noty = new NToastNotifyNoty_1.NToastNotifyNoty();
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var NToastNotify_1 = __webpack_require__(3);
-var libOptions = {
-    scriptSrc: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js',
-    varName: 'toastr',
-    styleHref: ''
-};
-var NToastNotifyNoty = /** @class */ (function (_super) {
-    __extends(NToastNotifyNoty, _super);
-    function NToastNotifyNoty(options) {
-        return _super.call(this, options || libOptions) || this;
-    }
-    NToastNotifyNoty.prototype.show = function (message) {
-        var args = [];
-        args.push(message.message);
-        args.push(message.title);
-        if (message.toastOptions) {
-            args.push(message.toastOptions);
-        }
-        if (toastr) {
-            toastr[message.toastType.toLowerCase()].apply(toastr, args);
-        }
-    };
-    return NToastNotifyNoty;
-}(NToastNotify_1.NToastNotify));
-exports.NToastNotifyNoty = NToastNotifyNoty;
-
-
-/***/ }),
-/* 3 */
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -162,7 +106,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(4);
+__webpack_require__(1);
 var NToastNotify = /** @class */ (function () {
     function NToastNotify(options) {
         this.options = null;
@@ -170,37 +114,30 @@ var NToastNotify = /** @class */ (function () {
         this.libOptions = options;
     }
     NToastNotify.prototype.init = function (options) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.options = Object.assign({}, NToastNotify.defaults, options);
-                        this.interceptXmlRequest();
-                        this.interceptNativeFetch();
-                        if (!this.libPresentAlready()) return [3 /*break*/, 1];
-                        this.showToasts(this.options.messages);
-                        return [3 /*break*/, 3];
-                    case 1: return [4 /*yield*/, this.loadLibAsync()];
-                    case 2:
-                        _a.sent();
-                        this.showToasts(this.options.messages);
-                        _a.label = 3;
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
+        this.options = Object.assign({}, NToastNotify.defaults, options);
+        this.interceptXmlRequest();
+        this.interceptNativeFetch();
+        this.handleEvents();
+    };
+    NToastNotify.prototype.ensureLibExists = function () {
+        if (this.libPresentAlready()) {
+            return;
+        }
+        else {
+            return this.loadLibAsync();
+        }
     };
     NToastNotify.prototype.libPresentAlready = function () {
-        return typeof window[this.libOptions.varName] !== 'undefined';
+        return typeof window[this.libOptions.libVarName] !== 'undefined';
     };
     NToastNotify.prototype.loadLibAsync = function () {
         return Promise.all([this.loadStyleAsync(), this.loadScriptAsync()]);
     };
     NToastNotify.prototype.getScriptTagSrc = function () {
-        return this.options.libScriptSrc || this.libOptions.scriptSrc;
+        return this.options.libScriptSrc || this.libOptions.libScriptSrc;
     };
     NToastNotify.prototype.getStyleTagHref = function () {
-        return this.options.libStyleHref || this.libOptions.styleHref;
+        return this.options.libStyleHref || this.libOptions.libStyleHref;
     };
     NToastNotify.prototype.loadScriptAsync = function () {
         var _this = this;
@@ -321,10 +258,18 @@ var NToastNotify = /** @class */ (function () {
         }
     };
     NToastNotify.prototype.domContentLoadedHandler = function () {
-        if (toastr) {
-            toastr.options = this.options.globalToastrOptions;
-            this.showToasts(this.options.messages);
-        }
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.ensureLibExists()];
+                    case 1:
+                        _a.sent();
+                        this.overrideLibDefaults();
+                        this.showToasts(this.options.messages);
+                        return [2 /*return*/];
+                }
+            });
+        });
     };
     NToastNotify.prototype.showToasts = function (messages) {
         var _this = this;
@@ -340,7 +285,7 @@ exports.NToastNotify = NToastNotify;
 
 
 /***/ }),
-/* 4 */
+/* 1 */
 /***/ (function(module, exports) {
 
 if (typeof Object.assign != 'function') {
@@ -369,6 +314,66 @@ if (typeof Object.assign != 'function') {
         configurable: true
     });
 }
+
+
+/***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var NToastNotifyNoty_1 = __webpack_require__(5);
+exports.noty = new NToastNotifyNoty_1.NToastNotifyNoty();
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var NToastNotify_1 = __webpack_require__(0);
+var ntoastNotifyOptions = {
+    libScriptSrc: 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js',
+    libVarName: 'toastr',
+    libStyleHref: 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css'
+};
+var NToastNotifyNoty = /** @class */ (function (_super) {
+    __extends(NToastNotifyNoty, _super);
+    function NToastNotifyNoty(options) {
+        return _super.call(this, options || ntoastNotifyOptions) || this;
+    }
+    NToastNotifyNoty.prototype.show = function (message) {
+        var args = [];
+        args.push(message.message);
+        args.push(message.title);
+        if (message.toastOptions) {
+            args.push(message.toastOptions);
+        }
+        if (toastr) {
+            toastr[message.toastType.toLowerCase()].apply(toastr, args);
+        }
+    };
+    NToastNotifyNoty.prototype.overrideLibDefaults = function () {
+        window.Noty.overrideDefaults(this.options.globalLibOptions);
+    };
+    return NToastNotifyNoty;
+}(NToastNotify_1.NToastNotify));
+exports.NToastNotifyNoty = NToastNotifyNoty;
 
 
 /***/ })

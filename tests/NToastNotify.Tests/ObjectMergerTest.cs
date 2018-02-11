@@ -8,10 +8,10 @@ namespace NToastNotify.Tests
         public void MergeWith_ValidArguments_ReturnMergedObject()
         {
             //Arrange
-            var obj1 = new ToastOption(){
+            var obj1 = new Option(){
                 PositionClass = "primary"
             };
-            var obj2 = new ToastOption(){ 
+            var obj2 = new Option(){ 
                CloseClass = "Close" 
              };
             //Act

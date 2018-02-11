@@ -1,8 +1,9 @@
 ﻿import './polyfills'
-interface NToastNotifyOptions {
+
+interface InitOptions {
     firstLoadEvent: string;
-    globalToastrOptions: ToastrOptions;
-    messages: ToastMessage[];
+    globalLibOptions: ToastrOptions;
+    messages: Array<ToastMessage>;
     responseHeaderKey: string;
     requestHeaderKey: string;
     libScriptSrc: string,
@@ -16,42 +17,43 @@ export interface ToastMessage {
     toastOptions: ToastrOptions;
 }
 
-export interface LibOptions {
-    varName: string,
-    scriptSrc: string,
-    styleHref: string
+export interface NToastNotifyOptions {
+    libVarName: string,
+    libScriptSrc: string,
+    libStyleHref: string
 }
 
 export abstract class NToastNotify {
-    libOptions: LibOptions;
-    constructor(options: LibOptions) {
+    libOptions: NToastNotifyOptions;
+    constructor(options: NToastNotifyOptions) {
         this.libOptions = options;
     }
-    options: NToastNotifyOptions = null;
+    options: InitOptions = null;
     fetchHeaderValue = 'Fetch';
-    async init(options: NToastNotifyOptions) {
+    init(options: InitOptions) {
         this.options = Object.assign({}, NToastNotify.defaults, options);
         this.interceptXmlRequest();
         this.interceptNativeFetch();
+        this.handleEvents();
+    }
+    ensureLibExists() {
         if (this.libPresentAlready()) {
-            this.showToasts(this.options.messages)
+            return;
         } else {
-            await this.loadLibAsync();
-            this.showToasts(this.options.messages)
+            return this.loadLibAsync();
         }
-
     }
     libPresentAlready() {
-        return typeof (window as any)[this.libOptions.varName] !== 'undefined';
+        return typeof (window as any)[this.libOptions.libVarName] !== 'undefined';
     }
     loadLibAsync() {
         return Promise.all([this.loadStyleAsync(), this.loadScriptAsync()])
     }
     getScriptTagSrc() {
-        return this.options.libScriptSrc || this.libOptions.scriptSrc;
+        return this.options.libScriptSrc || this.libOptions.libScriptSrc;
     }
     getStyleTagHref() {
-        return this.options.libStyleHref || this.libOptions.styleHref;
+        return this.options.libStyleHref || this.libOptions.libStyleHref;
     }
     loadScriptAsync() {
         return new Promise((resolve, reject) => {
@@ -168,12 +170,12 @@ export abstract class NToastNotify {
             return null;
         }
     }
-    domContentLoadedHandler() {
-        if (toastr) {
-            toastr.options = this.options.globalToastrOptions;
-            this.showToasts(this.options.messages);
-        }
+    async domContentLoadedHandler() {
+        await this.ensureLibExists();
+        this.overrideLibDefaults();
+        this.showToasts(this.options.messages);
     }
+    abstract overrideLibDefaults(): void;
     showToasts(messages: ToastMessage[]) {
         if (messages && messages.length) {
             messages.forEach((message, index, array) => {
@@ -186,7 +188,7 @@ export abstract class NToastNotify {
     static defaults: {
         firstLoadEvent: 'DOMContentLoaded',
         globalToastrOptions: {},
-        messages: [],
+        messages: null,
         responseHeaderKey: null,
         requestHeaderKey: null,
         libCdnScript: null,

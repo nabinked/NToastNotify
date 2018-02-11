@@ -10,10 +10,10 @@ namespace NToastNotify.Components
     public class ToastrViewComponent : ViewComponent
     {
         private readonly IToastNotification _toastNotification;
-        private readonly ToastOption _globalOption;                 // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
+        private readonly Option _globalOption;                 // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
         private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public ToastrViewComponent(IToastNotification toastNotification, ToastOption globalOption, NToastNotifyOption nToastNotifyOption)
+        public ToastrViewComponent(IToastNotification toastNotification, Option globalOption, NToastNotifyOption nToastNotifyOption)
         {
             _toastNotification = toastNotification;
             _globalOption = globalOption;
@@ -25,7 +25,7 @@ namespace NToastNotify.Components
             var model = new ToastNotificationViewModel()
             {
                 ToastMessagesJson = _toastNotification.ReadAllMessages().ToJson(),
-                GlobalOptionJson = _globalOption.MergeWith(ToastOption.Defaults).Json,
+                GlobalOptionJson = _globalOption.MergeWith(Option.Defaults).Json,
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
                 LibraryName = _nToastNotifyOption.Library.ToString().ToLower()

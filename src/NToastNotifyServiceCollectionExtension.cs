@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Options;
 
 namespace NToastNotify
 {
@@ -19,12 +20,12 @@ namespace NToastNotify
           (_embeddedFileProvider = new EmbeddedFileProvider(ThisAssembly, "NToastNotify"));
         }
         [Obsolete("Please use the extension method to IMVCBuilder. For e.g. services.AddMvc().AddNToastNotify()", true)]
-        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastOption defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
+        public static IServiceCollection AddNToastNotify(this IServiceCollection services, Option defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
         {
             return services;
         }
 
-        public static IMvcBuilder AddNToastNotify(this IMvcBuilder mvcBuilder, ToastOption defaultOptions = null,
+        public static IMvcBuilder AddNToastNotify<T>(this IMvcBuilder mvcBuilder, Option defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
             return AddNToastNotifyToMvcBuilder(mvcBuilder, defaultOptions, nToastNotifyOptions);
@@ -41,10 +42,11 @@ namespace NToastNotify
             return builder;
         }
 
-        private static IMvcBuilder AddNToastNotifyToMvcBuilder(this IMvcBuilder mvcBuilder, ToastOption defaultOptions = null,
-            NToastNotifyOption nToastNotifyOptions = null)
+        private static IMvcBuilder AddNToastNotifyToMvcBuilder<T>(this IMvcBuilder mvcBuilder, T defaultOptions = null,
+            NToastNotifyOption nToastNotifyOptions = null) where T : class, new()
         {
             var services = mvcBuilder.Services;
+            services.Configure<T>(o => { defaultOptions.Value });
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -85,7 +87,7 @@ namespace NToastNotify
             }
 
             // Add the toastr default options that will be rendered by the viewcomponent
-            defaultOptions = defaultOptions ?? ToastOption.Defaults;
+            defaultOptions = defaultOptions ?? Option.Defaults;
             services.AddSingleton(defaultOptions);
 
             // Add the NToastifyOptions to the services container for DI retrieval (options that are not rendered as they are not part of the toastr.js plugin)

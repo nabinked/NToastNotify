@@ -4,7 +4,7 @@ using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
-    public class ToastOption
+    public class Option : IOptions
     {
         public bool? TapToDismiss { get; set; }
         public string ToastClass { get; set; }
@@ -60,7 +60,7 @@ namespace NToastNotify
         [JsonIgnore]
         public string Json => this.ToJson();
 
-        public static ToastOption Defaults => new ToastOption()
+        public static Option Defaults => new Option()
         {
             TapToDismiss = true,
             ToastClass = "toast",

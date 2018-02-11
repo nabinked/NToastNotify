@@ -18,41 +18,41 @@ namespace NToastNotify
         /// <param name="title">Title of the message</param>
         /// <param name="message">The actual message body</param>
         /// <param name="notificationType">Type of message <seealso cref="Enums.ToastType"/></param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastOption"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
         void AddToastMessage(string title, string message, Enums.ToastType notificationType,
-            ToastOption toastOptions);
+            Option toastOptions);
         
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.ToastType.success"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastOption"/></param>
-        void AddSuccessToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
+        void AddSuccessToastMessage(string message = null, string title = null, Option toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.ToastType.Info"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastOption"/></param>
-        void AddInfoToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
+        void AddInfoToastMessage(string message = null, string title = null, Option toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.ToastType.Warning"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastOption"/></param>
-        void AddWarningToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
+        void AddWarningToastMessage(string message = null, string title = null, Option toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.ToastType.Error"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastOption"/></param>
-        void AddErrorToastMessage(string message = null, string title = null, ToastOption toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
+        void AddErrorToastMessage(string message = null, string title = null, Option toastOptions = null);
 
         /// <summary>
         /// Gets the list of <see cref="ToastMessage"/> added so far.

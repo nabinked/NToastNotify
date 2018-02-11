@@ -24,32 +24,32 @@ namespace NToastNotify
             var toastMessage = new ToastMessage(message, title, notificationType);
             AddMessage(toastMessage);
         }
-        public void AddToastMessage(string title, string message, Enums.ToastType notificationType, ToastOption toastOptions)
+        public void AddToastMessage(string title, string message, Enums.ToastType notificationType, Option toastOptions)
         {
             var toastMessage = new ToastMessage(message, title, notificationType, toastOptions);
             AddMessage(toastMessage);
         }
 
 
-        public void AddSuccessToastMessage(string message = null, string title = null, ToastOption toastOptions = null)
+        public void AddSuccessToastMessage(string message = null, string title = null, Option toastOptions = null)
         {
             var toastMessage = new ToastMessage(message ?? _defaultNtoastNotifyOptions.SuccessMessage, title ?? _defaultNtoastNotifyOptions.SuccessTitle, Enums.ToastType.Success, toastOptions);
             AddMessage(toastMessage);
         }
 
-        public void AddInfoToastMessage(string message, string title = null, ToastOption toastOptions = null)
+        public void AddInfoToastMessage(string message, string title = null, Option toastOptions = null)
         {
             var toastMessage = new ToastMessage(message ?? _defaultNtoastNotifyOptions.InfoMessage, title ?? _defaultNtoastNotifyOptions.InfoTitle, Enums.ToastType.Info, toastOptions);
             AddMessage(toastMessage);
         }
 
-        public void AddWarningToastMessage(string message = null, string title = null, ToastOption toastOptions = null)
+        public void AddWarningToastMessage(string message = null, string title = null, Option toastOptions = null)
         {
             var toastMessage = new ToastMessage(message ?? _defaultNtoastNotifyOptions.WarningMessage, title ?? _defaultNtoastNotifyOptions.WarningTitle, Enums.ToastType.Warning, toastOptions);
             AddMessage(toastMessage);
         }
 
-        public void AddErrorToastMessage(string message = null, string title = null, ToastOption toastOptions = null)
+        public void AddErrorToastMessage(string message = null, string title = null, Option toastOptions = null)
         {
             var toastMessage = new ToastMessage(message ?? _defaultNtoastNotifyOptions.ErrorMessage, title ?? _defaultNtoastNotifyOptions.ErrorTitle, Enums.ToastType.Error, toastOptions);
             AddMessage(toastMessage);

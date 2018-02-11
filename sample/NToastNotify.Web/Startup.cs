@@ -24,7 +24,7 @@ namespace NToastNotify.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc().AddNToastNotify(new ToastOption()
+            services.AddMvc().AddNToastNotify(new Option()
             {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
