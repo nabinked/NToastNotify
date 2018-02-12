@@ -5,9 +5,9 @@ namespace NToastNotify.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToastNotification _toastNotification;
+        private readonly IToastNotification<ToastrOptions> _toastNotification;
 
-        public HomeController(IToastNotification toastNotification)
+        public HomeController(IToastNotification<ToastrOptions> toastNotification)
         {
             _toastNotification = toastNotification;
         }
@@ -29,7 +29,7 @@ namespace NToastNotify.Web.Controllers
             //Error
             _toastNotification.AddErrorToastMessage();
 
-            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.ToastType.Success, new Option()
+            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.ToastType.Success, new ToastrOptions()
             {
                 PositionClass = ToastPositions.BottomLeft
             });
@@ -39,7 +39,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult About()
         {
-            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", Enums.ToastType.Warning, new Option()
+            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", Enums.ToastType.Warning, new ToastrOptions()
             {
                 PositionClass = ToastPositions.BottomFullWidth
             });
@@ -49,7 +49,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult Contact()
         {
-            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", Enums.ToastType.Info, new Option()
+            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", Enums.ToastType.Info, new ToastrOptions()
             {
                 PositionClass = ToastPositions.TopCenter
             });

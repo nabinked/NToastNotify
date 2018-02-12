@@ -1,6 +1,9 @@
-﻿namespace NToastNotify.Libraries
+﻿using NToastNotify.Helpers;
+
+namespace NToastNotify.Libraries
 {
-    public class NotyOptions
+    public class NotyOptions : ILibraryOptions
     {
+        public string Json => this.ToJson();
     }
 }

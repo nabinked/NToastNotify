@@ -6,7 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Options;
+using NToastNotify.Libraries;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace NToastNotify
 {
@@ -20,15 +21,17 @@ namespace NToastNotify
           (_embeddedFileProvider = new EmbeddedFileProvider(ThisAssembly, "NToastNotify"));
         }
         [Obsolete("Please use the extension method to IMVCBuilder. For e.g. services.AddMvc().AddNToastNotify()", true)]
-        public static IServiceCollection AddNToastNotify(this IServiceCollection services, Option defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
+        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastrOptions defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
         {
             return services;
         }
 
-        public static IMvcBuilder AddNToastNotify<T>(this IMvcBuilder mvcBuilder, Option defaultOptions = null,
+        public static IMvcBuilder AddNToastNotify<TOptions>(this IMvcBuilder mvcBuilder, TOptions defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
+            where TOptions : class, ILibraryOptions
+
         {
-            return AddNToastNotifyToMvcBuilder(mvcBuilder, defaultOptions, nToastNotifyOptions);
+            return AddNToastNotifyToMvcBuilder<TOptions>(mvcBuilder, defaultOptions, nToastNotifyOptions);
         }
 
         public static IApplicationBuilder UseNToastNotify(this IApplicationBuilder builder)
@@ -42,11 +45,12 @@ namespace NToastNotify
             return builder;
         }
 
-        private static IMvcBuilder AddNToastNotifyToMvcBuilder<T>(this IMvcBuilder mvcBuilder, T defaultOptions = null,
-            NToastNotifyOption nToastNotifyOptions = null) where T : class, new()
+        private static IMvcBuilder AddNToastNotifyToMvcBuilder<T, TOptions>(this IMvcBuilder mvcBuilder, TOptions defaultLibOptions = null,
+            NToastNotifyOption nToastNotifyOptions = null)
+            where T : class, ILibrary<TOptions>
+            where TOptions : class, ILibraryOptions
         {
             var services = mvcBuilder.Services;
-            services.Configure<T>(o => { defaultOptions.Value });
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
@@ -65,7 +69,7 @@ namespace NToastNotify
             });
 
             //Add the ToastNotification implementation
-            services.AddScoped<IToastNotification, ToastNotification>();
+            services.AddSingleton<IToastNotification<ILibraryOptions>, ToastNotification>();
 
             //Check if a TempDataProvider is already registered.
             var provider = services.BuildServiceProvider();
@@ -87,11 +91,10 @@ namespace NToastNotify
             }
 
             // Add the toastr default options that will be rendered by the viewcomponent
-            defaultOptions = defaultOptions ?? Option.Defaults;
-            services.AddSingleton(defaultOptions);
+            services.AddSingleton<ILibraryOptions>(defaultLibOptions ?? default(ILibraryOptions));
 
             // Add the NToastifyOptions to the services container for DI retrieval (options that are not rendered as they are not part of the toastr.js plugin)
-            nToastNotifyOptions = nToastNotifyOptions ?? NToastNotifyOption.Defaults;
+            nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
             services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
             services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
             services.AddScoped<NtoastNotifyMiddleware>();

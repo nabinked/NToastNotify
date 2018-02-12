@@ -2,9 +2,8 @@
 
 namespace NToastNotify
 {
-    public interface IOptions
+    public interface ILibraryOptions
     {
-        IOptions Defaults { get; }
         [JsonIgnore]
         string Json { get; }
     }

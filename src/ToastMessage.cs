@@ -5,7 +5,7 @@ namespace NToastNotify
 {
     public class ToastMessage
     {
-        public ToastMessage(string message, string title, Enums.ToastType toasType, Option options = null)
+        public ToastMessage(string message, string title, Enums.ToastType toasType, ILibraryOptions options = null)
         {
             this.Message = message;
             this.Title = title;
@@ -16,6 +16,6 @@ namespace NToastNotify
         public string Message { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public Enums.ToastType ToastType { get; set; }
-        public IOptions ToastOptions { get; set; }
+        public ILibraryOptions ToastOptions { get; set; }
     }
 }

@@ -9,10 +9,5 @@
             Info,
             Error
         }
-
-        public enum SupportedLibrary
-        {
-            Toastr
-        }
     }
 }

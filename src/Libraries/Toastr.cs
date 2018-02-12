@@ -4,15 +4,11 @@ using System.Text;
 
 namespace NToastNotify.Libraries
 {
-    public class Noty : ILibrary<NotyOptions>
+    public abstract class Toastr : ILibrary<ToastrOptions>
     {
         public string Name { get; set; } = "noty";
         public string ScriptSrc { get; set; }
         public string StyleHref { get; set; }
-        public NotyOptions Options { get; set; }
-        public NotyOptions GetOptions()
-        {
-            return new NotyOptions();
-        }
+        public ToastrOptions Options { get; set; }
     }
 }

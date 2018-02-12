@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using NToastNotify.Libraries;
 
 namespace NToastNotify.Web
 {
@@ -24,13 +25,9 @@ namespace NToastNotify.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc().AddNToastNotify(new Option()
+            services.AddMvc().AddNToastNotify<ToastrOptions>(new ToastrOptions(), new NToastNotifyOption()
             {
-                ProgressBar = false,
-                PositionClass = ToastPositions.BottomCenter
-            }, new NToastNotifyOption()
-            {
-                SuccessMessage = "Overwritten default success message"
+                DefaultSuccessMessage = "Overwritten default success message"
             }); ;
         }
 

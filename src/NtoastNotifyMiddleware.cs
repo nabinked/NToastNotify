@@ -13,10 +13,10 @@ namespace NToastNotify
 {
     internal class NtoastNotifyMiddleware : IMiddleware
     {
-        private readonly IToastNotification _toastNotification;
+        private readonly IToastNotification<ILibraryOptions> _toastNotification;
         private readonly ILogger<NtoastNotifyMiddleware> _logger;
 
-        public NtoastNotifyMiddleware(IToastNotification toastNotification, ILogger<NtoastNotifyMiddleware> logger)
+        public NtoastNotifyMiddleware(IToastNotification<ILibraryOptions> toastNotification, ILogger<NtoastNotifyMiddleware> logger)
         {
             _toastNotification = toastNotification;
             _logger = logger;
