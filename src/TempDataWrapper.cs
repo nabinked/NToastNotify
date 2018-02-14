@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
+using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
@@ -39,7 +40,7 @@ namespace NToastNotify
 
         public void Add(string key, object value)
         {
-            TempData[key] = JsonConvert.SerializeObject(value);
+            TempData[key] = value.ToJson();
         }
 
         public bool Remove(string key)

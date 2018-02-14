@@ -11,7 +11,10 @@ namespace NToastNotify
             Success,
             Warning,
             Info,
-            Error
+            Error,
+            //This one used in Noty
+            Alert
+
         }
     }
 }

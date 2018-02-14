@@ -1,6 +1,6 @@
 ﻿using NToastNotify.Helpers;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
     public class NotyOptions : ILibraryOptions
     {

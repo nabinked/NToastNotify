@@ -1,4 +1,5 @@
 ﻿using NToastNotify.Libraries;
+using System;
 using System.Collections.Generic;
 
 namespace NToastNotify
@@ -11,6 +12,7 @@ namespace NToastNotify
         /// <param name="title">Title of the message</param>
         /// <param name="message">The actual message body</param>
         /// <param name="notificationType">Type of message <seealso cref="Enums.ToastType"/></param>
+        [Obsolete("Use the other overload which takes, title, message and options")]
         void AddToastMessage(string title, string message, Enums.ToastType notificationType);
 
         /// <summary>

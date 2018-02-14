@@ -9,6 +9,7 @@ namespace NToastNotify.Libraries
         string VarName { get; }
         string ScriptSrc { get; }
         string StyleHref { get; }
+        ILibraryOptions Defaults { get; }
 
     }
 }
