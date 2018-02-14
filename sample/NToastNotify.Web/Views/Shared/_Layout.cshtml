@@ -15,7 +15,6 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <link href="~/lib/toastr/toastr.min.css" rel="stylesheet" />
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -69,7 +68,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-    <script src="~/lib/toastr/toastr.js"></script>
 
     @await Component.InvokeAsync("NToastNotify.Toastr")
 

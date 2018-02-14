@@ -8,15 +8,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NToastNotify.Helpers;
+using NToastNotify.Libraries;
 
 namespace NToastNotify
 {
     internal class NtoastNotifyMiddleware : IMiddleware
     {
-        private readonly IToastNotification<ILibraryOptions> _toastNotification;
+        private readonly IToastNotification _toastNotification;
         private readonly ILogger<NtoastNotifyMiddleware> _logger;
 
-        public NtoastNotifyMiddleware(IToastNotification<ILibraryOptions> toastNotification, ILogger<NtoastNotifyMiddleware> logger)
+        public NtoastNotifyMiddleware(IToastNotification toastNotification, ILogger<NtoastNotifyMiddleware> logger)
         {
             _toastNotification = toastNotification;
             _logger = logger;

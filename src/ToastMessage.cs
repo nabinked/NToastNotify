@@ -9,13 +9,16 @@ namespace NToastNotify
         {
             this.Message = message;
             this.Title = title;
-            this.ToastType = toasType;
+            this.ToastType = toasType.ToString();
             this.ToastOptions = options;
         }
-        public string Title { get; set; }
-        public string Message { get; set; }
-        [JsonConverter(typeof(StringEnumConverter))]
-        public Enums.ToastType ToastType { get; set; }
-        public ILibraryOptions ToastOptions { get; set; }
+        [JsonProperty]
+        public string Title { get; private set; }
+        [JsonProperty]
+        public string Message { get; private set; }
+        [JsonProperty]
+        public string ToastType { get; private set; }
+        [JsonProperty]
+        public object ToastOptions { get; private set; }
     }
 }

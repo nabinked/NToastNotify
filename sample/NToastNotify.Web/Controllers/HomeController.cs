@@ -5,9 +5,9 @@ namespace NToastNotify.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToastNotification<ToastrOptions> _toastNotification;
+        private readonly IToastNotification _toastNotification;
 
-        public HomeController(IToastNotification<ToastrOptions> toastNotification)
+        public HomeController(IToastNotification toastNotification)
         {
             _toastNotification = toastNotification;
         }
@@ -31,7 +31,7 @@ namespace NToastNotify.Web.Controllers
 
             _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.ToastType.Success, new ToastrOptions()
             {
-                PositionClass = ToastPositions.BottomLeft
+                PositionClass = ToastPositions.TopLeft
             });
 
             return View();

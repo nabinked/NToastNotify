@@ -4,15 +4,10 @@ using System.Text;
 
 namespace NToastNotify.Libraries
 {
-    public class Noty : ILibrary<NotyOptions>
+    public class Noty : ILibrary
     {
-        public string Name { get; set; } = "noty";
-        public string ScriptSrc { get; set; }
-        public string StyleHref { get; set; }
-        public NotyOptions Options { get; set; }
-        public NotyOptions GetOptions()
-        {
-            return new NotyOptions();
-        }
+        public string VarName { get; set; } = "noty";
+        public string ScriptSrc { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js";
+        public string StyleHref { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css";
     }
 }

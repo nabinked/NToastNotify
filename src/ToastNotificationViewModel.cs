@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NToastNotify.Libraries;
+using System.Collections.Generic;
 
 namespace NToastNotify
 {
@@ -8,6 +9,6 @@ namespace NToastNotify
         public string GlobalOptionJson { get; set; }
         public string RequestHeaderKey { get; set; }
         public string ResponseHeaderKey { get; set; }
-        public string LibraryName { get; set; }
+        public ILibrary LibraryDetails { get; set; }
     }
 }

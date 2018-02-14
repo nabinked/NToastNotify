@@ -6,10 +6,14 @@ interface InitOptions {
     messages: Array<ToastMessage>;
     responseHeaderKey: string;
     requestHeaderKey: string;
-    libScriptSrc: string,
-    libStyleHref: string
+    libraryDetails: LibraryDetails
 }
 
+export interface LibraryDetails {
+    varName: string,
+    scriptSrc: string,
+    styleHref: string
+}
 export interface ToastMessage {
     toastType: ToastrType;
     message: string;
@@ -17,17 +21,8 @@ export interface ToastMessage {
     toastOptions: ToastrOptions;
 }
 
-export interface NToastNotifyOptions {
-    libVarName: string,
-    libScriptSrc: string,
-    libStyleHref: string
-}
 
 export abstract class NToastNotify {
-    libOptions: NToastNotifyOptions;
-    constructor(options: NToastNotifyOptions) {
-        this.libOptions = options;
-    }
     options: InitOptions = null;
     fetchHeaderValue = 'Fetch';
     init(options: InitOptions) {
@@ -44,22 +39,17 @@ export abstract class NToastNotify {
         }
     }
     libPresentAlready() {
-        return typeof (window as any)[this.libOptions.libVarName] !== 'undefined';
+        return typeof (window as any)[this.options.libraryDetails.varName] !== 'undefined';
     }
     loadLibAsync() {
         return Promise.all([this.loadStyleAsync(), this.loadScriptAsync()])
     }
-    getScriptTagSrc() {
-        return this.options.libScriptSrc || this.libOptions.libScriptSrc;
-    }
-    getStyleTagHref() {
-        return this.options.libStyleHref || this.libOptions.libStyleHref;
-    }
+
     loadScriptAsync() {
         return new Promise((resolve, reject) => {
-            if (this.getScriptTagSrc()) {
+            if (this.options.libraryDetails.scriptSrc) {
                 const script = document.createElement('script');
-                script.setAttribute('src', this.getScriptTagSrc());
+                script.setAttribute('src', this.options.libraryDetails.scriptSrc);
                 script.onload = (e) => {
                     resolve();
                 };
@@ -74,11 +64,11 @@ export abstract class NToastNotify {
     }
     loadStyleAsync() {
         return new Promise((resolve, reject) => {
-            if (this.getStyleTagHref()) {
+            if (this.options.libraryDetails.scriptSrc) {
                 const link = document.createElement('link');
                 link.setAttribute('rel', 'stylesheet');
                 link.type = 'text/css'
-                link.href = this.getStyleTagHref()
+                link.href = this.options.libraryDetails.styleHref;
                 link.onload = (e) => {
                     resolve();
                 };

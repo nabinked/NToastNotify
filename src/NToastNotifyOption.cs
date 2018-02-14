@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NToastNotify.Libraries;
+using System;
 
 namespace NToastNotify
 {
@@ -42,5 +43,7 @@ namespace NToastNotify
         [Obsolete("Use DefaultErrorMessage", true)]
         public string ErrorMessage { get; set; }
         public string DefaultErrorMessage { get; set; } = "Task could not complete successfully.";
+
+        public ILibrary LibraryDetails { get; set; }
     }
 }

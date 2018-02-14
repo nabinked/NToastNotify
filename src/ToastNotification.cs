@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using NToastNotify.Libraries;
+using System.Collections.Generic;
 
 namespace NToastNotify
 {
-    public class ToastNotification : IToastNotification<ILibraryOptions>
+    public class ToastNotification : IToastNotification
     {
-
         private readonly NToastNotifyOption _defaultNtoastNotifyOptions;
         private readonly IMessageContainer _messageContainer;
 
@@ -29,7 +29,6 @@ namespace NToastNotify
             var toastMessage = new ToastMessage(message, title, notificationType, toastOptions);
             AddMessage(toastMessage);
         }
-
 
         public void AddSuccessToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
         {

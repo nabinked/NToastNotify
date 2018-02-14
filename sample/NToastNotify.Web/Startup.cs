@@ -25,7 +25,10 @@ namespace NToastNotify.Web
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc().AddNToastNotify<ToastrOptions>(new ToastrOptions(), new NToastNotifyOption()
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                PositionClass = ToastPositions.BottomCenter
+            }, new NToastNotifyOption()
             {
                 DefaultSuccessMessage = "Overwritten default success message"
             }); ;

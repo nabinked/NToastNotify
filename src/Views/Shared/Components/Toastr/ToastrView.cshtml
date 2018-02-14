@@ -3,15 +3,16 @@
 @using NToastNotify
 @using NToastNotify.Helpers
 @model ToastNotificationViewModel
-<script src="~/NToastNotify/js/dist/@(Model.LibraryName).js"></script>
+<script src="~/NToastNotify/js/dist/@(Model.LibraryDetails.VarName).js"></script>
 <script type="text/javascript" language="javascript">
-            if (nToastNotify && nToastNotify.@Model.LibraryName) {
-                nToastNotify.@(Model.LibraryName).init({
+            if (nToastNotify && nToastNotify.@Model.LibraryDetails.VarName) {
+                nToastNotify.@(Model.LibraryDetails.VarName).init({
                     firstLoadEvent: 'DOMContentLoaded',
-                    globalToastrOptions: @Html.Raw(Model.GlobalOptionJson),
+                    globalLibOptions: @Html.Raw(Model.GlobalOptionJson),
                     messages: @Html.Raw(Model.ToastMessagesJson),
                     responseHeaderKey: '@Model.ResponseHeaderKey',
-                    requestHeaderKey: '@Model.RequestHeaderKey'
+                    requestHeaderKey: '@Model.RequestHeaderKey',
+                    libraryDetails:@Html.Raw(Model.LibraryDetails.ToJson())
                 });
             };
 </script>

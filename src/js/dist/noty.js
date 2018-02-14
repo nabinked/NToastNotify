@@ -108,10 +108,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(1);
 var NToastNotify = /** @class */ (function () {
-    function NToastNotify(options) {
+    function NToastNotify() {
         this.options = null;
         this.fetchHeaderValue = 'Fetch';
-        this.libOptions = options;
     }
     NToastNotify.prototype.init = function (options) {
         this.options = Object.assign({}, NToastNotify.defaults, options);
@@ -128,23 +127,17 @@ var NToastNotify = /** @class */ (function () {
         }
     };
     NToastNotify.prototype.libPresentAlready = function () {
-        return typeof window[this.libOptions.libVarName] !== 'undefined';
+        return typeof window[this.options.libraryDetails.varName] !== 'undefined';
     };
     NToastNotify.prototype.loadLibAsync = function () {
         return Promise.all([this.loadStyleAsync(), this.loadScriptAsync()]);
     };
-    NToastNotify.prototype.getScriptTagSrc = function () {
-        return this.options.libScriptSrc || this.libOptions.libScriptSrc;
-    };
-    NToastNotify.prototype.getStyleTagHref = function () {
-        return this.options.libStyleHref || this.libOptions.libStyleHref;
-    };
     NToastNotify.prototype.loadScriptAsync = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (_this.getScriptTagSrc()) {
+            if (_this.options.libraryDetails.scriptSrc) {
                 var script = document.createElement('script');
-                script.setAttribute('src', _this.getScriptTagSrc());
+                script.setAttribute('src', _this.options.libraryDetails.scriptSrc);
                 script.onload = function (e) {
                     resolve();
                 };
@@ -161,11 +154,11 @@ var NToastNotify = /** @class */ (function () {
     NToastNotify.prototype.loadStyleAsync = function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            if (_this.getStyleTagHref()) {
+            if (_this.options.libraryDetails.scriptSrc) {
                 var link = document.createElement('link');
                 link.setAttribute('rel', 'stylesheet');
                 link.type = 'text/css';
-                link.href = _this.getStyleTagHref();
+                link.href = _this.options.libraryDetails.styleHref;
                 link.onload = function (e) {
                     resolve();
                 };
@@ -347,15 +340,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var NToastNotify_1 = __webpack_require__(0);
-var ntoastNotifyOptions = {
-    libScriptSrc: 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js',
-    libVarName: 'toastr',
-    libStyleHref: 'https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css'
-};
 var NToastNotifyNoty = /** @class */ (function (_super) {
     __extends(NToastNotifyNoty, _super);
-    function NToastNotifyNoty(options) {
-        return _super.call(this, options || ntoastNotifyOptions) || this;
+    function NToastNotifyNoty() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     NToastNotifyNoty.prototype.show = function (message) {
         var args = [];

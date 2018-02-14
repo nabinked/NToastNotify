@@ -1,4 +1,8 @@
-﻿namespace NToastNotify
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.Runtime.Serialization;
+
+namespace NToastNotify
 {
     public class Enums
     {

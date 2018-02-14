@@ -25,7 +25,6 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
     </environment>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"/>
     @await Component.InvokeAsync("NToastNotify.Toastr")
 
 </head>
@@ -82,7 +81,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 
     @RenderSection("Scripts", required: false)
 

@@ -4,11 +4,10 @@ using System.Text;
 
 namespace NToastNotify.Libraries
 {
-    public abstract class Toastr : ILibrary<ToastrOptions>
+    public class Toastr : ILibrary
     {
-        public string Name { get; set; } = "noty";
-        public string ScriptSrc { get; set; }
-        public string StyleHref { get; set; }
-        public ToastrOptions Options { get; set; }
+        public string VarName { get; set; } = "toastr";
+        public string ScriptSrc { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js";
+        public string StyleHref { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css";
     }
 }
