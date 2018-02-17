@@ -6,7 +6,7 @@ namespace NToastNotify.Libraries.Toastr
 {
     public class ToastrNotification : ToastNotification, IToastrNotification
     {
-        public ToastrNotification(IMessageContainerFactory<ToastrMessage> messageContainerFactory, NToastNotifyOption nToastNotifyOptions) : base(messageContainerFactory, nToastNotifyOptions)
+        public ToastrNotification(IMessageContainerFactory messageContainerFactory, NToastNotifyOption nToastNotifyOptions) : base(messageContainerFactory, nToastNotifyOptions)
         {
         }
 

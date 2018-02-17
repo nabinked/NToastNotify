@@ -138,7 +138,7 @@ namespace NToastNotify
             //(options that are not rendered as they are not part of the plugin)
             nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
             nToastNotifyOptions.LibraryDetails = library;
-            services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
+            services.AddSingleton(nToastNotifyOptions);
             services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
             //Add the ToastNotification implementation
             services.AddSingleton<TNotificationService, TNotificationImplementation>();

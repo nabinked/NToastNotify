@@ -6,8 +6,9 @@ namespace NToastNotify.Libraries.Toastr
 {
     public class NotyNotification : ToastNotification, INotyNotification
     {
-        public NotyNotification(IMessageContainerFactory<NotyMessage> messageContainerFactory, NToastNotifyOption nToastNotifyOptions) : base(messageContainerFactory, nToastNotifyOptions)
+        public NotyNotification(IMessageContainer messageContainerFactory, NToastNotifyOption nToastNotifyOptions) : base(messageContainerFactory, nToastNotifyOptions)
         {
+            _messageContainer = messageContainerFactory.Create<NotyMessage>();
         }
 
         public void AddToastMessage(string title, string message)

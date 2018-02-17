@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NToastNotify
 {
-    public interface IMessageContainerFactory<out TMessage> where TMessage : IToastMessage
+    public interface IMessageContainerFactory<TMessage> where TMessage : class, IToastMessage
     {
         IMessageContainer<TMessage> Create();
     }

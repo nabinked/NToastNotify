@@ -25,12 +25,12 @@ namespace NToastNotify
             _tempDataWrapper.Remove(Key);
         }
 
-        public IList<TMessage> GetAll()
+        public IEnumerable<TMessage> GetAll()
         {
             return _tempDataWrapper.Peek<IList<TMessage>>(Key);
         }
 
-        public IList<TMessage> ReadAll()
+        public IEnumerable<TMessage> ReadAll()
         {
             var messages = GetAll();
             RemoveAll();

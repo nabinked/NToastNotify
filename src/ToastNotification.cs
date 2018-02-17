@@ -6,16 +6,15 @@ namespace NToastNotify
     public abstract class ToastNotification : IToastNotification
     {
         private readonly NToastNotifyOption _defaultNtoastNotifyOptions;
-        private readonly IMessageContainer<IToastMessage> _messageContainer;
+        protected IMessageContainer<IToastMessage> _messageContainer;
 
         /// <summary>
         /// Toast notification constructor
         /// </summary>
         /// <param name="messageContainerFactory"></param>
         /// <param name="nToastNotifyOptions">Default toast notify options</param>
-        public ToastNotification(IMessageContainerFactory<IToastMessage> messageContainerFactory, NToastNotifyOption nToastNotifyOptions)
+        public ToastNotification(IMessageContainerFactory messageContainerFactory, NToastNotifyOption nToastNotifyOptions)
         {
-            _messageContainer = messageContainerFactory.Create();
             _defaultNtoastNotifyOptions = nToastNotifyOptions.MergeWith(new NToastNotifyOption());
         }
 

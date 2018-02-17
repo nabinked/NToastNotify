@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace NToastNotify
 {
-    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : IToastMessage
+    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage
     {
         private IList<TMessage> Messages { get; }
 
@@ -21,12 +21,12 @@ namespace NToastNotify
             Messages.Clear();
         }
 
-        public IList<TMessage> GetAll()
+        public IEnumerable<TMessage> GetAll()
         {
             return Messages;
         }
 
-        public IList<TMessage> ReadAll()
+        public IEnumerable<TMessage> ReadAll()
         {
             var messages = new List<TMessage>(Messages);
             Messages.Clear();
