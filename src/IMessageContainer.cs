@@ -4,11 +4,11 @@ using System.Text;
 
 namespace NToastNotify
 {
-    public interface IMessageContainer
+    public interface IMessageContainer<out TMessage> where TMessage : IToastMessage
     {
-        void Add(ToastMessage message);
+        void Add(TMessage message);
         void RemoveAll();
-        IList<ToastMessage> GetAll();
-        IList<ToastMessage> ReadAll();
+        IEnumerable<TMessage> GetAll();
+        IEnumerable<TMessage> ReadAll();
     }
 }

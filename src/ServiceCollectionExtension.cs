@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using NToastNotify.Libraries;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System.Linq;
+using NToastNotify.Libraries.Toastr;
 
 namespace NToastNotify
 {
@@ -39,7 +40,7 @@ namespace NToastNotify
         public static IMvcBuilder AddNToastNotify(this IMvcBuilder mvcBuilder, ToastrOptions defaultOptions = null,
     NToastNotifyOption nToastNotifyOptions = null)
         {
-            return AddNToastNotifyToMvcBuilder<Toastr, ToastrOptions>(mvcBuilder, defaultOptions, nToastNotifyOptions);
+            return AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, IToastrNotification, ToastrNotification>(mvcBuilder, defaultOptions, nToastNotifyOptions);
         }
 
         /// <summary>
@@ -52,7 +53,7 @@ namespace NToastNotify
         public static IMvcBuilder AddNToastNotifyToastr(this IMvcBuilder mvcBuilder, ToastrOptions defaultOptions = null,
     NToastNotifyOption nToastNotifyOptions = null)
         {
-            return AddNToastNotifyToMvcBuilder<Toastr, ToastrOptions>(mvcBuilder, defaultOptions ?? new ToastrOptions(), nToastNotifyOptions);
+            return AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, IToastrNotification, ToastrNotification>(mvcBuilder, defaultOptions ?? new ToastrOptions(), nToastNotifyOptions);
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace NToastNotify
         public static IMvcBuilder AddNToastNotifyNoty(this IMvcBuilder mvcBuilder, NotyOptions defaultOptions = null,
     NToastNotifyOption nToastNotifyOptions = null)
         {
-            return AddNToastNotifyToMvcBuilder<Noty, NotyOptions>(mvcBuilder, defaultOptions ?? new NotyOptions(), nToastNotifyOptions);
+            return AddNToastNotifyToMvcBuilder<NotyLibrary, NotyOptions, INotyNotification, NotyNotification>(mvcBuilder, defaultOptions ?? new NotyOptions(), nToastNotifyOptions);
         }
 
         /// <summary>
@@ -84,10 +85,12 @@ namespace NToastNotify
             return builder;
         }
 
-        private static IMvcBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption>(this IMvcBuilder mvcBuilder, TOption defaultLibOptions,
+        private static IMvcBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TNotificationService, TNotificationImplementation>(this IMvcBuilder mvcBuilder, TOption defaultLibOptions,
             NToastNotifyOption nToastNotifyOptions = null)
             where TOption : class, ILibraryOptions
             where TLibrary : class, ILibrary, new()
+            where TNotificationService : class, IToastNotification
+            where TNotificationImplementation : class, TNotificationService
         {
             var services = mvcBuilder.Services;
             if (services == null)
@@ -138,7 +141,8 @@ namespace NToastNotify
             services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
             services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
             //Add the ToastNotification implementation
-            services.AddSingleton<IToastNotification, ToastNotification>();
+            services.AddSingleton<TNotificationService, TNotificationImplementation>();
+            services.AddSingleton<IToastNotification, TNotificationImplementation>();
             services.AddScoped<NtoastNotifyMiddleware>();
             return mvcBuilder;
         }

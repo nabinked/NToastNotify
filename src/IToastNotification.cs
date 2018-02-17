@@ -6,27 +6,9 @@ namespace NToastNotify
 {
     public interface IToastNotification
     {
-        /// <summary>
-        /// Adds a toast message to render to the view.
-        /// </summary>
-        /// <param name="title">Title of the message</param>
-        /// <param name="message">The actual message body</param>
-        /// <param name="notificationType">Type of message <seealso cref="Enums.ToastType"/></param>
-        [Obsolete("Use the other overload which takes, title, message and options")]
-        void AddToastMessage(string title, string message, Enums.ToastType notificationType);
 
         /// <summary>
-        /// Adds a toast message to render to the view.
-        /// </summary>
-        /// <param name="title">Title of the message</param>
-        /// <param name="message">The actual message body</param>
-        /// <param name="notificationType">Type of message <seealso cref="Enums.ToastType"/></param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
-        void AddToastMessage(string title, string message, Enums.ToastType notificationType,
-            ILibraryOptions toastOptions);
-
-        /// <summary>
-        /// Adds a toast message of type <see cref="Enums.ToastType.success"/>
+        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.success"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
@@ -34,7 +16,7 @@ namespace NToastNotify
         void AddSuccessToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.ToastType.Info"/>
+        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Info"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
@@ -42,7 +24,7 @@ namespace NToastNotify
         void AddInfoToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.ToastType.Warning"/>
+        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Warning"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
@@ -50,7 +32,7 @@ namespace NToastNotify
         void AddWarningToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.ToastType.Error"/>
+        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Error"/>
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
@@ -58,16 +40,16 @@ namespace NToastNotify
         void AddErrorToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Gets the list of <see cref="ToastMessage"/> added so far.
+        /// Gets the list of <see cref="ToastrMessage"/> added so far.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ToastMessage> GetToastMessages();
+        IEnumerable<IToastMessage> GetToastMessages();
 
         /// <summary>
-        /// Returns a list of <see cref="ToastMessage"/> and removes them from the list of Toast Messages.
+        /// Returns a list of <see cref="ToastrMessage"/> and removes them from the list of Toast Messages.
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ToastMessage> ReadAllMessages();
+        IEnumerable<IToastMessage> ReadAllMessages();
 
         /// <summary>
         /// Remove all toast notifications

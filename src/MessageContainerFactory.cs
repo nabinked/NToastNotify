@@ -3,7 +3,7 @@ using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
-    public class MessageContainerFactory : IMessageContainerFactory
+    public class MessageContainerFactory<TMessage> : IMessageContainerFactory<TMessage> where TMessage : IToastMessage
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataWrapper _tempDataWrapper;
@@ -13,15 +13,15 @@ namespace NToastNotify
             _httpContextAccessor = httpContextAccessor;
             _tempDataWrapper = tempDataWrapper;
         }
-        public IMessageContainer Create()
+        public IMessageContainer<TMessage> Create()
         {
             if (_httpContextAccessor.HttpContext.Request.IsAjaxRequest())
             {
-                return new InMemoryMessageContainer();
+                return new InMemoryMessageContainer<TMessage>();
             }
             else
             {
-                return new TempDataMessageContainer(_tempDataWrapper);
+                return new TempDataMessageContainer<TMessage>(_tempDataWrapper);
             }
         }
     }

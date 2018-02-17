@@ -20,7 +20,7 @@ namespace NToastNotify
         /// </summary>
         private ITempDataDictionary TempData => _tempDataDictionaryFactory?.GetTempData(_context);
 
-        public T Get<T>(string key)
+        public T Get<T>(string key) where T : class
         {
             if (TempData.ContainsKey(key))
             {
@@ -29,7 +29,7 @@ namespace NToastNotify
             return default(T);
         }
 
-        public T Peek<T>(string key)
+        public T Peek<T>(string key) where T : class
         {
             if (TempData.ContainsKey(key))
             {

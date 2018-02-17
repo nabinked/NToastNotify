@@ -3,9 +3,9 @@ using Newtonsoft.Json.Converters;
 
 namespace NToastNotify
 {
-    public class ToastMessage
+    public class ToastrMessage : IToastMessage
     {
-        public ToastMessage(string message, string title, Enums.ToastType toasType, ILibraryOptions options = null)
+        public ToastrMessage(string message, string title, Enums.NotificationTypesToastr toasType, ILibraryOptions options = null)
         {
             this.Message = message;
             this.Title = title;
@@ -19,6 +19,6 @@ namespace NToastNotify
         [JsonProperty]
         public string ToastType { get; private set; }
         [JsonProperty]
-        public object ToastOptions { get; private set; }
+        public ILibraryOptions ToastOptions { get; private set; }
     }
 }

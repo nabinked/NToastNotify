@@ -3,15 +3,15 @@ using System.Linq;
 
 namespace NToastNotify
 {
-    public class InMemoryMessageContainer : IMessageContainer
+    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : IToastMessage
     {
-        private IList<ToastMessage> Messages { get; }
+        private IList<TMessage> Messages { get; }
 
         public InMemoryMessageContainer()
         {
-            Messages = new List<ToastMessage>();
+            Messages = new List<TMessage>();
         }
-        public void Add(ToastMessage message)
+        public void Add(TMessage message)
         {
             Messages.Add(message);
         }
@@ -21,14 +21,14 @@ namespace NToastNotify
             Messages.Clear();
         }
 
-        public IList<ToastMessage> GetAll()
+        public IList<TMessage> GetAll()
         {
             return Messages;
         }
 
-        public IList<ToastMessage> ReadAll()
+        public IList<TMessage> ReadAll()
         {
-            var messages = new List<ToastMessage>(Messages);
+            var messages = new List<TMessage>(Messages);
             Messages.Clear();
             return messages;
         }

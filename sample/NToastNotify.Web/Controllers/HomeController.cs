@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify.Libraries;
 
 namespace NToastNotify.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IToastNotification _toastNotification;
+        private readonly IToastrNotification _toastNotification;
 
-        public HomeController(IToastNotification toastNotification)
+        public HomeController(IToastrNotification toastNotification)
         {
             _toastNotification = toastNotification;
         }
@@ -29,7 +30,7 @@ namespace NToastNotify.Web.Controllers
             //Error
             _toastNotification.AddErrorToastMessage();
 
-            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.ToastType.Success, new ToastrOptions()
+            _toastNotification.AddToastMessage("Custom Title", "My Custom Message", Enums.NotificationTypesToastr.Success, new ToastrOptions()
             {
                 PositionClass = ToastPositions.TopLeft
             });
@@ -39,7 +40,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult About()
         {
-            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", Enums.ToastType.Warning, new ToastrOptions()
+            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", Enums.NotificationTypesToastr.Warning, new ToastrOptions()
             {
                 PositionClass = ToastPositions.BottomFullWidth
             });
@@ -49,7 +50,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult Contact()
         {
-            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", Enums.ToastType.Info, new ToastrOptions()
+            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", Enums.NotificationTypesToastr.Info, new ToastrOptions()
             {
                 PositionClass = ToastPositions.TopCenter
             });

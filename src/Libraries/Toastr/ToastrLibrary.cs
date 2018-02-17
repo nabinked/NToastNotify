@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify.Libraries.Toastr
 {
-    public class Toastr : ILibrary
+    internal class ToastrLibrary : ILibrary
     {
         public string VarName { get; set; } = "toastr";
         public string ScriptSrc { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js";

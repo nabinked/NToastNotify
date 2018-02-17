@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace NToastNotify
 {
-    public class TempDataMessageContainer : IMessageContainer
+    public class TempDataMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage
     {
         private readonly ITempDataWrapper _tempDataWrapper;
         private const string Key = "NToastNotify.Messages.TempDataKey";
@@ -12,9 +12,9 @@ namespace NToastNotify
         {
             _tempDataWrapper = tempDataWrapper;
         }
-        public void Add(ToastMessage message)
+        public void Add(TMessage message)
         {
-            var messages = _tempDataWrapper.Get<IList<ToastMessage>>(Key) ?? new List<ToastMessage>();
+            var messages = _tempDataWrapper.Get<IList<TMessage>>(Key) ?? new List<TMessage>();
             messages.Add(message);
             _tempDataWrapper.Add(Key, messages);
 
@@ -25,12 +25,12 @@ namespace NToastNotify
             _tempDataWrapper.Remove(Key);
         }
 
-        public IList<ToastMessage> GetAll()
+        public IList<TMessage> GetAll()
         {
-            return _tempDataWrapper.Peek<IList<ToastMessage>>(Key);
+            return _tempDataWrapper.Peek<IList<TMessage>>(Key);
         }
 
-        public IList<ToastMessage> ReadAll()
+        public IList<TMessage> ReadAll()
         {
             var messages = GetAll();
             RemoveAll();
