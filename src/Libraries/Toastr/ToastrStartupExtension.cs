@@ -15,7 +15,7 @@ namespace NToastNotify.Libraries.Toastr
         public static IMvcBuilder AddNToastNotifyToastr(this IMvcBuilder mvcBuilder, ToastrOptions defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
-            return mvcBuilder.AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, IToastrNotification, ToastrNotification>(defaultOptions ?? new ToastrOptions(), nToastNotifyOptions);
+            return mvcBuilder.AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, ToastrNotification>(defaultOptions ?? new ToastrOptions(), nToastNotifyOptions);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace NToastNotify.Libraries.Noty
         public static IMvcBuilder AddNToastNotifyNoty(this IMvcBuilder mvcBuilder, NotyOptions defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
-            return mvcBuilder.AddNToastNotifyToMvcBuilder<NotyLibrary, NotyOptions, NotyMessage, INotyNotification, NotyNotification>(defaultOptions ?? new NotyOptions(), nToastNotifyOptions);
+            return mvcBuilder.AddNToastNotifyToMvcBuilder<NotyLibrary, NotyOptions, NotyMessage, NotyNotification>(defaultOptions ?? new NotyOptions(), nToastNotifyOptions);
         }
     }
 }

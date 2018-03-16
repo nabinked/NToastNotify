@@ -2,10 +2,10 @@
 
 namespace NToastNotify
 {
-    public interface IToastMessage<out TOptions> where TOptions : class, ILibraryOptions
+    public interface IToastMessage
     {
         string Message { get; }
         string Title { get; }
-        TOptions ToastOptions { get; }
+        ILibraryOptions ToastOptions { get; }
     }
 }

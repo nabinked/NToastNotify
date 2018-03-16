@@ -2,9 +2,9 @@
 
 namespace NToastNotify.Libraries.Noty
 {
-    public class NotyMessage : IToastMessage<NotyOptions>
+    public class NotyMessage : IToastMessage
     {
-        public NotyMessage(string message, string title, NotyOptions options = null)
+        public NotyMessage(string message, string title, ILibraryOptions options = null)
         {
             this.Message = message;
             this.Title = title;
@@ -15,6 +15,6 @@ namespace NToastNotify.Libraries.Noty
         [JsonProperty]
         public string Message { get; private set; }
         [JsonProperty]
-        public NotyOptions ToastOptions { get; private set; }
+        public ILibraryOptions ToastOptions { get; private set; }
     }
 }

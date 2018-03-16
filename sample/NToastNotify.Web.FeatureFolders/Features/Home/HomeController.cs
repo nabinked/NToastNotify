@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify.Libraries.Toastr;
 using NToastNotify.Web.FeatureFolders.Models;
 
 namespace NToastNotify.Web.FeatureFolders.Features.Home
@@ -16,7 +17,7 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
         public IActionResult Index()
         {
             _toastNotification.AddSuccessToastMessage();
-            _toastNotification.AddErrorToastMessage("Test Erro", null, new ToastOption()
+            _toastNotification.AddErrorToastMessage("Test Erro", null, new ToastrOptions()
             {
                 PositionClass = ToastPositions.BottomCenter
             });
@@ -26,20 +27,14 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-            _toastNotification.AddToastMessage("Warning About Title", "My About Warning Message", Enums.ToastType.Warning, new ToastOption()
-            {
-                PositionClass = ToastPositions.BottomFullWidth
-            }); 
+            _toastNotification.AddAlertToastMessage("Warning About Title", "My About Warning Message");
             return View();
         }
 
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-            _toastNotification.AddToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>", Enums.ToastType.Info, new ToastOption()
-            {
-                PositionClass = ToastPositions.TopCenter
-            });
+            _toastNotification.AddInfoToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>");
             return RedirectToAction("About");
         }
 

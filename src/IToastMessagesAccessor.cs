@@ -1,11 +1,9 @@
-﻿using System;
+﻿using NToastNotify.Libraries;
 using System.Collections.Generic;
-using System.Text;
-using NToastNotify.Libraries;
 
 namespace NToastNotify
 {
-    public interface IToastMessagesAccessor<out TMessage> where TMessage : class, IToastMessage<ILibraryOptions>
+    public interface IToastMessagesAccessor<out TMessage> where TMessage : class, IToastMessage
     {
         IEnumerable<TMessage> ToastMessages { get; }
     }

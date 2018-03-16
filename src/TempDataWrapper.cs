@@ -24,7 +24,7 @@ namespace NToastNotify
         {
             if (TempData.ContainsKey(key))
             {
-                return JsonConvert.DeserializeObject<T>(TempData[key].ToString());
+                return JsonConvert.DeserializeObject<T>(TempData[key] as string);
             }
             return default(T);
         }
@@ -33,7 +33,7 @@ namespace NToastNotify
         {
             if (TempData.ContainsKey(key))
             {
-                return JsonConvert.DeserializeObject<T>(TempData.Peek(key).ToString());
+                return JsonConvert.DeserializeObject<T>(TempData.Peek(key) as string);
             }
             return default(T);
         }

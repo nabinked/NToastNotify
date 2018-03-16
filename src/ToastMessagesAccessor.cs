@@ -4,7 +4,7 @@ using NToastNotify.MessageContainers;
 
 namespace NToastNotify
 {
-    public class ToastMessagesAccessor<TMessage> : IToastMessagesAccessor<TMessage> where TMessage : class, IToastMessage<ILibraryOptions>
+    public class ToastMessagesAccessor<TMessage> : IToastMessagesAccessor<TMessage> where TMessage : class, IToastMessage
     {
         /// <summary>
         /// this does a destroy read from the message container.

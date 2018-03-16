@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
@@ -10,13 +11,13 @@ namespace NToastNotify.Components
     [ViewComponent(Name = "NToastNotify.Toastr")]
     public class ToastrViewComponent : ViewComponent
     {
-        private readonly IToastMessagesAccessor<IToastMessage<ILibraryOptions>> _toastMessagesAccessor;
+        private readonly IToastNotification _toastNotification;
         private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
         private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public ToastrViewComponent(IToastMessagesAccessor<IToastMessage<ILibraryOptions>> toastMessagesAccessor, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
+        public ToastrViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
         {
-            _toastMessagesAccessor = toastMessagesAccessor;
+            _toastNotification = toastNotification;
             _globalOption = globalOption;
             _nToastNotifyOption = nToastNotifyOption;
         }
@@ -25,7 +26,7 @@ namespace NToastNotify.Components
         {
             var model = new ToastNotificationViewModel()
             {
-                ToastMessagesJson = _toastMessagesAccessor.ToastMessages.ToJson(),
+                ToastMessagesJson = _toastNotification.ReadAllMessages().ToJson(),
                 GlobalOptionJson = _globalOption.Json,
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,

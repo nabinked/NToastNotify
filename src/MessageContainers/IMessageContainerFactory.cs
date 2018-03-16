@@ -4,6 +4,6 @@ namespace NToastNotify.MessageContainers
 {
     public interface IMessageContainerFactory
     {
-        IMessageContainer<TMessage> Create<TMessage>() where TMessage : class, IToastMessage<ILibraryOptions>;
+        IMessageContainer<TMessage> Create<TMessage>() where TMessage : class, IToastMessage;
     }
 }

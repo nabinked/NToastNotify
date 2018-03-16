@@ -8,7 +8,6 @@ namespace NToastNotify.MessageContainers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataWrapper _tempDataWrapper;
-        private object instance;
 
         public MessageContainerFactory(IHttpContextAccessor httpContextAccessor, ITempDataWrapper tempDataWrapper)
         {
@@ -17,30 +16,15 @@ namespace NToastNotify.MessageContainers
         }
 
         public IMessageContainer<TMessage> Create<TMessage>()
-            where TMessage : class, IToastMessage<ILibraryOptions>
+            where TMessage : class, IToastMessage
         {
-            IMessageContainer<TMessage> i = null;
             if (_httpContextAccessor.HttpContext.Request.IsAjaxRequest())
             {
-                if (instance == null)
-                {
-                    i = new InMemoryMessageContainer<TMessage>();
-                    return i;
-                }
-                else
-                {
-                    return (IMessageContainer<TMessage>)instance;
-                }
+                return new InMemoryMessageContainer<TMessage>();
             }
             else
             {
-                if (instance == null)
-                {
-                    i = new TempDataMessageContainer<TMessage>(_tempDataWrapper);
-                    return i;
-                }
-
-                return (IMessageContainer<TMessage>)instance;
+                return new TempDataMessageContainer<TMessage>(_tempDataWrapper);
             }
         }
     }

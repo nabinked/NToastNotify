@@ -3,7 +3,7 @@ using NToastNotify.Libraries;
 
 namespace NToastNotify.MessageContainers
 {
-    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage<ILibraryOptions>
+    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage
     {
         private IList<TMessage> Messages { get; }
 

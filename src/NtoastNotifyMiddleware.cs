@@ -15,10 +15,10 @@ namespace NToastNotify
 {
     internal class NtoastNotifyMiddleware : IMiddleware
     {
-        private readonly IToastMessagesAccessor<IToastMessage<ILibraryOptions>> _messagesAccessor;
+        private readonly IToastMessagesAccessor<IToastMessage> _messagesAccessor;
         private readonly ILogger<NtoastNotifyMiddleware> _logger;
 
-        public NtoastNotifyMiddleware(IToastMessagesAccessor<IToastMessage<ILibraryOptions>> messagesAccessor, ILogger<NtoastNotifyMiddleware> logger)
+        public NtoastNotifyMiddleware(IToastMessagesAccessor<IToastMessage> messagesAccessor, ILogger<NtoastNotifyMiddleware> logger)
         {
             _messagesAccessor = messagesAccessor;
             _logger = logger;

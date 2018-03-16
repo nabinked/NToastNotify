@@ -4,7 +4,7 @@ using NToastNotify.Libraries;
 
 namespace NToastNotify.MessageContainers
 {
-    public class TempDataMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage<ILibraryOptions>
+    public class TempDataMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage
     {
         private readonly ITempDataWrapper _tempDataWrapper;
         private const string Key = "NToastNotify.Messages.TempDataKey";

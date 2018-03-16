@@ -3,34 +3,39 @@ using System.Collections.Generic;
 
 namespace NToastNotify.Libraries.Noty
 {
-    public class NotyNotification : INotyNotification
+    public class NotyNotification : IToastNotification
     {
-        public void AddSuccessToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        public void AddSuccessToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
         {
             throw new NotImplementedException();
         }
 
-        public void AddInfoToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        public void AddInfoToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
         {
             throw new NotImplementedException();
         }
 
-        public void AddWarningToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        public void AddAlertToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
         {
             throw new NotImplementedException();
         }
 
-        public void AddErrorToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        public void AddWarningToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<NotyMessage> GetToastMessages()
+        public void AddErrorToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<NotyMessage> ReadAllMessages()
+        public IEnumerable<IToastMessage> GetToastMessages()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<IToastMessage> ReadAllMessages()
         {
             throw new NotImplementedException();
         }
@@ -40,14 +45,5 @@ namespace NToastNotify.Libraries.Noty
             throw new NotImplementedException();
         }
 
-        public void AddToastMessage(string title, string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddToastMessage(string title, string message, NotyOptions toasILibraryOptions)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

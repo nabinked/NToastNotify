@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,9 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using NToastNotify.Components;
+using NToastNotify.Libraries;
+using NToastNotify.Libraries.Toastr;
+using NToastNotify.MessageContainers;
 
 namespace NToastNotify
 {
@@ -38,7 +42,7 @@ namespace NToastNotify
         public static IMvcBuilder AddNToastNotify(this IMvcBuilder mvcBuilder, ToastrOptions defaultOptions = null,
     NToastNotifyOption nToastNotifyOptions = null)
         {
-            return AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, IToastrNotification, ToastrNotification>(mvcBuilder, defaultOptions, nToastNotifyOptions);
+            return AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, ToastrNotification>(mvcBuilder, defaultOptions, nToastNotifyOptions);
         }
 
         /// <summary>
@@ -58,13 +62,12 @@ namespace NToastNotify
             return builder;
         }
 
-        public static IMvcBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TMessage, TNotificationService, TNotificationImplementation>(this IMvcBuilder mvcBuilder, TOption defaultLibOptions,
+        public static IMvcBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TMessage, TNotificationImplementation>(this IMvcBuilder mvcBuilder, TOption defaultLibOptions,
             NToastNotifyOption nToastNotifyOptions = null)
-            where TOption : class, ILibraryOptions
-            where TLibrary : class, ILibrary<TOption>, new()
-            where TMessage : class, IToastMessage<TOption>
-            where TNotificationService : class, IToastNotification<TLibrary, TOption, TMessage>
-            where TNotificationImplementation : class, TNotificationService
+            where TLibrary: class, ILibrary<TOption>, new()
+            where TOption: class, ILibraryOptions
+            where TMessage: class, IToastMessage
+            where TNotificationImplementation : class, IToastNotification
         {
             var services = mvcBuilder.Services;
             if (services == null)
@@ -102,7 +105,7 @@ namespace NToastNotify
             }
 
             //Add TempDataWrapper for accessing and adding values to tempdata.
-            services.AddScoped<ITempDataWrapper, TempDataWrapper>();
+            services.AddSingleton<ITempDataWrapper, TempDataWrapper>();
 
             //check if IHttpContextAccessor implementation is not registered. Add one if not.
             var httpContextAccessor = services.FirstOrDefault(d => d.ServiceType == typeof(IHttpContextAccessor));
@@ -123,9 +126,9 @@ namespace NToastNotify
             nToastNotifyOptions.LibraryDetails = library;
             services.AddSingleton(nToastNotifyOptions);
             services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
-            services.AddScoped(typeof(IToastMessagesAccessor<IToastMessage<ILibraryOptions>>), typeof(ToastMessagesAccessor<TMessage>));
+            services.AddScoped(typeof(IToastMessagesAccessor<IToastMessage>), typeof(ToastMessagesAccessor<TMessage>));
             //Add the ToastNotification implementation
-            services.AddSingleton<TNotificationService, TNotificationImplementation>();
+            services.AddSingleton<IToastNotification, TNotificationImplementation>();
             services.AddScoped<NtoastNotifyMiddleware>();
             return mvcBuilder;
         }
