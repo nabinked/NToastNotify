@@ -1,24 +1,20 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Razor;
+﻿using System;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using System;
-using Microsoft.AspNetCore.Builder;
-using NToastNotify.Libraries;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System.Linq;
-using NToastNotify.Libraries.Noty;
-using NToastNotify.Libraries.Toastr;
-using NToastNotify.MessageContainers;
+using NToastNotify.Components;
 
 namespace NToastNotify
 {
     public static class StartupExtension
     {
-        private static EmbeddedFileProvider _embeddedFileProvider = null;
-        private static readonly Assembly ThisAssembly = typeof(Components.ToastrViewComponent).Assembly;
+        private static EmbeddedFileProvider _embeddedFileProvider;
+        private const string NToastNotifyCorsPolicy = nameof(NToastNotifyCorsPolicy);
+        private static readonly Assembly ThisAssembly = typeof(ToastrViewComponent).Assembly;
         private static EmbeddedFileProvider GetEmbeddedFileProvider()
         {
             return _embeddedFileProvider ??
@@ -52,12 +48,13 @@ namespace NToastNotify
         /// <returns></returns>
         public static IApplicationBuilder UseNToastNotify(this IApplicationBuilder builder)
         {
-            builder.UseMiddleware<NtoastNotifyMiddleware>();
-            builder.UseStaticFiles(new StaticFileOptions()
+            builder.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = GetEmbeddedFileProvider(),
-                RequestPath = new PathString("/ntoastnotify"),
+                RequestPath = new PathString("/ntoastnotify")
             });
+            builder.UseCors(NToastNotifyCorsPolicy);
+            builder.UseMiddleware<NtoastNotifyMiddleware>();
             return builder;
         }
 
@@ -74,6 +71,15 @@ namespace NToastNotify
             {
                 throw new ArgumentNullException(nameof(services));
             }
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(NToastNotifyCorsPolicy,
+                    builder =>
+                    {
+                        builder.WithExposedHeaders(Constants.RequestHeaderKey, Constants.ResponseHeaderKey);
+                    });
+            });
 
             //Add the file provider to the Razor view engine
             services.Configure<RazorViewEngineOptions>(options =>
