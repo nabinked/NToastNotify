@@ -61,5 +61,10 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
             _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request.", "AJAX CALL " + DateTime.Now.ToLongTimeString());
             return PartialView("_PartialView");
         }
+
+        public IActionResult NormalAjaxCall()
+        {
+            return PartialView("_PartialView");
+        }
     }
 }

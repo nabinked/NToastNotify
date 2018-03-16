@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 module.exports = env => {
     const isDevBuild = !(env && env.prod);
+    console.log(isDevBuild);
     return {
         entry: {
             toastr: './Js/src/toastr.ts'

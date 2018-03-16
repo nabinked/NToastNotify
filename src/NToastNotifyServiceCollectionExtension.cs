@@ -1,18 +1,20 @@
-﻿using System.Reflection;
-using Microsoft.AspNetCore.Mvc.Razor;
+﻿using System;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using System;
-using Microsoft.AspNetCore.Builder;
+using NToastNotify.Components;
 
 namespace NToastNotify
 {
     public static class NToastNotifyServiceCollectionExtension
     {
-        private static EmbeddedFileProvider _embeddedFileProvider = null;
-        private static readonly Assembly ThisAssembly = typeof(Components.ToastrViewComponent).Assembly;
+        private static EmbeddedFileProvider _embeddedFileProvider;
+        private const string NToastNotifyCorsPolicy = nameof(NToastNotifyCorsPolicy);
+        private static readonly Assembly ThisAssembly = typeof(ToastrViewComponent).Assembly;
         private static EmbeddedFileProvider GetEmbeddedFileProvider()
         {
             return _embeddedFileProvider ??
@@ -32,34 +34,44 @@ namespace NToastNotify
 
         public static IApplicationBuilder UseNToastNotify(this IApplicationBuilder builder)
         {
-            builder.UseMiddleware<NtoastNotifyMiddleware>();
-            builder.UseStaticFiles(new StaticFileOptions()
+            builder.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = GetEmbeddedFileProvider(),
-                RequestPath = new PathString("/ntoastnotify"),
+                RequestPath = new PathString("/ntoastnotify")
             });
+            builder.UseCors(NToastNotifyCorsPolicy);
+            builder.UseMiddleware<NtoastNotifyMiddleware>();
             return builder;
         }
 
         private static IMvcBuilder AddNToastNotifyToMvcBuilder(this IMvcBuilder mvcBuilder, ToastOption defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
-            var services = mvcBuilder.Services;
+            //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
+            mvcBuilder?.AddRazorOptions(o =>
+            {
+                o.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
+            });
+
+            var services = mvcBuilder?.Services;
             if (services == null)
             {
                 throw new ArgumentNullException(nameof(services));
             }
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(NToastNotifyCorsPolicy,
+                    builder =>
+                    {
+                        builder.WithExposedHeaders(Constants.RequestHeaderKey, Constants.ResponseHeaderKey);
+                    });
+            });
+
             //Add the file provider to the Razor view engine
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.FileProviders.Add(GetEmbeddedFileProvider());
-            });
-
-            //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
-            mvcBuilder?.AddRazorOptions(o =>
-            {
-                o.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
             });
 
             //Add the ToastNotification implementation
@@ -90,7 +102,7 @@ namespace NToastNotify
 
             // Add the NToastifyOptions to the services container for DI retrieval (options that are not rendered as they are not part of the toastr.js plugin)
             nToastNotifyOptions = nToastNotifyOptions ?? NToastNotifyOption.Defaults;
-            services.AddSingleton((NToastNotifyOption)nToastNotifyOptions);
+            services.AddSingleton(nToastNotifyOptions);
             services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
             services.AddScoped<NtoastNotifyMiddleware>();
             return mvcBuilder;

@@ -42,7 +42,7 @@ let libToastr: NToastNotify = {
         this.interceptNativeFetch();
     },
     handleEvents() {
-        document && document.addEventListener('DOMContentLoaded', this.domContentLoadedHandler.bind(this));
+        document && document.addEventListener(this.options.firstLoadEvent, this.domContentLoadedHandler.bind(this));
     },
     getResponseHeaderKey() {
         return this.options.responseHeaderKey;
@@ -88,15 +88,19 @@ let libToastr: NToastNotify = {
 
     },
     interceptXmlRequest() {
-        var self = this;
-        // store the native send()
-        var oldSend: (data: any) => void = XMLHttpRequest.prototype.send;
+        const self = this;
+        // store the native send() and onLoad()
+        const oldSend: (data: any) => void = XMLHttpRequest.prototype.send;
+        const oldOnLoad: (data: any) => void = XMLHttpRequest.prototype.onload;
         // override the native send()
         XMLHttpRequest.prototype.send = function () {
             this.setRequestHeader(self.options.requestHeaderKey, 'XMLHttpRequest');
-
             // process the callback queue
-            this.onload = self.xmlRequestOnLoadHandler.bind(self, this);
+            this.onload = function () {
+                self.xmlRequestOnLoadHandler.bind(self, this);
+                //call the old onLoad
+                oldOnLoad.apply(this, arguments);
+            }
             // call the native send()
             oldSend.apply(this, arguments);
         }
@@ -152,4 +156,4 @@ let libToastr: NToastNotify = {
     }
 }
 
-export { libToastr as toastr}
+export { libToastr as toastr }
