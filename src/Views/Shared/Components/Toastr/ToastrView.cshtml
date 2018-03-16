@@ -7,8 +7,10 @@
 <script type="text/javascript" language="javascript">
             if (nToastNotify && nToastNotify.@Model.LibraryName) {
                 nToastNotify.@(Model.LibraryName).init({
+                    firstLoadEvent: 'DOMContentLoaded',
+                    globalToastrOptions: @Html.Raw(Model.GlobalOptionJson),
                     messages: @Html.Raw(Model.ToastMessagesJson),
-                    globalToastMessageOptions: @Html.Raw(Model.GlobalOptionJson),
+                    responseHeaderKey: '@Model.ResponseHeaderKey',
                     requestHeaderKey: '@Model.RequestHeaderKey'
                 });
             };
