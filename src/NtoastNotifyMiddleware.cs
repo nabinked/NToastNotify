@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,9 +34,10 @@ namespace NToastNotify
             _logger.LogInformation("CallBack method called");
             if (httpContext.Request.IsAjaxRequest())
             {
-                _logger.LogInformation("An ajax request.");
-                _logger.LogInformation(_toastNotification.GetToastMessages().ToJson());
-                httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, _toastNotification.ReadAllMessages().ToJson());
+                if (_toastNotification.GetToastMessages().ToList().Count > 0)
+                {
+                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, _toastNotification.ReadAllMessages().ToJson());
+                }
             }
             return Task.FromResult(0);
         }

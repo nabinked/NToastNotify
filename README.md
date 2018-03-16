@@ -1,4 +1,4 @@
-# Features
+# Features (see [DEMO](http://ntoastnotify.azurewebsites.net/))
  - ##### Server side toast notification rendering.
  - ##### Toast notification on AJAX calls. XMLHTTPRequests - Full Support. fetch API - Partial Support (See sample).
  - ##### Supports Feature folder project structure.
@@ -19,7 +19,7 @@ services.AddMvc().AddNToastNotify(new ToastOption()
 ```
 **Or Simply**
 ```C#
-services.AddMvc().AddFeatureFolders().AddNToastNotify();
+services.AddMvc().AddNToastNotify();
 ```
 The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
@@ -43,7 +43,7 @@ Download the toastr library files if you haven't done that already and include t
 ```c#
 @await Component.InvokeAsync("NToastNotify.Toastr")
 ```
-This renders the View necessary for the view component
+The above line renders the View necessary for the view component. Although you can place this line anywhere inside your ```head``` or ```body``` tag, It is recommended that you place this line at the end before the closing ```body``` tag. 
 
 ### Add your toast messages.
 

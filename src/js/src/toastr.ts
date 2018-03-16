@@ -17,6 +17,9 @@ interface NToastNotify {
     interceptNativeFetch(): void;
     prepareReuqestInit(init: RequestInit): void;
     prepareRequestInfo(input: RequestInfo): any;
+    isToastrLibLoaded(): boolean;
+    loadLib(): void;
+    loadScript(): void;
 }
 
 interface NToastNotifyOptions {
@@ -25,6 +28,7 @@ interface NToastNotifyOptions {
     messages: ToastMessage[];
     responseHeaderKey: string;
     requestHeaderKey: string;
+    tostrLibCdnSrcScript: string;
 }
 interface ToastMessage {
     toastType: ToastrType;
@@ -40,6 +44,21 @@ let libToastr: NToastNotify = {
         this.handleEvents();
         this.interceptXmlRequest();
         this.interceptNativeFetch();
+
+    },
+    isToastrLibLoaded() {
+        return typeof toastr !== 'undefined';
+    },
+    loadLib() {
+        this.loadScript();
+    },
+    loadScript() {
+        const script = document.createElement('script');
+        script.setAttribute('src', this.options.tostrLibCdnSrcScript);
+        script.onload = (e) => {
+            this.init(this.options);
+        };
+        document.head.appendChild(script);
     },
     handleEvents() {
         document && document.addEventListener(this.options.firstLoadEvent, this.domContentLoadedHandler.bind(this));
@@ -153,6 +172,7 @@ let libToastr: NToastNotify = {
         messages: [],
         responseHeaderKey: 'NToastNotify-Messages',
         requestHeaderKey: 'NToastNotify-Request-Type',
+        tostrLibCdnSrcScript: 'https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js'
     }
 }
 
