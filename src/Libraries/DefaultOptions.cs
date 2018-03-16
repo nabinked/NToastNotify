@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NToastNotify.Libraries.Noty;
 
-namespace NToastNotify
+namespace NToastNotify.Libraries
 {
     public class DefaultOptions
     {

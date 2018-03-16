@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NToastNotify.Libraries;
+using NToastNotify.Libraries.Toastr;
 
 namespace NToastNotify.Web
 {

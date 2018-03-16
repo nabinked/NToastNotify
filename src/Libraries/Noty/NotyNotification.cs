@@ -1,26 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace NToastNotify.Libraries.Toastr
+namespace NToastNotify.Libraries.Noty
 {
-    public class NotyNotification : ToastNotification, INotyNotification
+    public class NotyNotification : INotyNotification
     {
-        public NotyNotification(IMessageContainer messageContainerFactory, NToastNotifyOption nToastNotifyOptions) : base(messageContainerFactory, nToastNotifyOptions)
+        public void AddSuccessToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
         {
-            _messageContainer = messageContainerFactory.Create<NotyMessage>();
+            throw new NotImplementedException();
+        }
+
+        public void AddInfoToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddWarningToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddErrorToastMessage(string message = null, string title = null, NotyOptions toastOptions = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<NotyMessage> GetToastMessages()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<NotyMessage> ReadAllMessages()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAll()
+        {
+            throw new NotImplementedException();
         }
 
         public void AddToastMessage(string title, string message)
         {
-            var toastMessage = new NotyMessage(message, title);
-            base.AddMessage(toastMessage);
+            throw new NotImplementedException();
         }
 
         public void AddToastMessage(string title, string message, NotyOptions toasILibraryOptions)
         {
-            var toastMessage = new NotyMessage(message, title, toasILibraryOptions);
-            base.AddMessage(toastMessage);
+            throw new NotImplementedException();
         }
     }
 }

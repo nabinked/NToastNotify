@@ -4,12 +4,12 @@ using System.Text;
 
 namespace NToastNotify.Libraries
 {
-    public interface ILibrary
+    public interface ILibrary<out TOptions>
     {
         string VarName { get; }
         string ScriptSrc { get; }
         string StyleHref { get; }
-        ILibraryOptions Defaults { get; }
+        TOptions Defaults { get; }
 
     }
 }

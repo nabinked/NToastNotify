@@ -3,9 +3,5 @@
     ViewData["Title"] = "Home Page";
 }
 
-@inject IToastNotification ToastNotification
-
 <h2>Testing Toast Messages</h2>
-
 <h4>Peeking all messages</h4>
-@Html.Raw(Json.Serialize(ToastNotification.GetToastMessages()))

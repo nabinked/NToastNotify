@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using NToastNotify.Libraries;
 
-namespace NToastNotify
+namespace NToastNotify.MessageContainers
 {
-    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage
+    public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage<ILibraryOptions>
     {
         private IList<TMessage> Messages { get; }
 
@@ -21,12 +21,12 @@ namespace NToastNotify
             Messages.Clear();
         }
 
-        public IEnumerable<TMessage> GetAll()
+        public IList<TMessage> GetAll()
         {
             return Messages;
         }
 
-        public IEnumerable<TMessage> ReadAll()
+        public IList<TMessage> ReadAll()
         {
             var messages = new List<TMessage>(Messages);
             Messages.Clear();

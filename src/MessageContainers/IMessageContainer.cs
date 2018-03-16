@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using NToastNotify.Libraries;
 
-namespace NToastNotify
+namespace NToastNotify.MessageContainers
 {
-    public interface IMessageContainer<TMessage> where TMessage : IToastMessage
+    public interface IMessageContainer<TMessage> where TMessage : class, IToastMessage<ILibraryOptions>
     {
         void Add(TMessage message);
         void RemoveAll();
-        IEnumerable<TMessage> GetAll();
-        IEnumerable<TMessage> ReadAll();
+        IList<TMessage> GetAll();
+        IList<TMessage> ReadAll();
     }
 }

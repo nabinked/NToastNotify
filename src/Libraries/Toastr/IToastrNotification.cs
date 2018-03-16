@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NToastNotify.Libraries
+﻿namespace NToastNotify.Libraries.Toastr
 {
-    public interface IToastrNotification : IToastNotification
+    public interface IToastrNotification : IToastNotification<ToastrLibrary, ToastrOptions, ToastrMessage>
     {
         /// <summary>
         /// Adds a toast message to render to the view.
@@ -22,5 +18,7 @@ namespace NToastNotify.Libraries
         /// <param name="notificationType">Type of message <seealso cref="Enums.NotificationTypesToastr"/></param>
         /// <param name="toasILibraryOptions">options</param>
         void AddToastMessage(string title, string message, Enums.NotificationTypesToastr notificationType, ToastrOptions toasILibraryOptions);
+
+
     }
 }

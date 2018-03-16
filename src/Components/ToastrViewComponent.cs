@@ -10,17 +10,14 @@ namespace NToastNotify.Components
     [ViewComponent(Name = "NToastNotify.Toastr")]
     public class ToastrViewComponent : ViewComponent
     {
-        private readonly INotyNotification _toastNotification;
+        private readonly IToastMessagesAccessor<IToastMessage<ILibraryOptions>> _toastMessagesAccessor;
         private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
-        private readonly ILibrary _library;
         private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public ToastrViewComponent(INotyNotification toastNotification, ILibraryOptions globalOption,
-                                        ILibrary library, NToastNotifyOption nToastNotifyOption)
+        public ToastrViewComponent(IToastMessagesAccessor<IToastMessage<ILibraryOptions>> toastMessagesAccessor, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
         {
-            _toastNotification = toastNotification;
+            _toastMessagesAccessor = toastMessagesAccessor;
             _globalOption = globalOption;
-            _library = library;
             _nToastNotifyOption = nToastNotifyOption;
         }
 
@@ -28,11 +25,11 @@ namespace NToastNotify.Components
         {
             var model = new ToastNotificationViewModel()
             {
-                ToastMessagesJson = _toastNotification.ReadAllMessages().ToJson(),
+                ToastMessagesJson = _toastMessagesAccessor.ToastMessages.ToJson(),
                 GlobalOptionJson = _globalOption.Json,
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
-                LibraryDetails = _library
+                LibraryDetails = _nToastNotifyOption.LibraryDetails
             };
             return View("ToastrView", model);
         }

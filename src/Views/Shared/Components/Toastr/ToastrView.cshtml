@@ -1,8 +1,9 @@
 ﻿@using Newtonsoft.Json
 @using Newtonsoft.Json.Serialization
 @using NToastNotify
+@using NToastNotify.Components
 @using NToastNotify.Helpers
-@model ToastNotificationViewModel
+@model NToastNotify.Components.ToastNotificationViewModel
 <script src="~/NToastNotify/js/dist/@(Model.LibraryDetails.VarName).js"></script>
 <script type="text/javascript" language="javascript">
             if (nToastNotify && nToastNotify.@Model.LibraryDetails.VarName) {

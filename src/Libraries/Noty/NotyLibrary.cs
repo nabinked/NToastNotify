@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NToastNotify.Libraries
+﻿namespace NToastNotify.Libraries.Noty
 {
-    public class NotyLibrary : ILibrary
+    public class NotyLibrary : ILibrary<NotyOptions>
     {
         public string VarName { get; set; } = "noty";
         public string ScriptSrc { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js";
         public string StyleHref { get; set; } = "https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css";
 
-        public ILibraryOptions Defaults => throw new NotImplementedException();
+        public NotyOptions Defaults => DefaultOptions.NotyDefaults;
     }
 }

@@ -9,17 +9,18 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using NToastNotify.Helpers;
 using NToastNotify.Libraries;
+using NToastNotify.MessageContainers;
 
 namespace NToastNotify
 {
     internal class NtoastNotifyMiddleware : IMiddleware
     {
-        private readonly IToastNotification _toastNotification;
+        private readonly IToastMessagesAccessor<IToastMessage<ILibraryOptions>> _messagesAccessor;
         private readonly ILogger<NtoastNotifyMiddleware> _logger;
 
-        public NtoastNotifyMiddleware(IToastNotification toastNotification, ILogger<NtoastNotifyMiddleware> logger)
+        public NtoastNotifyMiddleware(IToastMessagesAccessor<IToastMessage<ILibraryOptions>> messagesAccessor, ILogger<NtoastNotifyMiddleware> logger)
         {
-            _toastNotification = toastNotification;
+            _messagesAccessor = messagesAccessor;
             _logger = logger;
         }
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -34,9 +35,10 @@ namespace NToastNotify
             var httpContext = (HttpContext)context;
             if (httpContext.Request.IsAjaxRequest())
             {
-                if (_toastNotification.GetToastMessages().ToList().Count > 0)
+                var messages = _messagesAccessor.ToastMessages;
+                if (messages.Any())
                 {
-                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, _toastNotification.ReadAllMessages().ToJson());
+                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, messages.ToJson());
                 }
             }
             return Task.FromResult(0);

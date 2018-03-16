@@ -1,9 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace NToastNotify
+namespace NToastNotify.Libraries.Noty
 {
-    public class NotyMessage : IToastMessage
+    public class NotyMessage : IToastMessage<NotyOptions>
     {
         public NotyMessage(string message, string title, NotyOptions options = null)
         {
@@ -16,6 +15,6 @@ namespace NToastNotify
         [JsonProperty]
         public string Message { get; private set; }
         [JsonProperty]
-        public ILibraryOptions ToastOptions { get; private set; }
+        public NotyOptions ToastOptions { get; private set; }
     }
 }

@@ -1,27 +1,46 @@
 ﻿using Microsoft.AspNetCore.Http;
 using NToastNotify.Helpers;
+using NToastNotify.Libraries;
 
-namespace NToastNotify
+namespace NToastNotify.MessageContainers
 {
-    public class MessageContainerFactory<TMesssage> : IMessageContainerFactory<TMesssage> where TMesssage : class, IToastMessage
+    internal class MessageContainerFactory : IMessageContainerFactory
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataWrapper _tempDataWrapper;
+        private object instance;
 
         public MessageContainerFactory(IHttpContextAccessor httpContextAccessor, ITempDataWrapper tempDataWrapper)
         {
             _httpContextAccessor = httpContextAccessor;
             _tempDataWrapper = tempDataWrapper;
         }
-        public IMessageContainer<TMesssage> Create()
+
+        public IMessageContainer<TMessage> Create<TMessage>()
+            where TMessage : class, IToastMessage<ILibraryOptions>
         {
+            IMessageContainer<TMessage> i = null;
             if (_httpContextAccessor.HttpContext.Request.IsAjaxRequest())
             {
-                return new InMemoryMessageContainer<TMesssage>();
+                if (instance == null)
+                {
+                    i = new InMemoryMessageContainer<TMessage>();
+                    return i;
+                }
+                else
+                {
+                    return (IMessageContainer<TMessage>)instance;
+                }
             }
             else
             {
-                return new TempDataMessageContainer<TMesssage>(_tempDataWrapper);
+                if (instance == null)
+                {
+                    i = new TempDataMessageContainer<TMessage>(_tempDataWrapper);
+                    return i;
+                }
+
+                return (IMessageContainer<TMessage>)instance;
             }
         }
     }

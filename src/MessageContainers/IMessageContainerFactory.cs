@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using NToastNotify.Libraries;
 
-namespace NToastNotify
+namespace NToastNotify.MessageContainers
 {
-    public interface IMessageContainerFactory<TMessage> where TMessage : class, IToastMessage
+    public interface IMessageContainerFactory
     {
-        IMessageContainer<TMessage> Create();
+        IMessageContainer<TMessage> Create<TMessage>() where TMessage : class, IToastMessage<ILibraryOptions>;
     }
 }

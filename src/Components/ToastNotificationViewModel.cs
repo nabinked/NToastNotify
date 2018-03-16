@@ -1,7 +1,6 @@
 ﻿using NToastNotify.Libraries;
-using System.Collections.Generic;
 
-namespace NToastNotify
+namespace NToastNotify.Components
 {
     public class ToastNotificationViewModel
     {
@@ -9,6 +8,6 @@ namespace NToastNotify
         public string GlobalOptionJson { get; set; }
         public string RequestHeaderKey { get; set; }
         public string ResponseHeaderKey { get; set; }
-        public ILibrary LibraryDetails { get; set; }
+        public ILibrary<ILibraryOptions> LibraryDetails { get; set; }
     }
 }

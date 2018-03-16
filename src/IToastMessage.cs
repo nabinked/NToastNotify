@@ -1,9 +1,11 @@
-﻿namespace NToastNotify
+﻿using NToastNotify.Libraries;
+
+namespace NToastNotify
 {
-    public interface IToastMessage
+    public interface IToastMessage<out TOptions> where TOptions : class, ILibraryOptions
     {
         string Message { get; }
         string Title { get; }
-        ILibraryOptions ToastOptions { get; }
+        TOptions ToastOptions { get; }
     }
 }
