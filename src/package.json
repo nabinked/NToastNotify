@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/toastr": "^2.1.35",
     "awesome-typescript-loader": "^3.4.1",
+    "noty": "^3.2.0-beta",
     "toastr": "^2.1.4",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",

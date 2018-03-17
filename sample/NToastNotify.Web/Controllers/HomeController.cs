@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify.Libraries;
-using NToastNotify.Libraries.Toastr;
 
 namespace NToastNotify.Web.Controllers
 {

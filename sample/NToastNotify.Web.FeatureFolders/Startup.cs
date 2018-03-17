@@ -21,7 +21,7 @@ namespace NToastNotify.Web.FeatureFolders
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotify();
+            var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

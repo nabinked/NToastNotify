@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 using NToastNotify.Helpers;
@@ -8,13 +9,24 @@ namespace NToastNotify
     class TempDataWrapper : ITempDataWrapper
     {
         private readonly HttpContext _context;
+        private readonly JsonSerializerSettings _serializerSettings;
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
 
         public TempDataWrapper(ITempDataDictionaryFactory tempDataDictionaryFactory, IHttpContextAccessor httpContextAccessor)
         {
             _tempDataDictionaryFactory = tempDataDictionaryFactory;
             _context = httpContextAccessor.HttpContext;
+            _serializerSettings = GetSerializerSettings();
         }
+
+        private JsonSerializerSettings GetSerializerSettings()
+        {
+            return new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            };
+    }
+
         /// <summary>
         /// Gets or sets <see cref="ITempDataDictionary"/>/>.
         /// </summary>

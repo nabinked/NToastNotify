@@ -346,15 +346,7 @@ var NToastNotifyNoty = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     NToastNotifyNoty.prototype.show = function (message) {
-        var args = [];
-        args.push(message.message);
-        args.push(message.title);
-        if (message.toastOptions) {
-            args.push(message.toastOptions);
-        }
-        if (toastr) {
-            toastr[message.toastType.toLowerCase()].apply(toastr, args);
-        }
+        new Noty(message.toastOptions);
     };
     NToastNotifyNoty.prototype.overrideLibDefaults = function () {
         window.Noty.overrideDefaults(this.options.globalLibOptions);

@@ -18,6 +18,10 @@ module.exports = env => {
             library: 'nToastNotify',
             libraryTarget: 'var'
         },
+        externals: {
+            noty: 'noty',
+            toastr: 'toastr'
+        },
         // Add the loader for .ts files.
         module: {
             loaders: [

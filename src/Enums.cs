@@ -20,7 +20,6 @@ namespace NToastNotify
             Warning,
             Info,
             Error,
-            //This one used in Noty
             Alert
 
         }

@@ -1,9 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using NToastNotify.Helpers;
+﻿using NToastNotify.Helpers;
 using NToastNotify.Libraries;
 
-namespace NToastNotify
+namespace NToastNotify.Libraries
 {
     public class ToastrOptions : ILibraryOptions
     {

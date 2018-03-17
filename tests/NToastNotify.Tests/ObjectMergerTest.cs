@@ -1,3 +1,4 @@
+using NToastNotify.Libraries;
 using Xunit;
 
 namespace NToastNotify.Tests

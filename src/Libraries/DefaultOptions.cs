@@ -1,10 +1,8 @@
-﻿using NToastNotify.Libraries.Noty;
-
-namespace NToastNotify.Libraries
+﻿namespace NToastNotify.Libraries
 {
     public class DefaultOptions
     {
-        public static ToastrOptions ToastrDefaults => new ToastrOptions()
+        public static ToastrOptions Toastr => new ToastrOptions()
         {
             TapToDismiss = true,
             ToastClass = "toast",
@@ -42,14 +40,19 @@ namespace NToastNotify.Libraries
             ErrorTitle = "Error",
             ErrorMessage = "Task could not complete successfully"
         };
-
-        public static NotyOptions NotyDefaults
+        public static NotyOptions Noty => new NotyOptions()
         {
-            get => new NotyOptions()
-            {
-
-            };
-        }
+            Type = Enums.NotificationTypesNoty.Alert,
+            Layout = "topRight",
+            Theme = "mint",
+            Timeout = 0,
+            ProgressBar = true,
+            CloseWith = new[] { "click" },
+            Modal = false,
+            Force = false,
+            Queue = "global",
+            VisibilityControl = false
+        };
     }
 }
 

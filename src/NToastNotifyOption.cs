@@ -44,6 +44,9 @@ namespace NToastNotify
         public string ErrorMessage { get; set; }
         public string DefaultErrorMessage { get; set; } = "Task could not complete successfully.";
 
+        public string DefaultAlertTitle { get; set; } = "Alert";
+        public string DefaultAlertMessage { get; set; } = "This is an alert.";
+
         public ILibrary<ILibraryOptions> LibraryDetails { get; set; }
     }
 }

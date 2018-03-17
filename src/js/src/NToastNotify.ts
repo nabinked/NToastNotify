@@ -1,4 +1,6 @@
 ﻿import './polyfills'
+import { NToastNotifyNoty } from './noty/NToastNotifyNoty';
+import * as Noty from 'noty';
 
 interface InitOptions {
     firstLoadEvent: string;
@@ -18,7 +20,7 @@ export interface ToastMessage {
     toastType: ToastrType;
     message: string;
     title: string;
-    toastOptions: ToastrOptions;
+    toastOptions: ToastrOptions | Noty.Options;
 }
 
 

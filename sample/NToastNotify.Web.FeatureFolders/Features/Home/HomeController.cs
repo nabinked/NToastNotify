@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify.Libraries.Toastr;
+using NToastNotify.Libraries;
 using NToastNotify.Web.FeatureFolders.Models;
 
 namespace NToastNotify.Web.FeatureFolders.Features.Home
@@ -17,9 +17,9 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
         public IActionResult Index()
         {
             _toastNotification.AddSuccessToastMessage();
-            _toastNotification.AddErrorToastMessage("Test Erro", null, new ToastrOptions()
+            _toastNotification.AddErrorToastMessage("Test Erro", null, new NotyOptions()
             {
-                PositionClass = ToastPositions.BottomCenter
+                Timeout = 0
             });
             return View();
         }
