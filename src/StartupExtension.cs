@@ -53,7 +53,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 FileProvider = GetEmbeddedFileProvider(),
                 RequestPath = new PathString("/ntoastnotify")
             });
-            builder.UseCors(NToastNotifyCorsPolicy);
+            //builder.UseCors(NToastNotifyCorsPolicy);
             builder.UseMiddleware<NtoastNotifyMiddleware>();
             return builder;
         }
@@ -106,14 +106,15 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(NToastNotifyCorsPolicy,
-                    builder =>
-                    {
-                        builder.WithExposedHeaders(Constants.RequestHeaderKey, Constants.ResponseHeaderKey);
-                    });
-            });
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy(NToastNotifyCorsPolicy,
+            //        builder =>
+            //        {
+            //            builder.AllowAnyHeader()
+            //            .WithExposedHeaders(Constants.RequestHeaderKey, Constants.ResponseHeaderKey);
+            //        });
+            //});
 
             //Add the file provider to the Razor view engine
             services.Configure<RazorViewEngineOptions>(options =>
@@ -150,7 +151,7 @@ namespace Microsoft.Extensions.DependencyInjection
             nToastNotifyOptions.LibraryDetails = library;
             services.AddSingleton(nToastNotifyOptions);
             services.AddSingleton<IMessageContainerFactory, MessageContainerFactory>();
-            services.AddScoped(typeof(IToastMessagesAccessor<IToastMessage>), typeof(ToastMessagesAccessor<TMessage>));
+            services.AddSingleton(typeof(IToastMessagesAccessor<IToastMessage>), typeof(ToastMessagesAccessor<TMessage>));
             //Add the ToastNotification implementation
             services.AddSingleton<IToastNotification, TNotificationImplementation>();
             services.AddScoped<NtoastNotifyMiddleware>();

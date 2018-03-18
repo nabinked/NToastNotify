@@ -36,7 +36,7 @@ namespace NToastNotify
             if (httpContext.Request.IsAjaxRequest())
             {
                 var messages = _messagesAccessor.ToastMessages;
-                if (messages.Any())
+                if (messages != null && messages.Any())
                 {
                     httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, messages.ToJson());
                 }
