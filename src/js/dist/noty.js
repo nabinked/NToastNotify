@@ -346,7 +346,9 @@ var NToastNotifyNoty = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     NToastNotifyNoty.prototype.show = function (message) {
-        new Noty(message.toastOptions);
+        var notyOpts = message.toastOptions;
+        notyOpts.text = message.message;
+        new Noty(message.toastOptions).show();
     };
     NToastNotifyNoty.prototype.overrideLibDefaults = function () {
         window.Noty.overrideDefaults(this.options.globalLibOptions);

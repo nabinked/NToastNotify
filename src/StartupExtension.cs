@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         private static EmbeddedFileProvider _embeddedFileProvider;
         private const string NToastNotifyCorsPolicy = nameof(NToastNotifyCorsPolicy);
-        private static readonly Assembly ThisAssembly = typeof(ToastrViewComponent).Assembly;
+        private static readonly Assembly ThisAssembly = typeof(ToastViewComponent).Assembly;
         private static EmbeddedFileProvider GetEmbeddedFileProvider()
         {
             return _embeddedFileProvider ??

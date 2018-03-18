@@ -8,14 +8,14 @@ using NToastNotify.Libraries;
 
 namespace NToastNotify.Components
 {
-    [ViewComponent(Name = "NToastNotify.Toastr")]
-    public class ToastrViewComponent : ViewComponent
+    [ViewComponent(Name = "NToastNotify")]
+    public class ToastViewComponent : ViewComponent
     {
         private readonly IToastNotification _toastNotification;
         private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
         private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public ToastrViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
+        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
         {
             _toastNotification = toastNotification;
             _globalOption = globalOption;
@@ -32,7 +32,7 @@ namespace NToastNotify.Components
                 RequestHeaderKey = Constants.RequestHeaderKey,
                 LibraryDetails = _nToastNotifyOption.LibraryDetails
             };
-            return View("ToastrView", model);
+            return View("ToastView", model);
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify.Libraries;
 
-namespace NToastNotify.Web.Controllers
+namespace NToastNotify.Toastr.Controllers
 {
     public class HomeController : Controller
     {
@@ -17,7 +16,7 @@ namespace NToastNotify.Web.Controllers
             //Testing Default Methods
 
             //Success
-            _toastNotification.AddSuccessToastMessage("Same for success message", "Success title specified in controller action");
+            _toastNotification.AddSuccessToastMessage("Same for success message");
             // Success with default options (taking into account the overwritten defaults when initializing in Startup.cs)
             _toastNotification.AddSuccessToastMessage();
 
@@ -35,17 +34,19 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult About()
         {
+            _toastNotification.AddInfoToastMessage("You got redirected");
             return View();
         }
 
         public IActionResult Contact()
         {
+            _toastNotification.AddAlertToastMessage("You will be redirected");
             return RedirectToAction("About");
         }
 
         public IActionResult Error()
         {
-            _toastNotification.AddErrorToastMessage("ERROR", "There was something wrong with this request.");
+            _toastNotification.AddErrorToastMessage("There was something wrong with this request.");
             return View();
         }
 
@@ -63,7 +64,7 @@ namespace NToastNotify.Web.Controllers
 
         public IActionResult AjaxCall()
         {
-            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request.", "AJAX CALL " + DateTime.Now.ToLongTimeString());
+            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request. AJAX CALL " + DateTime.Now.ToLongTimeString());
             return PartialView("_PartialView");
         }
     }

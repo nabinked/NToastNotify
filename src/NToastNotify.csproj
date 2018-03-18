@@ -19,6 +19,7 @@
   <ItemGroup>
     <EmbeddedResource Include="**\*.resx" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
     <EmbeddedResource Include="js\dist\**\*.js" />
+    <EmbeddedResource Include="js\dist\**\*.js.map" />
     <EmbeddedResource Include="Views\**\*.cshtml;compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
   <ItemGroup>

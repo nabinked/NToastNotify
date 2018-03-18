@@ -2,9 +2,9 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using NToastNotify.Libraries;
-using NToastNotify.Web.FeatureFolders.Models;
+using NToastNotify.Toastr.FeatureFolders.Models;
 
-namespace NToastNotify.Web.FeatureFolders.Features.Home
+namespace NToastNotify.Noty.FeatureFolders.Features.Home
 {
     public class HomeController : Controller
     {
@@ -17,7 +17,7 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
         public IActionResult Index()
         {
             _toastNotification.AddSuccessToastMessage();
-            _toastNotification.AddErrorToastMessage("Test Erro", null, new NotyOptions()
+            _toastNotification.AddErrorToastMessage("Test Erro", new NotyOptions()
             {
                 Timeout = 0
             });
@@ -27,20 +27,20 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-            _toastNotification.AddAlertToastMessage("Warning About Title", "My About Warning Message");
+            _toastNotification.AddAlertToastMessage("My About Warning Message");
             return View();
         }
 
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-            _toastNotification.AddInfoToastMessage("Redirected...", "Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>");
+            _toastNotification.AddInfoToastMessage("Dont get confused. <br /> <strong>You were redirected from Contact Page. <strong/>");
             return RedirectToAction("About");
         }
 
         public IActionResult Error()
         {
-            _toastNotification.AddErrorToastMessage("ERROR", "There was something wrong with this request.");
+            _toastNotification.AddErrorToastMessage("There was something wrong with this request.");
 
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
@@ -53,7 +53,7 @@ namespace NToastNotify.Web.FeatureFolders.Features.Home
 
         public IActionResult AjaxCall()
         {
-            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request.", "AJAX CALL " + DateTime.Now.ToLongTimeString());
+            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request. AJAX CALL " + DateTime.Now.ToLongTimeString());
             return PartialView("_PartialView");
         }
 

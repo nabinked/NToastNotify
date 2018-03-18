@@ -1,6 +1,4 @@
-using System;
-
-namespace NToastNotify.Web.FeatureFolders.Models
+namespace NToastNotify.Toastr.FeatureFolders.Models
 {
     public class ErrorViewModel
     {

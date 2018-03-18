@@ -13,7 +13,7 @@ namespace NToastNotify
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
         /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
-        void AddSuccessToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
+        void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Info"/>
@@ -21,7 +21,7 @@ namespace NToastNotify
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
         /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
-        void AddInfoToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
+        void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Info"/>
@@ -29,7 +29,7 @@ namespace NToastNotify
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
         /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
-        void AddAlertToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
+        void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Warning"/>
@@ -37,7 +37,7 @@ namespace NToastNotify
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
         /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
-        void AddWarningToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
+        void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Error"/>
@@ -45,7 +45,7 @@ namespace NToastNotify
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
         /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
-        void AddErrorToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
+        void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
         /// Gets the list of <see cref="ToastrMessage"/> added so far.

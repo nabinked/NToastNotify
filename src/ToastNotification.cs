@@ -14,11 +14,11 @@ namespace NToastNotify
         {
             _messageContainer = messageContainerFactory.Create<TMessage>();
         }
-        public abstract void AddAlertToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
-        public abstract void AddErrorToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
-        public abstract void AddInfoToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
-        public abstract void AddSuccessToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
-        public abstract void AddWarningToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null);
+        public abstract void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        public abstract void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        public abstract void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        public abstract void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        public abstract void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null);
         public IEnumerable<IToastMessage> GetToastMessages()
         {
             return _messageContainer.GetAll();

@@ -10,53 +10,43 @@ namespace NToastNotify.Libraries
         {
             _defaultNtoastNotifyOptions = nToastNotifyOptions;
         }
-        public override void AddSuccessToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
+        public override void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
             var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
             notyOptions.Type = Enums.NotificationTypesNoty.Success;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage,
-                                            title ?? _defaultNtoastNotifyOptions.DefaultSuccessTitle,
-                                            notyOptions);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage, notyOptions);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddInfoToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
+        public override void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
             var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
             notyOptions.Type = Enums.NotificationTypesNoty.Info;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage,
-                                            title ?? _defaultNtoastNotifyOptions.DefaultInfoTitle,
-                                            notyOptions);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage, notyOptions);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddAlertToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
+        public override void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
             var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
             notyOptions.Type = Enums.NotificationTypesNoty.Alert;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultAlertMessage,
-                                            title ?? _defaultNtoastNotifyOptions.DefaultAlertTitle,
-                                            notyOptions);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultAlertMessage, notyOptions);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddWarningToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
+        public override void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
             var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
             notyOptions.Type = Enums.NotificationTypesNoty.Warning;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningTitle,
-                                            title ?? _defaultNtoastNotifyOptions.DefaultWarningMessage,
-                                            notyOptions);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningTitle, notyOptions);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddErrorToastMessage(string message = null, string title = null, ILibraryOptions toastOptions = null)
+        public override void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
             var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
             notyOptions.Type = Enums.NotificationTypesNoty.Error;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage,
-                                            title ?? _defaultNtoastNotifyOptions.DefaultErrorTitle,
-                                            notyOptions);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage, notyOptions);
             AddMessage(successNotyMessage);
         }
 
