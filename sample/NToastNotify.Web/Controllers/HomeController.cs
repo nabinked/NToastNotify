@@ -64,8 +64,19 @@ namespace NToastNotify.Toastr.Controllers
 
         public IActionResult AjaxCall()
         {
+            System.Threading.Thread.Sleep(2000);
             _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request. AJAX CALL " + DateTime.Now.ToLongTimeString());
-            return PartialView("_PartialView");
+            return PartialView("_PartialView", "Ajax Call");
+        }
+
+        public IActionResult NormalAjaxCall()
+        {
+            return PartialView("_PartialView", "Normal Ajax Call");
+        }
+
+        public IActionResult ErrorAjaxCall()
+        {
+            throw new Exception("Error occurred");
         }
     }
 }

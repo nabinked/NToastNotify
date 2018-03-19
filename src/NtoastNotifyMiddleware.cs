@@ -15,12 +15,12 @@ namespace NToastNotify
 {
     internal class NtoastNotifyMiddleware : IMiddleware
     {
-        private readonly IToastMessagesAccessor<IToastMessage> _messagesAccessor;
+        private readonly IToastNotification _toastNotification;
         private readonly ILogger<NtoastNotifyMiddleware> _logger;
-
-        public NtoastNotifyMiddleware(IToastMessagesAccessor<IToastMessage> messagesAccessor, ILogger<NtoastNotifyMiddleware> logger)
+        private const string AccessControlExposeHeadersKey = "Access-Control-Expose-Headers";
+        public NtoastNotifyMiddleware(IToastNotification toastNotification, ILogger<NtoastNotifyMiddleware> logger)
         {
-            _messagesAccessor = messagesAccessor;
+            _toastNotification = toastNotification;
             _logger = logger;
         }
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -35,14 +35,27 @@ namespace NToastNotify
             var httpContext = (HttpContext)context;
             if (httpContext.Request.IsAjaxRequest())
             {
-                var messages = _messagesAccessor.ToastMessages;
+                var messages = _toastNotification.ReadAllMessages();
                 if (messages != null && messages.Any())
                 {
+                    httpContext.Response.Headers.Add(AccessControlExposeHeadersKey, $"{GetControlExposeHeaders(httpContext.Response.Headers)}");
                     httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, messages.ToJson());
                 }
             }
             return Task.FromResult(0);
         }
 
+        private object GetControlExposeHeaders(IHeaderDictionary headers)
+        {
+            var existingHeaders = headers[AccessControlExposeHeadersKey];
+            if (string.IsNullOrEmpty(existingHeaders))
+            {
+                return Constants.ResponseHeaderKey;
+            }
+            else
+            {
+                return $"{existingHeaders}, {Constants.ResponseHeaderKey}";
+            }
+        }
     }
 }

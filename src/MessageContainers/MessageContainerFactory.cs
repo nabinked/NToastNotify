@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using NToastNotify.Helpers;
-using NToastNotify.Libraries;
 
 namespace NToastNotify.MessageContainers
 {
@@ -8,7 +7,6 @@ namespace NToastNotify.MessageContainers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataWrapper _tempDataWrapper;
-
         public MessageContainerFactory(IHttpContextAccessor httpContextAccessor, ITempDataWrapper tempDataWrapper)
         {
             _httpContextAccessor = httpContextAccessor;

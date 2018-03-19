@@ -17,7 +17,11 @@ namespace NToastNotify.Noty.FeatureFolders
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty();
+            var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty(new Libraries.NotyOptions
+            {
+                ProgressBar = true,
+                Timeout = 5000
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,7 +38,7 @@ namespace NToastNotify.Noty.FeatureFolders
             }
 
             app.UseStaticFiles();
-            app.UseNToastNotify();
+            app.UseNToastNotify(); // This must be above the UseMvc() line
             app.UseMvcWithDefaultRoute();
 
         }

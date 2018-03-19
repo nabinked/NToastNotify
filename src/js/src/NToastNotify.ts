@@ -126,8 +126,6 @@ export abstract class NToastNotify {
                 }
             }
         }
-
-
     }
     interceptXmlRequest() {
         var self = this;
@@ -136,9 +134,7 @@ export abstract class NToastNotify {
         // override the native send()
         XMLHttpRequest.prototype.send = function () {
             this.setRequestHeader(self.options.requestHeaderKey, 'XMLHttpRequest');
-
-            // process the callback queue
-            this.onload = self.xmlRequestOnLoadHandler.bind(self, this);
+            this.addEventListener('load', self.xmlRequestOnLoadHandler.bind(self, this));
             // call the native send()
             oldSend.apply(this, arguments);
         }

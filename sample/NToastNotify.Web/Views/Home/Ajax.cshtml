@@ -4,16 +4,37 @@
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p>AJAX View</p>
+<h4 id="message">AJAX View</h4>
 <script>
     window.addEventListener('load', function () {
-        alert('Going to make a fetch request (Native fetch AJAX) and show notification.');
-        fetch('/Home/AjaxCall').then(function(response) {
-            var messages = nToastNotify.toastr.fetchGetMessagesFromResponse(response);
-            nToastNotify.toastr.showToasts(messages);
+        setTimeout(function () {
 
-            alert('Going to make a XMLHTTPRequest (Normal AJAX Request) and show notification.');
-            $.ajax('/Home/AjaxCall');
-        });
+            $('#message').text('Going to make a fetch request (Native fetch AJAX) and show notification.');
+            fetch('/Home/AjaxCall').then(function (response) {
+                var messages = nToastNotify.toastr.fetchGetMessagesFromResponse(response);
+                nToastNotify.toastr.showToasts(messages);
+
+                $('#message').text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show notification.');
+                $.ajax({
+                    url: '/Home/AjaxCall',
+                    success: function () {
+                        $('#message').text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show no notification.');
+
+                        $.get('/Home/NormalAjaxCall', function (res) {
+                            console.info(res)
+                        })
+                    }
+
+                });
+
+                $.ajax({
+                    url: '/Home/ErrorAjaxCall',
+                    error: function (res) {
+                        console.log(res)
+                    }
+                });
+            });
+
+        }, 2000)
     })
 </script>
