@@ -214,8 +214,8 @@ public class HomeController : Controller
     }
 ```
 # DEMO
-- ## [Toastr](http://notyjs.azurewebsites.net/)
-- ## [Noty](http://toastrjs.azurewebsites.net/)
+- ## [Noty](http://notyjs.azurewebsites.net/)
+- ## [Toastr](http://toastrjs.azurewebsites.net/)
 and they will be rendered as 
 
 # Screenshots
