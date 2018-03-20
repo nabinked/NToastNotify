@@ -3,8 +3,14 @@
  - ##### Toast notification on AJAX calls. XMLHTTPRequests - Full Support. fetch API - Partial Support (See sample).
  - ##### Supports Feature folder project structure.
  - ##### Supports multiple client libraries: toastr.js & noty.js. Can easily be extended to support more.
+ 
+ # DEMO
+- ## [Noty](http://notyjs.azurewebsites.net/)
+- ## [Toastr](http://toastrjs.azurewebsites.net/)
+
 # Get Started
 ## 1. Install From [Nuget](https://www.nuget.org/packages/NToastNotify/)
+
 Visual Studio Nuget Package Manager - `Install-Package NToastNotify`
 
 dotnet CLI - `dotnet add package NToastNotify`
@@ -28,7 +34,6 @@ dotnet CLI - `dotnet add package NToastNotify`
 - ### For Noty.js
     ```C#
     using NToastNotify.Libraries;
-
 
     services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty(new NotyOptions {
                     ProgressBar = true,
@@ -213,11 +218,6 @@ public class HomeController : Controller
         }
     }
 ```
-# DEMO
-- ## [Noty](http://notyjs.azurewebsites.net/)
-- ## [Toastr](http://toastrjs.azurewebsites.net/)
-and they will be rendered as 
-
 # Screenshots
 ![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/home-2-0-1.png)
 ##### About Page
