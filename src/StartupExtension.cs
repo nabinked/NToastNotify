@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.FileProviders;
 using NToastNotify;
 using NToastNotify.Components;
+using NToastNotify.Helpers;
 using NToastNotify.Libraries;
 using NToastNotify.MessageContainers;
 
@@ -15,14 +16,8 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupExtension
     {
-        private static EmbeddedFileProvider _embeddedFileProvider;
         private const string NToastNotifyCorsPolicy = nameof(NToastNotifyCorsPolicy);
-        private static readonly Assembly ThisAssembly = typeof(ToastViewComponent).Assembly;
-        private static EmbeddedFileProvider GetEmbeddedFileProvider()
-        {
-            return _embeddedFileProvider ??
-          (_embeddedFileProvider = new EmbeddedFileProvider(ThisAssembly, "NToastNotify"));
-        }
+        
         [Obsolete("Please use the extension method to IMVCBuilder. For e.g. services.AddMvc().AddNToastNotify()", true)]
         public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastrOptions defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
         {
@@ -50,7 +45,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             builder.UseStaticFiles(new StaticFileOptions
             {
-                FileProvider = GetEmbeddedFileProvider(),
+                FileProvider = Utils.GetEmbeddedFileProvider(),
                 RequestPath = new PathString("/ntoastnotify")
             });
             builder.UseMiddleware<NtoastNotifyMiddleware>();
@@ -107,11 +102,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
 
             //Add the file provider to the Razor view engine
+            var fileProvider = Utils.GetEmbeddedFileProvider();
             services.Configure<RazorViewEngineOptions>(options =>
             {
-                options.FileProviders.Add(GetEmbeddedFileProvider());
+                options.FileProviders.Add(fileProvider);
             });
-
+            services.AddSingleton<IFileProvider>(fileProvider);
+            
             //Check if a TempDataProvider is already registered.
             var tempDataProvider = services.FirstOrDefault(d => d.ServiceType == typeof(ITempDataProvider));
             if (tempDataProvider == null)

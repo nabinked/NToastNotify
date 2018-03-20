@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using NToastNotify.Libraries;
 
@@ -17,9 +18,11 @@ namespace NToastNotify.Toastr
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
+            Env = env;
         }
 
         public IConfigurationRoot Configuration { get; }
+        public IHostingEnvironment Env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -30,8 +33,9 @@ namespace NToastNotify.Toastr
                 PositionClass = ToastPositions.BottomCenter
             }, new NToastNotifyOption()
             {
-                DefaultSuccessMessage = "Overwritten default success message"
-            }); ;
+                DefaultSuccessMessage = "Overwritten default success message",
+                DefaultSuccessTitle = "Default Success Title"
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

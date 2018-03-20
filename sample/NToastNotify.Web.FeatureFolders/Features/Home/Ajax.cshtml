@@ -30,7 +30,7 @@
                 $.ajax({
                     url: '/Home/ErrorAjaxCall',
                     error: function (res) {
-                        console.log(res)
+                        console.log('Error logged: ', arguments)
                     }
                 });
             });

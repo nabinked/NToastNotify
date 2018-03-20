@@ -20,7 +20,8 @@ namespace NToastNotify.Noty.FeatureFolders
             var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty(new Libraries.NotyOptions
             {
                 ProgressBar = true,
-                Timeout = 5000
+                Timeout = 5000,
+                Theme = "mint"
             });
         }
 

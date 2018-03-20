@@ -1,4 +1,5 @@
-﻿using NToastNotify.Libraries;
+﻿using Microsoft.Extensions.FileProviders;
+using NToastNotify.Libraries;
 
 namespace NToastNotify.Components
 {
@@ -9,5 +10,6 @@ namespace NToastNotify.Components
         public string RequestHeaderKey { get; set; }
         public string ResponseHeaderKey { get; set; }
         public ILibrary<ILibraryOptions> LibraryDetails { get; set; }
+        public string Hash { get; set; }
     }
 }

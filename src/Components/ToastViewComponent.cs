@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json;
 using NToastNotify.Helpers;
 using NToastNotify.Libraries;
@@ -15,7 +16,7 @@ namespace NToastNotify.Components
         private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
         private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
+        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption, IFileProvider fileProvider)
         {
             _toastNotification = toastNotification;
             _globalOption = globalOption;
@@ -30,7 +31,8 @@ namespace NToastNotify.Components
                 GlobalOptionJson = _globalOption.Json,
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
-                LibraryDetails = _nToastNotifyOption.LibraryDetails
+                LibraryDetails = _nToastNotifyOption.LibraryDetails,
+                Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_nToastNotifyOption.LibraryDetails.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
             };
             return View("ToastView", model);
         }
