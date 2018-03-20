@@ -7,10 +7,10 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" />
-    <!--<PackageReference Include="NToastNotify" Version="4.0.0" />-->
+    <PackageReference Include="NToastNotify" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NToastNotify.csproj" />
+    <!--<ProjectReference Include="..\..\src\NToastNotify.csproj" />-->
   </ItemGroup>
 </Project>
