@@ -48,7 +48,7 @@ dotnet CLI - `dotnet add package NToastNotify`
 
 The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
-### 3. Add the middleware
+## 3. Add the middleware
 ```c#
  public void Configure(IApplicationBuilder app, IHostingEnvironment env)
  {
@@ -64,15 +64,15 @@ The ToastOption parameter acts as the global options for the toast library. If n
  }
 ```
 
-### 5. Add the following line in you html file. Preferably in your Layout Page.
+## 4. Add the following line in you html file. Preferably in your Layout Page.
 ```c#
 @await Component.InvokeAsync("NToastNotify")
 ```
 The above line renders the View necessary for the view component. Although you can place this line anywhere inside your ```head``` or ```body``` tag, It is recommended that you place this line at the end before the closing ```body``` tag. 
 
-### using toastr
+## 5. Add your toast messages.
 
-# Add your toast messages.
+### using toastr
 ```C#
 public class HomeController : Controller
     {
