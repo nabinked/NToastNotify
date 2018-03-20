@@ -219,8 +219,13 @@ public class HomeController : Controller
 and they will be rendered as 
 
 # Screenshots
-![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/home-2-0-1.png)
+![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/home-2-0-1.png)
 ##### About Page
-![About Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/about-2-0-1.PNG)
+![About Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/about-2-0-1.PNG)
 ##### Contact Page
-![Contact Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Web/wwwroot/images/contact-2-0-1.PNG)
+![Contact Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/contact-2-0-1.PNG)
+
+## Possible Issue
+ - [Cannot find compilation library location for package 'Microsoft.Win32.Registry](https://github.com/dotnet/core-setup/issues/2113)
+ 
+    **Fix** : https://github.com/dotnet/core-setup/issues/2113#issuecomment-337341068  
