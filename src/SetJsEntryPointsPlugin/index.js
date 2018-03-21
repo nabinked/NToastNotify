@@ -1,1 +1,0 @@
-﻿exports.SetJsEntryPointsPlugin = require('./SetJsEntryPointsPlugin');

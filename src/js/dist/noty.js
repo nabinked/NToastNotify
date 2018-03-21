@@ -1,1 +1,362 @@
-var nToastNotify=function(e){function t(o){if(n[o])return n[o].exports;var r=n[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};return t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=4)}([function(e,t,n){"use strict";var o=this&&this.__awaiter||function(e,t,n,o){return new(n||(n=Promise))(function(r,s){function i(e){try{u(o.next(e))}catch(e){s(e)}}function a(e){try{u(o.throw(e))}catch(e){s(e)}}function u(e){e.done?r(e.value):new n(function(t){t(e.value)}).then(i,a)}u((o=o.apply(e,t||[])).next())})},r=this&&this.__generator||function(e,t){function n(e){return function(t){return o([e,t])}}function o(n){if(r)throw new TypeError("Generator is already executing.");for(;u;)try{if(r=1,s&&(i=s[2&n[0]?"return":n[0]?"throw":"next"])&&!(i=i.call(s,n[1])).done)return i;switch(s=0,i&&(n=[0,i.value]),n[0]){case 0:case 1:i=n;break;case 4:return u.label++,{value:n[1],done:!1};case 5:u.label++,s=n[1],n=[0];continue;case 7:n=u.ops.pop(),u.trys.pop();continue;default:if(i=u.trys,!(i=i.length>0&&i[i.length-1])&&(6===n[0]||2===n[0])){u=0;continue}if(3===n[0]&&(!i||n[1]>i[0]&&n[1]<i[3])){u.label=n[1];break}if(6===n[0]&&u.label<i[1]){u.label=i[1],i=n;break}if(i&&u.label<i[2]){u.label=i[2],u.ops.push(n);break}i[2]&&u.ops.pop(),u.trys.pop();continue}n=t.call(e,u)}catch(e){n=[6,e],s=0}finally{r=i=0}if(5&n[0])throw n[1];return{value:n[0]?n[1]:void 0,done:!0}}var r,s,i,a,u={label:0,sent:function(){if(1&i[0])throw i[1];return i[1]},trys:[],ops:[]};return a={next:n(0),throw:n(1),return:n(2)},"function"==typeof Symbol&&(a[Symbol.iterator]=function(){return this}),a};Object.defineProperty(t,"__esModule",{value:!0}),n(1);var s=function(){function e(){this.options=null,this.fetchHeaderValue="Fetch"}return e.prototype.init=function(t){this.options=Object.assign({},e.defaults,t),this.interceptXmlRequest(),this.interceptNativeFetch(),this.handleEvents()},e.prototype.ensureLibExists=function(){return this.libPresentAlready()?void 0:this.loadLibAsync()},e.prototype.libPresentAlready=function(){return void 0!==window[this.options.libraryDetails.varName]},e.prototype.loadLibAsync=function(){return Promise.all([this.loadStyleAsync(),this.loadScriptAsync()])},e.prototype.loadScriptAsync=function(){var e=this;return new Promise(function(t,n){if(e.options.libraryDetails.scriptSrc){var o=document.createElement("script");o.setAttribute("src",e.options.libraryDetails.scriptSrc),o.onload=function(e){t()},o.onerror=function(e){n(e.message)},document.head.appendChild(o)}else t()})},e.prototype.loadStyleAsync=function(){var e=this;return new Promise(function(t,n){if(e.options.libraryDetails.scriptSrc){var o=document.createElement("link");o.setAttribute("rel","stylesheet"),o.type="text/css",o.href=e.options.libraryDetails.styleHref,o.onload=function(e){t()},o.onerror=function(e){n(e.message)},document.head.appendChild(o)}else t()})},e.prototype.handleEvents=function(){document&&document.addEventListener("DOMContentLoaded",this.domContentLoadedHandler.bind(this))},e.prototype.getResponseHeaderKey=function(){return this.options.responseHeaderKey},e.prototype.interceptNativeFetch=function(){var e=this,t=window.fetch;t&&(window.fetch=function(){var n=arguments[0];e.prepareRequestInfo(n);var o=arguments.length>1?arguments[1]:{};return e.prepareReuqestInit(o),t.apply(this,[n,o])})},e.prototype.prepareRequestInfo=function(e){e instanceof Request&&e.headers.append(this.options.requestHeaderKey,this.fetchHeaderValue)},e.prototype.prepareReuqestInit=function(e){if(e)if(e.headers)e.headers instanceof Headers?e.headers.set(this.options.requestHeaderKey,this.fetchHeaderValue):e.headers instanceof Object?e.headers[this.options.requestHeaderKey]=this.fetchHeaderValue:console.warn("NToastNotify header not set. Toast notification will not work");else{var t=new Headers;t.set(this.options.requestHeaderKey,this.fetchHeaderValue),e.headers=t}},e.prototype.interceptXmlRequest=function(){var e=this,t=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.send=function(){this.setRequestHeader(e.options.requestHeaderKey,"XMLHttpRequest"),this.addEventListener("load",e.xmlRequestOnLoadHandler.bind(e,this)),t.apply(this,arguments)}},e.prototype.xmlRequestOnLoadHandler=function(e){var t=this.xmlGetMessagesFromResponse(e);this.showToasts(t)},e.prototype.xmlGetMessagesFromResponse=function(e){var t=e.getResponseHeader(this.options.responseHeaderKey);return t?JSON.parse(t):null},e.prototype.fetchGetMessagesFromResponse=function(e){var t=e.headers.get(this.options.responseHeaderKey);return t?JSON.parse(t):null},e.prototype.domContentLoadedHandler=function(){return o(this,void 0,void 0,function(){return r(this,function(e){switch(e.label){case 0:return[4,this.ensureLibExists()];case 1:return e.sent(),this.overrideLibDefaults(),this.showToasts(this.options.messages),[2]}})})},e.prototype.showToasts=function(e){var t=this;e&&e.length&&e.forEach(function(e,n,o){t.show(e)})},e}();t.NToastNotify=s},function(e,t){"function"!=typeof Object.assign&&Object.defineProperty(Object,"assign",{value:function(e){"use strict";if(null==e)throw new TypeError("Cannot convert undefined or null to object");for(var t=Object(e),n=1;n<arguments.length;n++){var o=arguments[n];if(null!=o)for(var r in o)Object.prototype.hasOwnProperty.call(o,r)&&(t[r]=o[r])}return t},writable:!0,configurable:!0})},,,function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=n(5);t.noty=new o.NToastNotifyNoty},function(e,t,n){"use strict";var o=this&&this.__extends||function(){var e=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(e,t){e.__proto__=t}||function(e,t){for(var n in t)t.hasOwnProperty(n)&&(e[n]=t[n])};return function(t,n){function o(){this.constructor=t}e(t,n),t.prototype=null===n?Object.create(n):(o.prototype=n.prototype,new o)}}();Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),s=function(e){function t(){return null!==e&&e.apply(this,arguments)||this}return o(t,e),t.prototype.show=function(e){e.toastOptions.text=e.message,new Noty(e.toastOptions).show()},t.prototype.overrideLibDefaults=function(){window.Noty.overrideDefaults(this.options.globalLibOptions)},t}(r.NToastNotify);t.NToastNotifyNoty=s}]);
+var nToastNotify =
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(1);
+var NToastNotify = /** @class */ (function () {
+    function NToastNotify() {
+        this.options = null;
+        this.fetchHeaderValue = 'Fetch';
+    }
+    NToastNotify.prototype.init = function (options) {
+        this.options = Object.assign({}, NToastNotify.defaults, options);
+        this.interceptXmlRequest();
+        this.interceptNativeFetch();
+        this.handleEvents();
+    };
+    NToastNotify.prototype.ensureLibExists = function () {
+        if (this.libPresentAlready()) {
+            return;
+        }
+        else {
+            return this.loadLibAsync();
+        }
+    };
+    NToastNotify.prototype.libPresentAlready = function () {
+        return typeof window[this.options.libraryDetails.varName] !== 'undefined';
+    };
+    NToastNotify.prototype.loadLibAsync = function () {
+        return Promise.all([this.loadStyleAsync(), this.loadScriptAsync()]);
+    };
+    NToastNotify.prototype.loadScriptAsync = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.options.libraryDetails.scriptSrc) {
+                var script = document.createElement('script');
+                script.setAttribute('src', _this.options.libraryDetails.scriptSrc);
+                script.onload = function (e) {
+                    resolve();
+                };
+                script.onerror = function (e) {
+                    reject(e.message);
+                };
+                document.head.appendChild(script);
+            }
+            else {
+                resolve();
+            }
+        });
+    };
+    NToastNotify.prototype.loadStyleAsync = function () {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            if (_this.options.libraryDetails.scriptSrc) {
+                var link = document.createElement('link');
+                link.setAttribute('rel', 'stylesheet');
+                link.type = 'text/css';
+                link.href = _this.options.libraryDetails.styleHref;
+                link.onload = function (e) {
+                    resolve();
+                };
+                link.onerror = function (e) {
+                    reject(e.message);
+                };
+                document.head.appendChild(link);
+            }
+            else {
+                resolve();
+            }
+        });
+    };
+    NToastNotify.prototype.handleEvents = function () {
+        document && document.addEventListener('DOMContentLoaded', this.domContentLoadedHandler.bind(this));
+    };
+    NToastNotify.prototype.getResponseHeaderKey = function () {
+        return this.options.responseHeaderKey;
+    };
+    NToastNotify.prototype.interceptNativeFetch = function () {
+        var self = this;
+        var oldFetch = window.fetch;
+        if (oldFetch) {
+            window.fetch = function () {
+                var requestInfo = arguments[0];
+                self.prepareRequestInfo(requestInfo);
+                var init = arguments.length > 1 ? arguments[1] : {};
+                self.prepareReuqestInit(init);
+                return oldFetch.apply(this, [requestInfo, init]);
+            };
+        }
+    };
+    NToastNotify.prototype.prepareRequestInfo = function (request) {
+        if (request instanceof Request) {
+            request.headers.append(this.options.requestHeaderKey, this.fetchHeaderValue);
+        }
+    };
+    NToastNotify.prototype.prepareReuqestInit = function (reqInit) {
+        if (reqInit) {
+            //if headers is not defined yet. define one
+            if (!reqInit.headers) {
+                var newHeaders = new Headers();
+                newHeaders.set(this.options.requestHeaderKey, this.fetchHeaderValue);
+                reqInit.headers = newHeaders;
+            }
+            else {
+                if (reqInit.headers instanceof Headers) {
+                    reqInit.headers.set(this.options.requestHeaderKey, this.fetchHeaderValue);
+                }
+                else if (reqInit.headers instanceof Object) {
+                    reqInit.headers[this.options.requestHeaderKey] = this.fetchHeaderValue;
+                }
+                else {
+                    console.warn('NToastNotify header not set. Toast notification will not work');
+                }
+            }
+        }
+    };
+    NToastNotify.prototype.interceptXmlRequest = function () {
+        var self = this;
+        // store the native send()
+        var oldSend = XMLHttpRequest.prototype.send;
+        // override the native send()
+        XMLHttpRequest.prototype.send = function () {
+            this.setRequestHeader(self.options.requestHeaderKey, 'XMLHttpRequest');
+            this.addEventListener('load', self.xmlRequestOnLoadHandler.bind(self, this));
+            // call the native send()
+            oldSend.apply(this, arguments);
+        };
+    };
+    NToastNotify.prototype.xmlRequestOnLoadHandler = function (xmlHttpRequest) {
+        var messages = this.xmlGetMessagesFromResponse(xmlHttpRequest);
+        this.showToasts(messages);
+    };
+    NToastNotify.prototype.xmlGetMessagesFromResponse = function (xmlHttpRequest) {
+        var messagesStr = xmlHttpRequest.getResponseHeader(this.options.responseHeaderKey);
+        if (messagesStr) {
+            return JSON.parse(messagesStr);
+        }
+        return null;
+    };
+    NToastNotify.prototype.fetchGetMessagesFromResponse = function (response) {
+        var messageStr = response.headers.get(this.options.responseHeaderKey);
+        if (messageStr) {
+            return JSON.parse(messageStr);
+        }
+        else {
+            return null;
+        }
+    };
+    NToastNotify.prototype.domContentLoadedHandler = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.ensureLibExists()];
+                    case 1:
+                        _a.sent();
+                        this.overrideLibDefaults();
+                        this.showToasts(this.options.messages);
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    NToastNotify.prototype.showToasts = function (messages) {
+        var _this = this;
+        if (messages && messages.length) {
+            messages.forEach(function (message, index, array) {
+                _this.show(message);
+            });
+        }
+    };
+    return NToastNotify;
+}());
+exports.NToastNotify = NToastNotify;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+if (typeof Object.assign != 'function') {
+    // Must be writable: true, enumerable: false, configurable: true
+    Object.defineProperty(Object, 'assign', {
+        value: function (target) {
+            'use strict';
+            if (target == null) {
+                throw new TypeError('Cannot convert undefined or null to object');
+            }
+            var to = Object(target);
+            for (var index = 1; index < arguments.length; index++) {
+                var nextSource = arguments[index];
+                if (nextSource != null) {
+                    for (var nextKey in nextSource) {
+                        // Avoid bugs when hasOwnProperty is shadowed
+                        if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+        writable: true,
+        configurable: true
+    });
+}
+
+
+/***/ }),
+/* 2 */,
+/* 3 */,
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var NToastNotifyNoty_1 = __webpack_require__(5);
+exports.noty = new NToastNotifyNoty_1.NToastNotifyNoty();
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var NToastNotify_1 = __webpack_require__(0);
+var NToastNotifyNoty = /** @class */ (function (_super) {
+    __extends(NToastNotifyNoty, _super);
+    function NToastNotifyNoty() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    NToastNotifyNoty.prototype.show = function (message) {
+        var notyOpts = message.toastOptions;
+        notyOpts.text = message.message;
+        new Noty(message.toastOptions).show();
+    };
+    NToastNotifyNoty.prototype.overrideLibDefaults = function () {
+        window.Noty.overrideDefaults(this.options.globalLibOptions);
+    };
+    return NToastNotifyNoty;
+}(NToastNotify_1.NToastNotify));
+exports.NToastNotifyNoty = NToastNotifyNoty;
+
+
+/***/ })
+/******/ ]);
+//# sourceMappingURL=noty.js.map
