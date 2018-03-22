@@ -1,9 +1,8 @@
 ﻿using NToastNotify.Helpers;
-using NToastNotify.Libraries;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify.Libraries.Toastr
 {
-    public class ToastrOptions : ILibraryOptions
+    public class ToastrOptions: IToastrJsOptions, ILibraryOptions
     {
         public bool? TapToDismiss { get; set; }
         public string ToastClass { get; set; }
@@ -44,18 +43,10 @@ namespace NToastNotify.Libraries
         public bool? CloseButton { get; set; }
         public string Onclick { get; set; }
 
-        // Default message and title options
-        public string SuccessTitle { get; set; }
-        public string SuccessMessage { get; set; }
-
-        public string InfoTitle { get; set; }
-
-        public string WarningTitle { get; set; }
-
-        public string ErrorTitle { get; set; }
-        public string ErrorMessage { get; set; }
-
-        public string Json => this.ToJson();
-
+        //Non library options
+        string Title { get; set; }
+        
+        //ILIbraryoptions
+        string ILibraryOptions.Json => this.ToJson();
     }
 }

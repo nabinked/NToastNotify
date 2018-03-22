@@ -2,7 +2,7 @@
 
 namespace NToastNotify.Libraries
 {
-    public class ToastrNotification : ToastNotification<ToastrMessage, ToastrOptions>
+    public class ToastrNotification : ToastNotification<ToastrMessage, IToastrJsOptions>
     {
         private readonly NToastNotifyOption _defaultNtoastNotifyOptions;
 

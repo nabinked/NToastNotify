@@ -5,7 +5,7 @@ using static NToastNotify.Enums;
 
 namespace NToastNotify.Libraries
 {
-    public class NotyOptions : ILibraryOptions
+    public class NotyOptions : ILibraryOptions, INotyJsOptions
     {
         /// <summary>
         /// alert, success, error, warning, info - ClassName generator uses this value → noty_type__${type}

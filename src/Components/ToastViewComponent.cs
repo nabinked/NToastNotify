@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.FileProviders;
-using Newtonsoft.Json;
+﻿using Microsoft.AspNetCore.Mvc;
 using NToastNotify.Helpers;
 using NToastNotify.Libraries;
 
@@ -16,7 +11,7 @@ namespace NToastNotify.Components
         private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
         private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption, IFileProvider fileProvider)
+        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
         {
             _toastNotification = toastNotification;
             _globalOption = globalOption;

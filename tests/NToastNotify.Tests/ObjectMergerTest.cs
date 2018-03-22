@@ -9,10 +9,10 @@ namespace NToastNotify.Tests
         public void MergeWith_ValidArguments_ReturnMergedObject()
         {
             //Arrange
-            var obj1 = new ToastrOptions(){
+            var obj1 = new ToastrJsOptions(){
                 PositionClass = "primary"
             };
-            var obj2 = new ToastrOptions(){ 
+            var obj2 = new ToastrJsOptions(){ 
                CloseClass = "Close" 
              };
             //Act

@@ -2,7 +2,7 @@
 {
     public class DefaultOptions
     {
-        public static ToastrOptions Toastr => new ToastrOptions()
+        public static IToastrJsOptions Toastr => new IToastrJsOptions()
         {
             TapToDismiss = true,
             ToastClass = "toast",

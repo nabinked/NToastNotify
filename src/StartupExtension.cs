@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
-using Microsoft.Extensions.FileProviders;
 using NToastNotify;
-using NToastNotify.Components;
 using NToastNotify.Helpers;
 using NToastNotify.Libraries;
 using NToastNotify.MessageContainers;
@@ -17,25 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class StartupExtension
     {
         private const string NToastNotifyCorsPolicy = nameof(NToastNotifyCorsPolicy);
-        
-        [Obsolete("Please use the extension method to IMVCBuilder. For e.g. services.AddMvc().AddNToastNotify()", true)]
-        public static IServiceCollection AddNToastNotify(this IServiceCollection services, ToastrOptions defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null, IMvcBuilder mvcBuilder = null)
-        {
-            return services;
-        }
-        /// <summary>
-        /// Addes the necessary services for NToastNotify. Default <see cref="ILibrary{TOption}" used is <see cref="Toastr"/>/>
-        /// </summary>
-        /// <typeparam name="TLibrary">Toastr</typeparam>
-        /// <param name="mvcBuilder"></param>
-        /// <param name="defaultOptions"></param>
-        /// <param name="nToastNotifyOptions"></param>
-        /// <returns></returns>
-        [Obsolete("Please use the library specific method either AddNToastNotifyToastr or AddNToastNotifyNoty")]
-        public static IMvcBuilder AddNToastNotify(this IMvcBuilder mvcBuilder, ToastrOptions defaultOptions = null, NToastNotifyOption nToastNotifyOptions = null)
-        {
-            return AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, ToastrNotification>(mvcBuilder, defaultOptions, nToastNotifyOptions);
-        }
+
         /// <summary>
         /// Add the NToastNotify middleware to handle ajax request.
         /// </summary>
@@ -52,12 +31,11 @@ namespace Microsoft.Extensions.DependencyInjection
             return builder;
         }
 
-        internal static IMvcBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TMessage, TNotificationImplementation>(this IMvcBuilder mvcBuilder,
+        internal static IMvcBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TNotificationImplementation>(this IMvcBuilder mvcBuilder,
                                                                                                                             TOption defaultLibOptions,
                                                                                                                             NToastNotifyOption nToastNotifyOptions = null)
             where TLibrary : class, ILibrary<TOption>, new()
             where TOption : class, ILibraryOptions
-            where TMessage : class, IToastMessage
             where TNotificationImplementation : class, IToastNotification
         {
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
@@ -67,15 +45,14 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             var services = mvcBuilder.Services;
-            AddNToastNotifyToServiceCollection<TLibrary, TOption, TMessage, TNotificationImplementation>(services, defaultLibOptions, nToastNotifyOptions);
+            AddNToastNotifyToServiceCollection<TLibrary, TOption, TNotificationImplementation>(services, defaultLibOptions, nToastNotifyOptions);
             return mvcBuilder;
         }
-        internal static IMvcCoreBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TMessage, TNotificationImplementation>(this IMvcCoreBuilder mvcCoreBuilder,
+        internal static IMvcCoreBuilder AddNToastNotifyToMvcBuilder<TLibrary, TOption, TNotificationImplementation>(this IMvcCoreBuilder mvcCoreBuilder,
                                                                                                                             TOption defaultLibOptions,
                                                                                                                             NToastNotifyOption nToastNotifyOptions = null)
             where TLibrary : class, ILibrary<TOption>, new()
             where TOption : class, ILibraryOptions
-            where TMessage : class, IToastMessage
             where TNotificationImplementation : class, IToastNotification
         {
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
@@ -85,14 +62,13 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             var services = mvcCoreBuilder.Services;
-            AddNToastNotifyToServiceCollection<TLibrary, TOption, TMessage, TNotificationImplementation>(services, defaultLibOptions, nToastNotifyOptions);
+            AddNToastNotifyToServiceCollection<TLibrary, TOption, TNotificationImplementation>(services, defaultLibOptions, nToastNotifyOptions);
             return mvcCoreBuilder;
         }
-        internal static IServiceCollection AddNToastNotifyToServiceCollection<TLibrary, TOption, TMessage, TNotificationImplementation>(this IServiceCollection services, TOption defaultLibOptions,
+        internal static IServiceCollection AddNToastNotifyToServiceCollection<TLibrary, TOption, TNotificationImplementation>(this IServiceCollection services, TOption defaultLibOptions,
             NToastNotifyOption nToastNotifyOptions = null)
             where TLibrary : class, ILibrary<TOption>, new()
             where TOption : class, ILibraryOptions
-            where TMessage : class, IToastMessage
             where TNotificationImplementation : class, IToastNotification
         {
             if (services == null)
@@ -107,8 +83,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 options.FileProviders.Add(fileProvider);
             });
-            services.AddSingleton<IFileProvider>(fileProvider);
-            
+
             //Check if a TempDataProvider is already registered.
             var tempDataProvider = services.FirstOrDefault(d => d.ServiceType == typeof(ITempDataProvider));
             if (tempDataProvider == null)

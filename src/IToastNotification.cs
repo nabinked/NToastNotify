@@ -12,7 +12,7 @@ namespace NToastNotify
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="IToastrJsOptions"/></param>
         void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
@@ -20,7 +20,7 @@ namespace NToastNotify
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="IToastrJsOptions"/></param>
         void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace NToastNotify
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. <see cref="IToastrJsOptions"/></param>
         void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
