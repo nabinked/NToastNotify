@@ -1,6 +1,6 @@
-﻿namespace NToastNotify.Libraries
+﻿namespace NToastNotify
 {
-    public interface ILibrary<out TOptions>
+    public interface ILibrary
     {
         /// <summary>
         /// Variable name available to window
@@ -9,16 +9,11 @@
         /// <summary>
         /// The src to the script file of the library. Defaults to the cdn link
         /// </summary>
-        string ScriptSrc { get; }
+        string ScriptSrc { get; set; }
         /// <summary>
         /// The href to the stylesheet file of the library. Defaults to the cdn link
         /// </summary>
-        string StyleHref { get; }
-
-        /// <summary>
-        /// Default options of the javascript library.
-        /// </summary>
-        TOptions Defaults { get; }
+        string StyleHref { get; set; }
 
     }
 }

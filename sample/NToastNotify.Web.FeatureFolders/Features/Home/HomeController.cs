@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify.Libraries;
+using NToastNotify.Helpers;
 using NToastNotify.Noty.FeatureFolders.Models;
 
 namespace NToastNotify.Noty.FeatureFolders.Features.Home
@@ -17,10 +17,27 @@ namespace NToastNotify.Noty.FeatureFolders.Features.Home
         public IActionResult Index()
         {
             _toastNotification.AddSuccessToastMessage();
-            _toastNotification.AddErrorToastMessage("Test Erro", new NotyOptions()
+            _toastNotification.AddErrorToastMessage("Test", new NotyOptions()
             {
-                Timeout = 0
+                Timeout = 0,
+                Layout = "topLeft"
             });
+
+
+            //Info
+            _toastNotification.AddInfoToastMessage();
+            _toastNotification.AddInfoToastMessage("This is an info toast", new NotyOptions()
+            {
+                ProgressBar = false
+            });
+
+            //Warning
+            _toastNotification.AddWarningToastMessage("Waring go bottom right", new NotyOptions() { });
+
+            //Error
+            _toastNotification.AddErrorToastMessage("Custom Error Message", new NotyOptions() { Theme = "metroui" });
+
+
             return View();
         }
 

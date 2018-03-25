@@ -1,8 +1,10 @@
-﻿using NToastNotify.MessageContainers;
+﻿using NToastNotify.Helpers;
+using NToastNotify.MessageContainers;
+using static NToastNotify.Enums;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
-    public class ToastrNotification : ToastNotification<ToastrMessage, IToastrJsOptions>
+    public class ToastrNotification : ToastNotification<ToastrMessage, ToastrOptions>
     {
         private readonly NToastNotifyOption _defaultNtoastNotifyOptions;
 
@@ -11,33 +13,37 @@ namespace NToastNotify.Libraries
             _defaultNtoastNotifyOptions = nToastNotifyOptions;
         }
 
-        public override void AddInfoToastMessage(string message, ILibraryOptions toasILibraryOptions = null)
+        public override void AddInfoToastMessage(string message, ILibraryOptions toastrOptions = null)
         {
-            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage, _defaultNtoastNotifyOptions.DefaultInfoTitle, Enums.NotificationTypesToastr.Info, toasILibraryOptions);
+            var options = OptionsHelpers.PrepareOptionsToastr(toastrOptions, NotificationTypesToastr.Info, _defaultNtoastNotifyOptions.DefaultInfoTitle);
+            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage, options);
             AddMessage(toastMessage);
         }
 
-        public override void AddWarningToastMessage(string message = null, ILibraryOptions toasILibraryOptions = null)
+        public override void AddWarningToastMessage(string message = null, ILibraryOptions toastrOptions = null)
         {
-            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningMessage, _defaultNtoastNotifyOptions.DefaultWarningTitle, Enums.NotificationTypesToastr.Warning, toasILibraryOptions);
+            var options = OptionsHelpers.PrepareOptionsToastr(toastrOptions, NotificationTypesToastr.Warning, _defaultNtoastNotifyOptions.DefaultWarningTitle);
+            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningMessage, options);
             AddMessage(toastMessage);
         }
 
-        public override void AddErrorToastMessage(string message = null, ILibraryOptions toasILibraryOptions = null)
+        public override void AddErrorToastMessage(string message = null, ILibraryOptions toastrOptions = null)
         {
-            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage, _defaultNtoastNotifyOptions.DefaultErrorTitle, Enums.NotificationTypesToastr.Error, toasILibraryOptions);
+            var options = OptionsHelpers.PrepareOptionsToastr(toastrOptions, NotificationTypesToastr.Error, _defaultNtoastNotifyOptions.DefaultErrorTitle);
+            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage, options);
             AddMessage(toastMessage);
         }
 
-        public override void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null)
+        public override void AddAlertToastMessage(string message = null, ILibraryOptions toastrOptions = null)
         {
             //because toastr js does not have an alert type.
-            AddInfoToastMessage(message, toastOptions);
+            AddInfoToastMessage(message, toastrOptions);
         }
 
-        public override void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null)
+        public override void AddSuccessToastMessage(string message = null, ILibraryOptions toastrOptions = null)
         {
-            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage, _defaultNtoastNotifyOptions.DefaultSuccessTitle, Enums.NotificationTypesToastr.Success, toastOptions);
+            var options = OptionsHelpers.PrepareOptionsToastr(toastrOptions, NotificationTypesToastr.Success, _defaultNtoastNotifyOptions.DefaultSuccessTitle);
+            var toastMessage = new ToastrMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage, options);
             AddMessage(toastMessage);
         }
 

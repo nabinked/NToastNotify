@@ -1,11 +1,11 @@
-﻿using NToastNotify.Libraries;
+﻿using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
     /// <summary>
     /// This class is used to provide options that are used by the entire library not by th third party js library.
     /// </summary>
-    public class NToastNotifyOption
+    public class NToastNotifyOption : ILibrary
     {
         /// <summary>
         /// Default success title to all toast messages
@@ -52,9 +52,9 @@ namespace NToastNotify
         /// </summary>
         public string DefaultAlertMessage { get; set; } = "This is an alert.";
 
-        /// <summary>
-        /// Library details 
-        /// </summary>
-        public ILibrary<ILibraryOptions> LibraryDetails { get; set; }
+        public string VarName { get; }
+
+        public string ScriptSrc { get; set; }
+        public string StyleHref { get; set; }
     }
 }

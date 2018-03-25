@@ -1,6 +1,4 @@
-﻿using NToastNotify.Libraries;
-
-namespace NToastNotify.Components
+﻿namespace NToastNotify.Components
 {
     public class ToastNotificationViewModel
     {
@@ -23,7 +21,7 @@ namespace NToastNotify.Components
         /// <summary>
         /// Library details 
         /// </summary>
-        public ILibrary<ILibraryOptions> LibraryDetails { get; set; }
+        public ILibrary LibraryDetails { get; set; }
         /// <summary>
         /// This is used to get the hash of the javascript file using the last modified date. Used for cache busting.
         /// </summary>

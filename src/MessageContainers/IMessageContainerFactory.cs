@@ -1,4 +1,4 @@
-﻿using NToastNotify.Libraries;
+﻿using NToastNotify.Helpers;
 
 namespace NToastNotify.MessageContainers
 {

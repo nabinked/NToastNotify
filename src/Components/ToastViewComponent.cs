@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NToastNotify.Helpers;
-using NToastNotify.Libraries;
 
 namespace NToastNotify.Components
 {
@@ -9,13 +8,13 @@ namespace NToastNotify.Components
     {
         private readonly IToastNotification _toastNotification;
         private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
-        private readonly NToastNotifyOption _nToastNotifyOption;
+        private readonly ILibrary _library;
 
-        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, NToastNotifyOption nToastNotifyOption)
+        public ToastViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, ILibrary library)
         {
             _toastNotification = toastNotification;
             _globalOption = globalOption;
-            _nToastNotifyOption = nToastNotifyOption;
+            _library = library;
         }
 
         public IViewComponentResult Invoke()
@@ -26,8 +25,8 @@ namespace NToastNotify.Components
                 GlobalOptionJson = _globalOption.Json,
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
-                LibraryDetails = _nToastNotifyOption.LibraryDetails,
-                Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_nToastNotifyOption.LibraryDetails.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
+                LibraryDetails = _library,
+                Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_library.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
             };
             return View("ToastView", model);
         }

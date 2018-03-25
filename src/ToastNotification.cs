@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using NToastNotify.Libraries;
+using NToastNotify.Helpers;
 using NToastNotify.MessageContainers;
 
 namespace NToastNotify
@@ -36,7 +36,7 @@ namespace NToastNotify
 
         protected void AddMessage(TMessage toastMessage)
         {
-            OptionsCaster.EnsureSameType<TOptions>(toastMessage.ToastOptions);
+            OptionsHelpers.EnsureSameType<TOptions>(toastMessage.Options);
             _messageContainer.Add(toastMessage);
         }
     }

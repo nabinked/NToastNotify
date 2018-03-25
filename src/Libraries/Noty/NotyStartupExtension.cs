@@ -1,5 +1,5 @@
 ﻿using NToastNotify;
-using NToastNotify.Libraries;
+using NToastNotify.Helpers;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -12,10 +12,13 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="defaultOptions"></param>
         /// <param name="nToastNotifyOptions"></param>
         /// <returns></returns>
-        public static IMvcBuilder AddNToastNotifyNoty(this IMvcBuilder mvcBuilder, NotyOptions defaultOptions = null,
-            NToastNotifyOption nToastNotifyOptions = null)
+        public static IMvcBuilder AddNToastNotifyNoty(this IMvcBuilder mvcBuilder,
+                                                        NotyOptions defaultOptions = null,
+                                                        NToastNotifyOption nToastNotifyOptions = null)
         {
-            return mvcBuilder.AddNToastNotifyToMvcBuilder<NotyLibrary, NotyOptions, NotyMessage, NotyNotification>(defaultOptions ?? new NotyOptions(), nToastNotifyOptions);
+            nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
+            var library = Utils.GetLibraryDetails<NotyLibrary>(nToastNotifyOptions);
+            return mvcBuilder.AddNToastNotifyToMvcBuilder<NotyNotification>(library, defaultOptions, nToastNotifyOptions);
         }
 
         /// <summary>
@@ -28,7 +31,10 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddNToastNotifyNoty(this IMvcCoreBuilder mvcBuilder, NotyOptions defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
-            return mvcBuilder.AddNToastNotifyToMvcBuilder<NotyLibrary, NotyOptions, NotyMessage, NotyNotification>(defaultOptions ?? new NotyOptions(), nToastNotifyOptions);
+            nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
+            var library = Utils.GetLibraryDetails<NotyLibrary>(nToastNotifyOptions);
+            return mvcBuilder.AddNToastNotifyToMvcBuilder<NotyNotification>(library, defaultOptions, nToastNotifyOptions);
         }
+
     }
 }

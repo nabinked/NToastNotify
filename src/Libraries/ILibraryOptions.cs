@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
     public interface ILibraryOptions
     {

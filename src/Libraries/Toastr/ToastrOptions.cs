@@ -1,6 +1,8 @@
-﻿using NToastNotify.Helpers;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using NToastNotify.Helpers;
 
-namespace NToastNotify.Libraries.Toastr
+namespace NToastNotify
 {
     public class ToastrOptions: IToastrJsOptions, ILibraryOptions
     {
@@ -43,9 +45,11 @@ namespace NToastNotify.Libraries.Toastr
         public bool? CloseButton { get; set; }
         public string Onclick { get; set; }
 
-        //Non library options
-        string Title { get; set; }
-        
+        //Non library options. Used purely for rendering purposes
+        public string Title { get; set; }
+        [JsonConverter(typeof(StringEnumConverter), true)]
+        public Enums.NotificationTypesToastr Type { get; set; }
+
         //ILIbraryoptions
         string ILibraryOptions.Json => this.ToJson();
     }

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using NToastNotify.Attributes;
-using NToastNotify.Libraries;
 
 namespace NToastNotify
 {
@@ -9,13 +8,13 @@ namespace NToastNotify
         public ToastrMessage(string message, ILibraryOptions options = null)
         {
             Message = message;
-            ToastOptions = options;
+            Options = options;
         }
         [JsonProperty]
         public string Message { get; private set; }
         [JsonProperty]
-        [JsonConverter(typeof(ConcreteTypeConverter<IToastrJsOptions>))]
-        public ILibraryOptions ToastOptions { get; private set; }
+        [JsonConverter(typeof(ConcreteTypeConverter<ToastrOptions>))]
+        public ILibraryOptions Options { get; private set; }
 
     }
 }

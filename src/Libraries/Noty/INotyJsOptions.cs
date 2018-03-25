@@ -1,4 +1,4 @@
-﻿namespace NToastNotify.Libraries
+﻿namespace NToastNotify
 {
     /// <summary>
     /// Mirrors the options object used by noty.js

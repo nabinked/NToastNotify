@@ -345,12 +345,14 @@ var NToastNotifyNoty = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     NToastNotifyNoty.prototype.show = function (message) {
-        var notyOpts = message.toastOptions;
+        var notyOpts = message.options;
         notyOpts.text = message.message;
-        new Noty(message.toastOptions).show();
+        new Noty(notyOpts).show();
     };
     NToastNotifyNoty.prototype.overrideLibDefaults = function () {
-        window.Noty.overrideDefaults(this.options.globalLibOptions);
+        if (this.options.globalLibOptions) {
+            Noty.overrideDefaults(this.options.globalLibOptions);
+        }
     };
     return NToastNotifyNoty;
 }(NToastNotify_1.NToastNotify));

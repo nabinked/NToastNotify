@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using NToastNotify.Helpers;
 using static NToastNotify.Enums;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
     public class NotyOptions : ILibraryOptions, INotyJsOptions
     {

@@ -17,7 +17,7 @@ namespace NToastNotify.Noty.FeatureFolders
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty(new Libraries.NotyOptions
+            var mvcBuilder = services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty(new NotyOptions
             {
                 ProgressBar = true,
                 Timeout = 5000,

@@ -1,4 +1,4 @@
-﻿namespace NToastNotify.Libraries
+﻿namespace NToastNotify
 {
     /// <summary>
     /// Purely mirrors the options object used by toastr.js library
