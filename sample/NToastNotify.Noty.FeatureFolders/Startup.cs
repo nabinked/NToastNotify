@@ -21,7 +21,7 @@ namespace NToastNotify.Noty.FeatureFolders
             {
                 ProgressBar = true,
                 Timeout = 5000,
-                Theme = "mint"
+                Theme = "metroui"
             });
         }
 

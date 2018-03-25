@@ -20,22 +20,30 @@ namespace NToastNotify.Noty.FeatureFolders.Features.Home
             _toastNotification.AddErrorToastMessage("Test", new NotyOptions()
             {
                 Timeout = 0,
-                Layout = "topLeft"
+                Layout = "topLeft",
+                Theme = "mint"
             });
 
 
             //Info
-            _toastNotification.AddInfoToastMessage();
+            _toastNotification.AddInfoToastMessage(null, new NotyOptions
+            {
+                Layout = "bottomLeft" 
+            });
             _toastNotification.AddInfoToastMessage("This is an info toast", new NotyOptions()
             {
-                ProgressBar = false
+                ProgressBar = false,
+                Layout ="center"
             });
 
             //Warning
-            _toastNotification.AddWarningToastMessage("Waring go bottom right", new NotyOptions() { });
+            _toastNotification.AddWarningToastMessage("Waring go bottom right", new NotyOptions()
+            {
+                Layout = "bottomRight"
+            });
 
             //Error
-            _toastNotification.AddErrorToastMessage("Custom Error Message", new NotyOptions() { Theme = "metroui" });
+            _toastNotification.AddErrorToastMessage("Custom Error Message", new NotyOptions() { Theme = "mint" });
 
 
             return View();
