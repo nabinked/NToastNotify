@@ -1,9 +1,10 @@
-﻿using NToastNotify.Helpers;
-using NToastNotify.Libraries;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using NToastNotify.Helpers;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
-    public class ToastrOptions : ILibraryOptions
+    public class ToastrOptions: IToastrJsOptions, ILibraryOptions
     {
         public bool? TapToDismiss { get; set; }
         public string ToastClass { get; set; }
@@ -44,18 +45,12 @@ namespace NToastNotify.Libraries
         public bool? CloseButton { get; set; }
         public string Onclick { get; set; }
 
-        // Default message and title options
-        public string SuccessTitle { get; set; }
-        public string SuccessMessage { get; set; }
+        //Non library options. Used purely for rendering purposes
+        public string Title { get; set; }
+        [JsonConverter(typeof(StringEnumConverter), true)]
+        public Enums.NotificationTypesToastr Type { get; set; }
 
-        public string InfoTitle { get; set; }
-
-        public string WarningTitle { get; set; }
-
-        public string ErrorTitle { get; set; }
-        public string ErrorMessage { get; set; }
-
-        public string Json => this.ToJson();
-
+        //ILIbraryoptions
+        string ILibraryOptions.Json => this.ToJson();
     }
 }

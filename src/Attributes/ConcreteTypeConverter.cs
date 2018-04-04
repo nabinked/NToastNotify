@@ -3,7 +3,7 @@ using System;
 
 namespace NToastNotify.Attributes
 {
-    public class ConcreteTypeConverter<TConcrete> : JsonConverter
+    internal class ConcreteTypeConverter<TConcrete> : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {

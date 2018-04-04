@@ -1,7 +1,6 @@
 ﻿import './polyfills'
-import { NToastNotifyNoty } from './noty/NToastNotifyNoty';
 import * as Noty from 'noty';
-
+import { Options as TostrJsOptions } from './toastr/ToastrOptions'
 interface InitOptions {
     firstLoadEvent: string;
     globalLibOptions: ToastrOptions;
@@ -11,18 +10,16 @@ interface InitOptions {
     libraryDetails: LibraryDetails
 }
 
-export interface LibraryDetails {
+export type LibraryDetails = {
     varName: string,
     scriptSrc: string,
     styleHref: string
 }
-export interface ToastMessage {
-    toastType: ToastrType;
-    message: string;
-    title: string;
-    toastOptions: ToastrOptions | Noty.Options;
-}
 
+export type ToastMessage = {
+    message: string;
+    options: TostrJsOptions | Noty.Options;
+}
 
 export abstract class NToastNotify {
     options: InitOptions = null;

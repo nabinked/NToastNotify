@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using NToastNotify;
-using NToastNotify.Libraries;
+﻿using NToastNotify;
+using NToastNotify.Helpers;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -16,7 +15,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcBuilder AddNToastNotifyToastr(this IMvcBuilder mvcBuilder, ToastrOptions defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
-            return mvcBuilder.AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, ToastrNotification>(defaultOptions ?? new ToastrOptions(), nToastNotifyOptions);
+            nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
+            var library = Utils.GetLibraryDetails<ToastrLibrary>(nToastNotifyOptions);
+            return mvcBuilder.AddNToastNotifyToMvcBuilder<ToastrNotification>(library, defaultOptions, nToastNotifyOptions);
         }
 
         /// <summary>
@@ -29,7 +30,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IMvcCoreBuilder AddNToastNotifyToastr(this IMvcCoreBuilder mvcBuilder, ToastrOptions defaultOptions = null,
             NToastNotifyOption nToastNotifyOptions = null)
         {
-            return mvcBuilder.AddNToastNotifyToMvcBuilder<ToastrLibrary, ToastrOptions, ToastrMessage, ToastrNotification>(defaultOptions ?? new ToastrOptions(), nToastNotifyOptions);
+            nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
+            var library = Utils.GetLibraryDetails<ToastrLibrary>(nToastNotifyOptions);
+            return mvcBuilder.AddNToastNotifyToMvcBuilder<ToastrNotification>(library, defaultOptions, nToastNotifyOptions);
         }
     }
 }

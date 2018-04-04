@@ -2,7 +2,7 @@ echo off
 echo "%*"
 IF "%1"=="Debug" (
     IF NOT "%mygetApiKey"=="" (
-        nuget push "%2" %mygetApiKey% -source "mero-feed"
+        nuget push "%2" %mygetApiKey% -source "myget-nabin"
     )
 )
 IF "%1"=="Release" (

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using NToastNotify.Helpers;
-using NToastNotify.Libraries;
-using NToastNotify.MessageContainers;
 
 namespace NToastNotify
 {

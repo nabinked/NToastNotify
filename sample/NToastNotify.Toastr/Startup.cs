@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using NToastNotify.Libraries;
+using NToastNotify.Helpers;
 
 namespace NToastNotify.Toastr
 {
@@ -30,7 +30,8 @@ namespace NToastNotify.Toastr
             // Add framework services.
             services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
             {
-                PositionClass = ToastPositions.BottomCenter
+                PositionClass = ToastPositions.TopCenter,
+                ProgressBar = true
             }, new NToastNotifyOption()
             {
                 DefaultSuccessMessage = "Overwritten default success message",

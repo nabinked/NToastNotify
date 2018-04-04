@@ -3,9 +3,9 @@ using Newtonsoft.Json.Converters;
 using NToastNotify.Helpers;
 using static NToastNotify.Enums;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
-    public class NotyOptions : ILibraryOptions
+    public class NotyOptions : ILibraryOptions, INotyJsOptions
     {
         /// <summary>
         /// alert, success, error, warning, info - ClassName generator uses this value → noty_type__${type}

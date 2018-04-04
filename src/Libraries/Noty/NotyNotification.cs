@@ -1,6 +1,7 @@
-﻿using NToastNotify.MessageContainers;
+﻿using NToastNotify.Helpers;
+using NToastNotify.MessageContainers;
 
-namespace NToastNotify.Libraries
+namespace NToastNotify
 {
     public class NotyNotification : ToastNotification<NotyMessage, NotyOptions>
     {
@@ -12,48 +13,37 @@ namespace NToastNotify.Libraries
         }
         public override void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
-            var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
-            notyOptions.Type = Enums.NotificationTypesNoty.Success;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage, notyOptions);
+            var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Success);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage, options);
             AddMessage(successNotyMessage);
         }
 
         public override void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
-            var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
-            notyOptions.Type = Enums.NotificationTypesNoty.Info;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage, notyOptions);
+            var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Info);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage, options);
             AddMessage(successNotyMessage);
         }
 
         public override void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
-            var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
-            notyOptions.Type = Enums.NotificationTypesNoty.Alert;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultAlertMessage, notyOptions);
+            var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Alert);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultAlertMessage, options);
             AddMessage(successNotyMessage);
         }
 
         public override void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
-            var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
-            notyOptions.Type = Enums.NotificationTypesNoty.Warning;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningTitle, notyOptions);
+            var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Warning);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningTitle, options);
             AddMessage(successNotyMessage);
         }
 
         public override void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null)
         {
-            var notyOptions = OptionsCaster.CastOptionTo<NotyOptions>(toastOptions);
-            notyOptions.Type = Enums.NotificationTypesNoty.Error;
-            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage, notyOptions);
+            var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Error);
+            var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage, options);
             AddMessage(successNotyMessage);
-        }
-
-        private void InitToastOptions(NotyOptions notyOptions, string message, Enums.NotificationTypesNoty notificationTypes)
-        {
-            notyOptions.Text = message;
-            notyOptions.Type = notificationTypes;
         }
     }
 }

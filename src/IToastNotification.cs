@@ -1,6 +1,4 @@
-﻿using NToastNotify.Libraries;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace NToastNotify
 {
@@ -8,53 +6,53 @@ namespace NToastNotify
     {
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.success"/>
+        /// Adds a toast message of type success
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
         void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Info"/>
+        /// Adds a toast message of type info"
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
         void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Info"/>
+        /// Adds a toast message of type alert"
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="ToastrOptions"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
         void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Warning"/>
+        /// Adds a toast message of type warning"
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
         void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Adds a toast message of type <see cref="Enums.NotificationTypesToastr.Error"/>
+        /// Adds a toast message of type error
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. <see cref="Option"/></param>
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
         void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null);
 
         /// <summary>
-        /// Gets the list of <see cref="ToastrMessage"/> added so far.
+        /// Gets the list of <see cref="IToastMessage"/> added so far.
         /// </summary>
         /// <returns></returns>
         IEnumerable<IToastMessage> GetToastMessages();
 
         /// <summary>
-        /// Returns a list of <see cref="ToastrMessage"/> and removes them from the list of Toast Messages.
+        /// Returns a list of <see cref="IToastMessage"/> and removes them from the list of Toast Messages.
         /// </summary>
         /// <returns></returns>
         IEnumerable<IToastMessage> ReadAllMessages();

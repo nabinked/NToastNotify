@@ -10,7 +10,24 @@ namespace NToastNotify.Helpers
 
         public static EmbeddedFileProvider GetEmbeddedFileProvider()
         {
-          return new EmbeddedFileProvider(ThisAssembly, "NToastNotify");
+            return new EmbeddedFileProvider(ThisAssembly, "NToastNotify");
+        }
+
+        public static ILibrary GetLibraryDetails<T>(NToastNotifyOption nToastNotifyOptions) where T : class, ILibrary, new()
+        {
+            var library = new T();
+            if (nToastNotifyOptions != null)
+            {
+                if (!string.IsNullOrWhiteSpace(nToastNotifyOptions.ScriptSrc))
+                {
+                    library.ScriptSrc = nToastNotifyOptions.ScriptSrc;
+                }
+                if (!string.IsNullOrWhiteSpace(nToastNotifyOptions.StyleHref))
+                {
+                    library.StyleHref = nToastNotifyOptions.StyleHref;
+                }
+            }
+            return library;
         }
     }
 }

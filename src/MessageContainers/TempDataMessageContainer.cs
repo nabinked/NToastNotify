@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NToastNotify.Libraries;
+using NToastNotify.Helpers;
 
 namespace NToastNotify.MessageContainers
 {

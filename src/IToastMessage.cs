@@ -1,10 +1,8 @@
-﻿using NToastNotify.Libraries;
-
-namespace NToastNotify
+﻿namespace NToastNotify
 {
     public interface IToastMessage
     {
         string Message { get; }
-        ILibraryOptions ToastOptions { get; }
+        ILibraryOptions Options { get; }
     }
 }

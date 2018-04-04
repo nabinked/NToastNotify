@@ -344,17 +344,20 @@ var NToastNotifyToastr = /** @class */ (function (_super) {
     }
     NToastNotifyToastr.prototype.show = function (message) {
         var args = [];
+        var options = message.options;
         args.push(message.message);
-        args.push(message.title);
-        if (message.toastOptions) {
-            args.push(message.toastOptions);
+        args.push(options.title);
+        if (message.options) {
+            args.push(message.options);
         }
         if (toastr) {
-            toastr[message.toastType.toLowerCase()].apply(toastr, args);
+            toastr[options.type.toLowerCase()].apply(toastr, args);
         }
     };
     NToastNotifyToastr.prototype.overrideLibDefaults = function () {
-        toastr.options = this.options.globalLibOptions;
+        if (this.options.globalLibOptions && toastr) {
+            toastr.options = this.options.globalLibOptions;
+        }
     };
     return NToastNotifyToastr;
 }(NToastNotify_1.NToastNotify));

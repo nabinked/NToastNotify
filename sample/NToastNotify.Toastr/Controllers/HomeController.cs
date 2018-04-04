@@ -16,31 +16,38 @@ namespace NToastNotify.Toastr.Controllers
             //Testing Default Methods
 
             //Success
-            _toastNotification.AddSuccessToastMessage("Same for success message");
+            _toastNotification.AddSuccessToastMessage("Same for success message", new ToastrOptions()
+            {
+                Title = "Yeah !"
+            });
             // Success with default options (taking into account the overwritten defaults when initializing in Startup.cs)
             _toastNotification.AddSuccessToastMessage();
 
             //Info
             _toastNotification.AddInfoToastMessage();
+            _toastNotification.AddInfoToastMessage("This is an info toast", new ToastrOptions()
+            {
+                ProgressBar = false
+            });
 
             //Warning
             _toastNotification.AddWarningToastMessage();
 
             //Error
-            _toastNotification.AddErrorToastMessage();
+            _toastNotification.AddErrorToastMessage("Custom Error Message", new ToastrOptions() { Title = "Oops" });
 
             return View();
         }
 
         public IActionResult About()
         {
-            _toastNotification.AddInfoToastMessage("You got redirected");
+            _toastNotification.AddInfoToastMessage("This is about page");
             return View();
         }
 
         public IActionResult Contact()
         {
-            _toastNotification.AddAlertToastMessage("You will be redirected");
+            _toastNotification.AddAlertToastMessage("You will be redirected to about page");
             return RedirectToAction("About");
         }
 

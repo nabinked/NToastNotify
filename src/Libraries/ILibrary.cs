@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NToastNotify.Libraries
+﻿namespace NToastNotify
 {
-    public interface ILibrary<out TOptions>
+    public interface ILibrary
     {
+        /// <summary>
+        /// Variable name available to window
+        /// </summary>
         string VarName { get; }
-        string ScriptSrc { get; }
-        string StyleHref { get; }
-        TOptions Defaults { get; }
+        /// <summary>
+        /// The src to the script file of the library. Defaults to the cdn link
+        /// </summary>
+        string ScriptSrc { get; set; }
+        /// <summary>
+        /// The href to the stylesheet file of the library. Defaults to the cdn link
+        /// </summary>
+        string StyleHref { get; set; }
 
     }
 }
