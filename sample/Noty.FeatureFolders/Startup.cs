@@ -2,8 +2,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NToastNotify;
 
-namespace NToastNotify.Noty.FeatureFolders
+namespace Noty.FeatureFolders
 {
     public class Startup
     {

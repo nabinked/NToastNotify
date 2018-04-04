@@ -2,11 +2,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
-using NToastNotify.Helpers;
+using NToastNotify;
 
-namespace NToastNotify.Toastr
+namespace Toastr
 {
     public class Startup
     {

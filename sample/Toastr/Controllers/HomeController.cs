@@ -1,7 +1,8 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using NToastNotify;
 
-namespace NToastNotify.Toastr.Controllers
+namespace Toastr.Controllers
 {
     public class HomeController : Controller
     {

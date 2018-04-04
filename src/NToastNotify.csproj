@@ -3,7 +3,7 @@
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
-    <VersionPrefix>5.0.2</VersionPrefix>
+    <VersionPrefix>5.0.3</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
     <PackageProjectUrl>https://github.com/nabinked/NToastNotify</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,11 +23,11 @@
     <EmbeddedResource Include="Views\**\*.cshtml;compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.2" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="js\test\" />

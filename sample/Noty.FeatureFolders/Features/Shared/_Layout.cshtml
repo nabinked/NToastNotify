@@ -5,28 +5,26 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104176479-2"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'UA-104176479-2');
     </script>
 
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - NToastNotify.Noty.FeatureFolders</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css"/>
-        <link rel="stylesheet" href="~/css/site.css"/>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"/>
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    @await Component.InvokeAsync("NToastNotify")
-
 </head>
 
 <body>
@@ -83,6 +81,7 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
 
 </body>
 </html>

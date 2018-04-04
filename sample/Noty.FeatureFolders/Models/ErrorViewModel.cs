@@ -1,4 +1,4 @@
-namespace NToastNotify.Noty.FeatureFolders.Models
+namespace Noty.FeatureFolders.Models
 {
     public class ErrorViewModel
     {

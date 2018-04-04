@@ -6,7 +6,7 @@ namespace NToastNotify.Helpers
 {
     public class Utils
     {
-        private static readonly Assembly ThisAssembly = typeof(ToastViewComponent).Assembly;
+        private static readonly Assembly ThisAssembly = typeof(NToastNotifyViewComponent).Assembly;
 
         public static EmbeddedFileProvider GetEmbeddedFileProvider()
         {

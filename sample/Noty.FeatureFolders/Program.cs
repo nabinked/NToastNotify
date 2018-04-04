@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace NToastNotify.Noty.FeatureFolders
+namespace Noty.FeatureFolders
 {
     public class Program
     {

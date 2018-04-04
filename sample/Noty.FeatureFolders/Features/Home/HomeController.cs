@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using NToastNotify.Helpers;
-using NToastNotify.Noty.FeatureFolders.Models;
+using Noty.FeatureFolders.Models;
+using NToastNotify;
 
-namespace NToastNotify.Noty.FeatureFolders.Features.Home
+namespace Noty.FeatureFolders.Features.Home
 {
     public class HomeController : Controller
     {
