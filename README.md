@@ -3,8 +3,14 @@
  - ##### Toast notification on AJAX calls. XMLHTTPRequests - Full Support. fetch API - Partial Support (See sample).
  - ##### Supports Feature folder project structure.
  - ##### Supports multiple client libraries: toastr.js & noty.js. Can easily be extended to support more.
+ 
+ # DEMO
+- ## [Noty](http://notyjs.azurewebsites.net/)
+- ## [Toastr](http://toastrjs.azurewebsites.net/)
+
 # Get Started
 ## 1. Install From [Nuget](https://www.nuget.org/packages/NToastNotify/)
+
 Visual Studio Nuget Package Manager - `Install-Package NToastNotify`
 
 dotnet CLI - `dotnet add package NToastNotify`
@@ -29,7 +35,6 @@ dotnet CLI - `dotnet add package NToastNotify`
     ```C#
     using NToastNotify.Libraries;
 
-
     services.AddMvc().AddFeatureFolders().AddNToastNotifyNoty(new NotyOptions {
                     ProgressBar = true,
                     Timeout = 5000,
@@ -43,7 +48,7 @@ dotnet CLI - `dotnet add package NToastNotify`
 
 The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
-### 3. Add the middleware
+## 3. Add the middleware
 ```c#
  public void Configure(IApplicationBuilder app, IHostingEnvironment env)
  {
@@ -59,15 +64,15 @@ The ToastOption parameter acts as the global options for the toast library. If n
  }
 ```
 
-### 5. Add the following line in you html file. Preferably in your Layout Page.
+## 4. Add the following line in you html file. Preferably in your Layout Page.
 ```c#
 @await Component.InvokeAsync("NToastNotify")
 ```
 The above line renders the View necessary for the view component. Although you can place this line anywhere inside your ```head``` or ```body``` tag, It is recommended that you place this line at the end before the closing ```body``` tag. 
 
-### using toastr
+## 5. Add your toast messages.
 
-# Add your toast messages.
+### using toastr
 ```C#
 public class HomeController : Controller
     {
@@ -213,11 +218,6 @@ public class HomeController : Controller
         }
     }
 ```
-# DEMO
-- ## [Noty](http://notyjs.azurewebsites.net/)
-- ## [Toastr](http://toastrjs.azurewebsites.net/)
-and they will be rendered as 
-
 # Screenshots
 ![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/home-2-0-1.png)
 ##### About Page
