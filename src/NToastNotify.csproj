@@ -3,7 +3,7 @@
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
-    <VersionPrefix>5.0.1</VersionPrefix>
+    <VersionPrefix>5.0.2</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
     <PackageProjectUrl>https://github.com/nabinked/NToastNotify</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
@@ -36,7 +36,7 @@
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
   </PropertyGroup>
   <Target Name="PreReleaseCompileScript" BeforeTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Release'  ">
-    <Exec Command="npm run publish" />
+    <Exec Command="npm run build" />
   </Target>
   <Target Name="PostReleaseCompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true'">
     <Exec Command="dotnet pack --no-build --output nupkgs" />
