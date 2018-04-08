@@ -1,11 +1,9 @@
-﻿using NToastNotify.Helpers;
-
-namespace NToastNotify
+﻿namespace NToastNotify
 {
     /// <summary>
     /// This class is used to provide options that are used by the entire library not by th third party js library.
     /// </summary>
-    public class NToastNotifyOption : ILibrary
+    public class NToastNotifyOption
     {
         /// <summary>
         /// Default success title to all toast messages

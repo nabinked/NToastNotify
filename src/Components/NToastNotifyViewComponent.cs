@@ -9,13 +9,11 @@ namespace NToastNotify
     public class NToastNotifyViewComponent : ViewComponent
     {
         private readonly IToastNotification _toastNotification;
-        private readonly ILibraryOptions _globalOption; // This is filled with the provided default values on NToastNotify service config./initialization in startup.cs
         private readonly ILibrary _library;
 
-        public NToastNotifyViewComponent(IToastNotification toastNotification, ILibraryOptions globalOption, ILibrary library)
+        public NToastNotifyViewComponent(IToastNotification toastNotification, ILibrary library)
         {
             _toastNotification = toastNotification;
-            _globalOption = globalOption;
             _library = library;
         }
 
@@ -23,14 +21,18 @@ namespace NToastNotify
         {
             var model = new ToastNotificationViewModel
             {
-                ToastMessagesJson = _toastNotification.ReadAllMessages().ToJson(),
-                GlobalOptionJson = _globalOption.Json,
+                ToastMessagesJson = JsonOrUndefined(_toastNotification.ReadAllMessages()),
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
                 LibraryDetails = _library,
                 Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_library.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
             };
             return View("Default", model);
+        }
+
+        public string JsonOrUndefined(object obj)
+        {
+            return obj == null ? "undefined" : obj.ToJson();
         }
     }
 }

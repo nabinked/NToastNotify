@@ -56,6 +56,11 @@ namespace Noty.FeatureFolders.Features.Home
             return View();
         }
 
+        public IActionResult Empty()
+        {
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";

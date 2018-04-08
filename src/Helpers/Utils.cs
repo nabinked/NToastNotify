@@ -13,7 +13,7 @@ namespace NToastNotify.Helpers
             return new EmbeddedFileProvider(ThisAssembly, "NToastNotify");
         }
 
-        public static ILibrary GetLibraryDetails<T>(NToastNotifyOption nToastNotifyOptions) where T : class, ILibrary, new()
+        public static ILibrary GetLibraryDetails<T>(NToastNotifyOption nToastNotifyOptions, ILibraryOptions defaultOptions) where T : class, ILibrary, new()
         {
             var library = new T();
             if (nToastNotifyOptions != null)
@@ -26,6 +26,11 @@ namespace NToastNotify.Helpers
                 {
                     library.StyleHref = nToastNotifyOptions.StyleHref;
                 }
+            }
+
+            if (defaultOptions != null)
+            {
+                library.Options = defaultOptions;
             }
             return library;
         }

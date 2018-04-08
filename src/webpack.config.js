@@ -2,12 +2,14 @@
 var webpack = require('webpack');
 
 module.exports = env => {
+
     const isDevBuild = !(env && env.prod);
-    console.log(isDevBuild);
+    console.log('env', env, 'isDevBuild', isDevBuild);
+
     return {
         entry: {
-            toastr: './Js/src/toastr/index.ts',
-            noty: './Js/src/noty/index.ts'
+            toastr: './Js/src/toastr/NToastNotifyToastr.ts',
+            noty: './Js/src/noty/NToastNotifyNoty.ts'
         },
         resolve: {
             extensions: ['.ts', '.js']
@@ -15,8 +17,7 @@ module.exports = env => {
         output: {
             path: path.resolve(__dirname, 'Js/dist'),
             filename: '[name].js',
-            library: 'nToastNotify',
-            libraryTarget: 'var'
+            libraryTarget: 'window'
         },
         externals: {
             noty: 'noty',

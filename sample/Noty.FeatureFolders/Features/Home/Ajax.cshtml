@@ -7,34 +7,36 @@
 <p>Empty View</p>
 <script>
     window.addEventListener('load', function () {
-        setTimeout(function () {
+        setTimeout(function() {
+                $('#message').text('Going to make a fetch request (Native fetch AJAX) and show notification.');
+                fetch('/Home/AjaxCall').then(function(response) {
+                    var messages = nToastNotify.getMessagesFromFetchResponse(response);
+                    nToastNotify.showMessages(messages);
 
-            $('#message').text('Going to make a fetch request (Native fetch AJAX) and show notification.');
-            fetch('/Home/AjaxCall').then(function (response) {
-                var messages = nToastNotify.noty.fetchGetMessagesFromResponse(response);
-                nToastNotify.noty.showToasts(messages);
+                    $('#message').text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show notification.');
+                    $.ajax({
+                        url: '/Home/AjaxCall',
+                        success: function() {
+                            $('#message')
+                                .text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show no notification.');
 
-                $('#message').text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show notification.');
-                $.ajax({
-                    url: '/Home/AjaxCall',
-                    success: function () {
-                        $('#message').text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show no notification.');
+                            $.get('/Home/NormalAjaxCall',
+                                function(res) {
+                                    console.info(res);
+                                });
+                        }
 
-                        $.get('/Home/NormalAjaxCall', function (res) {
-                            console.info(res)
-                        })
-                    }
+                    });
 
+                    $.ajax({
+                        url: '/Home/ErrorAjaxCall',
+                        error: function() {
+                            console.log('Error logged: ', arguments);
+                        }
+                    });
                 });
 
-                $.ajax({
-                    url: '/Home/ErrorAjaxCall',
-                    error: function (res) {
-                        console.log('Error logged: ', arguments)
-                    }
-                });
-            });
-
-        }, 2000)
+            },
+            2000);
     })
 </script>

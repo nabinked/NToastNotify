@@ -31,9 +31,8 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         internal static IMvcBuilder AddNToastNotifyToMvcBuilder<TNotificationImplementation>(this IMvcBuilder mvcBuilder,
-                                                                                                                            ILibrary library,
-                                                                                                                            ILibraryOptions defaultLibOptions,
-                                                                                                                            NToastNotifyOption nToastNotifyOptions)
+                                                                                                    ILibrary library,
+                                                                                                    NToastNotifyOption nToastNotifyOptions)
             where TNotificationImplementation : class, IToastNotification
         {
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
@@ -43,29 +42,29 @@ namespace Microsoft.Extensions.DependencyInjection
             });
 
             var services = mvcBuilder.Services;
-            AddNToastNotifyToServiceCollection<TNotificationImplementation>(services, library, defaultLibOptions, nToastNotifyOptions);
+            AddNToastNotifyToServiceCollection<TNotificationImplementation>(services, library, nToastNotifyOptions);
             return mvcBuilder;
         }
         internal static IMvcCoreBuilder AddNToastNotifyToMvcBuilder<TNotificationImplementation>(this IMvcCoreBuilder mvcCoreBuilder,
-                                                                                                                            ILibrary library,
-                                                                                                                            ILibraryOptions defaultLibOptions,
-                                                                                                                            NToastNotifyOption nToastNotifyOptions)
+                                                                                                    ILibrary library,
+                                                                                                    NToastNotifyOption nToastNotifyOptions)
             where TNotificationImplementation : class, IToastNotification
         {
+            if (mvcCoreBuilder == null) return null;
+
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
-            mvcCoreBuilder?.AddRazorViewEngine(o =>
+            mvcCoreBuilder.AddRazorViewEngine(o =>
             {
                 o.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
             });
 
             var services = mvcCoreBuilder.Services;
-            AddNToastNotifyToServiceCollection<TNotificationImplementation>(services, library, defaultLibOptions, nToastNotifyOptions);
+            AddNToastNotifyToServiceCollection<TNotificationImplementation>(services, library, nToastNotifyOptions);
             return mvcCoreBuilder;
         }
-        internal static IServiceCollection AddNToastNotifyToServiceCollection<TNotificationImplementation>(this IServiceCollection services, 
-                                                                                                            ILibrary library, 
-                                                                                                            ILibraryOptions defaultLibOptions,
-                                                                                                            NToastNotifyOption nToastNotifyOptions)
+        internal static IServiceCollection AddNToastNotifyToServiceCollection<TNotificationImplementation>(this IServiceCollection services,
+                                                                                                    ILibrary library,
+                                                                                                    NToastNotifyOption nToastNotifyOptions)
             where TNotificationImplementation : class, IToastNotification
         {
             if (services == null)
@@ -109,15 +108,13 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddScoped<NtoastNotifyMiddleware>();
 
             //Addes instances
-            services.AddSingleton<ILibrary>(library);
-            // Add the toast library default options that will be rendered by the viewcomponent
-            services.AddSingleton<ILibraryOptions>(defaultLibOptions);
+            services.AddSingleton(library);
             // Add the NToastifyOptions to the services container for DI retrieval 
             //(options that are not rendered as they are not part of the plugin)
             services.AddSingleton(nToastNotifyOptions);
 
-            #endregion           
-            
+            #endregion
+
             return services;
         }
     }

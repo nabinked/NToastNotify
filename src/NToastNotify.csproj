@@ -3,7 +3,7 @@
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
-    <VersionPrefix>5.0.3</VersionPrefix>
+    <VersionPrefix>5.0.6</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
     <PackageProjectUrl>https://github.com/nabinked/NToastNotify</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,6 +23,11 @@
     <EmbeddedResource Include="Views\**\*.cshtml;compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="node_modules\**" />
+    <EmbeddedResource Remove="node_modules\**" />
+    <None Remove="node_modules\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
@@ -35,10 +40,13 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
   </PropertyGroup>
-  <Target Name="PreReleaseCompileScript" BeforeTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Release'  ">
-    <Exec Command="npm run build" />
+  <Target Name="PreReleaseCompileScript" BeforeTargets="BeforeBuild" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Release'  ">
+    <Exec Command="npm run build -- --env.prod" />
   </Target>
-  <Target Name="PostReleaseCompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true'">
+  <Target Name="PreDebugCompileScript" BeforeTargets="BeforeBuild" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Debug'  ">
+    <Exec Command="npm run build -- --env.prod" />
+  </Target>
+  <Target Name="PostCompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true'">
     <Exec Command="dotnet pack --no-build --output nupkgs" />
     <Exec Command="call nugetpush $(Configuration) $(MSBuildProjectDirectory)\nupkgs\$(AssemblyName).$(Version).nupkg" />
   </Target>

@@ -11,8 +11,8 @@
 
             $('#message').text('Going to make a fetch request (Native fetch AJAX) and show notification.');
             fetch('/Home/AjaxCall').then(function (response) {
-                var messages = nToastNotify.toastr.fetchGetMessagesFromResponse(response);
-                nToastNotify.toastr.showToasts(messages);
+                var messages = nToastNotify.getMessagesFromFetchResponse(response);
+                nToastNotify.showMessages(messages);
 
                 $('#message').text('Going to make a XMLHTTPRequest (Normal AJAX Request) and show notification.');
                 $.ajax({

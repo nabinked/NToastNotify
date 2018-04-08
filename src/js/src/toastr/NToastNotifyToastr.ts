@@ -1,9 +1,8 @@
-﻿import { NToastNotify, ToastMessage, LibraryDetails } from './../NToastNotify'
+﻿import { NToastNotify, ToastMessage } from './../NToastNotify'
 import { Options as ToastrJsOptions } from './ToastrOptions'
 
-export class NToastNotifyToastr extends NToastNotify {
-
-    show(message: ToastMessage): void {
+class NToastNotifyToastr extends NToastNotify {
+    showMessage(message: ToastMessage): void {
         const args: any[] = [];
         const options = message.options as ToastrJsOptions;
 
@@ -17,10 +16,12 @@ export class NToastNotifyToastr extends NToastNotify {
         }
     }
     overrideLibDefaults(): void {
-        if (this.options.globalLibOptions && toastr) {
-            toastr.options = this.options.globalLibOptions
+        if (this.options.libraryDetails.options && toastr) {
+            toastr.options = this.options.libraryDetails.options;
         }
     }
 
 
 }
+
+export const nToastNotify = new NToastNotifyToastr();

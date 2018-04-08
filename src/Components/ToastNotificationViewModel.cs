@@ -7,10 +7,6 @@
         /// </summary>
         public string ToastMessagesJson { get; set; }
         /// <summary>
-        /// JSON string for global options of the library
-        /// </summary>
-        public string GlobalOptionJson { get; set; }
-        /// <summary>
         /// Request header key used to show toast notification in AJAX calls
         /// </summary>
         public string RequestHeaderKey { get; set; }

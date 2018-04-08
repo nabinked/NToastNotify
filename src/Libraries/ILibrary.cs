@@ -15,5 +15,6 @@
         /// </summary>
         string StyleHref { get; set; }
 
+        ILibraryOptions Options { get; set; }
     }
 }
