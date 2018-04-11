@@ -34,7 +34,8 @@ namespace Toastr
             }, new NToastNotifyOption()
             {
                 DefaultSuccessMessage = "Overwritten default success message",
-                DefaultSuccessTitle = "Default Success Title"
+                DefaultSuccessTitle = "Default Success Title",
+                DisableAjaxToasts = true
             });
         }
 

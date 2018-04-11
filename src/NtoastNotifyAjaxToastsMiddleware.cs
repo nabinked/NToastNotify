@@ -6,15 +6,17 @@ using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
-    internal class NtoastNotifyMiddleware : IMiddleware
+    internal class NtoastNotifyAjaxToastsMiddleware : IMiddleware
     {
         private readonly IToastNotification _toastNotification;
-        private readonly ILogger<NtoastNotifyMiddleware> _logger;
+        private readonly ILogger<NtoastNotifyAjaxToastsMiddleware> _logger;
+        private readonly NToastNotifyOption _nToastNotifyOption;
         private const string AccessControlExposeHeadersKey = "Access-Control-Expose-Headers";
-        public NtoastNotifyMiddleware(IToastNotification toastNotification, ILogger<NtoastNotifyMiddleware> logger)
+        public NtoastNotifyAjaxToastsMiddleware(IToastNotification toastNotification, ILogger<NtoastNotifyAjaxToastsMiddleware> logger, NToastNotifyOption nToastNotifyOption)
         {
             _toastNotification = toastNotification;
             _logger = logger;
+            _nToastNotifyOption = nToastNotifyOption;
         }
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
@@ -26,13 +28,18 @@ namespace NToastNotify
         private Task Callback(object context)
         {
             var httpContext = (HttpContext)context;
-            if (httpContext.Request.IsAjaxRequest())
+            if (!_nToastNotifyOption.DisableAjaxToasts && httpContext.Request.IsNtoastNotifyAjaxRequest())
             {
                 var messages = _toastNotification.ReadAllMessages();
                 if (messages != null && messages.Any())
                 {
-                    httpContext.Response.Headers.Add(AccessControlExposeHeadersKey, $"{GetControlExposeHeaders(httpContext.Response.Headers)}");
-                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, messages.ToJson());
+                    var accessControlExposeHeaders = $"{GetControlExposeHeaders(httpContext.Response.Headers)}";
+                    _logger.LogInformation($"Setting response header {AccessControlExposeHeadersKey} with {accessControlExposeHeaders}");
+                    httpContext.Response.Headers.Add(AccessControlExposeHeadersKey, accessControlExposeHeaders);
+
+                    var messagesJson = messages.ToJson();
+                    _logger.LogInformation($"Setting response header {Constants.ResponseHeaderKey} with {messagesJson}");
+                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, messagesJson);
                 }
             }
             return Task.FromResult(0);

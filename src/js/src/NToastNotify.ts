@@ -2,12 +2,13 @@
 import * as Noty from 'noty';
 import { Options as TostrJsOptions } from './toastr/ToastrOptions'
 // ReSharper disable once InconsistentNaming
-interface InitOptions {
+interface Options {
     firstLoadEvent: string;
     messages: Array<ToastMessage>;
     responseHeaderKey: string;
     requestHeaderKey: string;
     libraryDetails: LibraryDetails;
+    disableAjaxToasts: boolean;
 }
 
 export type LibraryDetails = {
@@ -23,12 +24,14 @@ export type ToastMessage = {
 }
 
 export abstract class NToastNotify {
-    options: InitOptions = null;
+    options: Options = null;
     fetchHeaderValue = 'Fetch';
-    init(options: InitOptions) {
+    init(options: Options) {
         this.options = Object.assign({}, NToastNotify.defaults, options);
-        this.interceptXmlRequest();
-        this.interceptNativeFetch();
+        if (!this.options.disableAjaxToasts) {
+            this.interceptXmlRequest();
+            this.interceptNativeFetch();
+        }
         this.handleEvents();
     }
     ensureLibExists() {
@@ -44,7 +47,6 @@ export abstract class NToastNotify {
     loadLibAsync() {
         return Promise.all([this.loadStyleAsync(), this.loadScriptAsync()]);
     }
-
     loadScriptAsync() {
         return new Promise((resolve, reject) => {
             if (this.options.libraryDetails.scriptSrc) {
@@ -82,10 +84,7 @@ export abstract class NToastNotify {
         });
     }
     handleEvents() {
-        document && document.addEventListener('DOMContentLoaded', this.domContentLoadedHandler.bind(this));
-    }
-    getResponseHeaderKey() {
-        return this.options.responseHeaderKey;
+        document && document.addEventListener(this.options.firstLoadEvent, this.domContentLoadedHandler.bind(this));
     }
     interceptNativeFetch() {
         const self = this;
@@ -125,6 +124,15 @@ export abstract class NToastNotify {
             }
         }
     }
+    getMessagesFromFetchResponse(response: Response) {
+        const messageStr = response.headers.get(this.options.responseHeaderKey);
+        if (messageStr) {
+            return JSON.parse(messageStr);
+        } else {
+            return null;
+        }
+    }
+
     interceptXmlRequest() {
         var self = this;
         // store the native send()
@@ -138,30 +146,24 @@ export abstract class NToastNotify {
         };
     }
     xmlRequestOnLoadHandler(xmlHttpRequest: XMLHttpRequest) {
-        const messages = this.xmlGetMessagesFromResponse(xmlHttpRequest);
+        const messages = this.getMessagesFromXmlResponse(xmlHttpRequest);
         this.showMessages(messages);
     }
-    xmlGetMessagesFromResponse(xmlHttpRequest: XMLHttpRequest) {
-        const messagesStr = xmlHttpRequest.getResponseHeader(this.options.responseHeaderKey);
-        if (messagesStr) {
-            return JSON.parse(messagesStr);
+    getMessagesFromXmlResponse(xmlHttpRequest: XMLHttpRequest) {
+        const allResponseHeaders = xmlHttpRequest.getAllResponseHeaders();
+        if (allResponseHeaders.indexOf(this.options.responseHeaderKey) > -1) {
+            const messagesStr = xmlHttpRequest.getResponseHeader(this.options.responseHeaderKey);
+            if (messagesStr) {
+                return JSON.parse(messagesStr);
+            }
         }
         return null;
-    }
-    getMessagesFromFetchResponse(response: Response) {
-        const messageStr = response.headers.get(this.options.responseHeaderKey);
-        if (messageStr) {
-            return JSON.parse(messageStr);
-        } else {
-            return null;
-        }
     }
     async domContentLoadedHandler() {
         await this.ensureLibExists();
         this.overrideLibDefaults();
         this.showMessages(this.options.messages);
     }
-    abstract overrideLibDefaults(): void;
     showMessages(messages: ToastMessage[]) {
         if (messages && messages.length) {
             messages.forEach((message) => {
@@ -170,6 +172,7 @@ export abstract class NToastNotify {
         }
     }
     abstract showMessage(message: ToastMessage): void;
+    abstract overrideLibDefaults(): void;
 
     static defaults: {
         firstLoadEvent: 'DOMContentLoaded',

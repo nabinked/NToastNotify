@@ -50,9 +50,13 @@
         /// </summary>
         public string DefaultAlertMessage { get; set; } = "This is an alert.";
 
-        public string VarName { get; }
-
+        /// <summary>
+        /// If set to true, the library will not show toast messages on AJAX calls. Default value false
+        /// </summary>
+        public bool DisableAjaxToasts { get; set; } = false;
+        #region LibraryDetails
         public string ScriptSrc { get; set; }
         public string StyleHref { get; set; }
+        #endregion
     }
 }

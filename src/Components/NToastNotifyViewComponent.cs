@@ -10,11 +10,13 @@ namespace NToastNotify
     {
         private readonly IToastNotification _toastNotification;
         private readonly ILibrary _library;
+        private readonly NToastNotifyOption _nToastNotifyOption;
 
-        public NToastNotifyViewComponent(IToastNotification toastNotification, ILibrary library)
+        public NToastNotifyViewComponent(IToastNotification toastNotification, ILibrary library, NToastNotifyOption nToastNotifyOption)
         {
             _toastNotification = toastNotification;
             _library = library;
+            _nToastNotifyOption = nToastNotifyOption;
         }
 
         public IViewComponentResult Invoke()
@@ -25,6 +27,7 @@ namespace NToastNotify
                 ResponseHeaderKey = Constants.ResponseHeaderKey,
                 RequestHeaderKey = Constants.RequestHeaderKey,
                 LibraryDetails = _library,
+                DisableAjaxToasts = _nToastNotifyOption.DisableAjaxToasts,
                 Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_library.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
             };
             return View("Default", model);

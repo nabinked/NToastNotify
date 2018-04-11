@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using NToastNotify.Helpers;
 
 namespace NToastNotify.MessageContainers
 {

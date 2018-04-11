@@ -22,5 +22,10 @@
         /// This is used to get the hash of the javascript file using the last modified date. Used for cache busting.
         /// </summary>
         public string Hash { get; set; }
+
+        /// <summary>
+        /// If set to true, Ajax toasts will be disabled.
+        /// </summary>
+        public bool DisableAjaxToasts { get; set; }
     }
 }

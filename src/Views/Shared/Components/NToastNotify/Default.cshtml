@@ -8,7 +8,8 @@
             messages: @Html.Raw(Model.ToastMessagesJson),
             responseHeaderKey: '@Model.ResponseHeaderKey',
             requestHeaderKey: '@Model.RequestHeaderKey',
-            libraryDetails:@Html.Raw(Model.LibraryDetails.ToJson())
+            libraryDetails:@Html.Raw(Model.LibraryDetails.ToJson()),
+            disableAjaxToasts:@Model.DisableAjaxToasts.ToString().ToLower()
         });
     };
 </script>

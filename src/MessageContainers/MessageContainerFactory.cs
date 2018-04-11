@@ -7,16 +7,19 @@ namespace NToastNotify.MessageContainers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITempDataWrapper _tempDataWrapper;
-        public MessageContainerFactory(IHttpContextAccessor httpContextAccessor, ITempDataWrapper tempDataWrapper)
+        private readonly NToastNotifyOption _nToastNotifyOption;
+
+        public MessageContainerFactory(IHttpContextAccessor httpContextAccessor, ITempDataWrapper tempDataWrapper, NToastNotifyOption nToastNotifyOption)
         {
             _httpContextAccessor = httpContextAccessor;
             _tempDataWrapper = tempDataWrapper;
+            _nToastNotifyOption = nToastNotifyOption;
         }
 
         public IMessageContainer<TMessage> Create<TMessage>()
             where TMessage : class, IToastMessage
         {
-            if (_httpContextAccessor.HttpContext.Request.IsAjaxRequest())
+            if (_httpContextAccessor.HttpContext.Request.IsNtoastNotifyAjaxRequest())
             {
                 return new InMemoryMessageContainer<TMessage>();
             }

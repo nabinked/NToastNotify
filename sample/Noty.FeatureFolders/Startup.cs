@@ -23,7 +23,11 @@ namespace Noty.FeatureFolders
                 {
                     ProgressBar = true,
                     Timeout = 5000,
-                    Theme = "metroui"
+                    Theme = "metroui",
+                },
+                new NToastNotifyOption()
+                {
+                    DisableAjaxToasts = true
                 }
                 );
         }

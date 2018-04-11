@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
-using NToastNotify.Helpers;
 
 namespace NToastNotify.MessageContainers
 {
+    /// <summary>
+    /// This container is used for ajax calls.
+    /// </summary>
+    /// <typeparam name="TMessage"></typeparam>
     public class InMemoryMessageContainer<TMessage> : IMessageContainer<TMessage> where TMessage : class, IToastMessage
     {
         private IList<TMessage> Messages { get; }

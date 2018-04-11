@@ -8,11 +8,11 @@ namespace NToastNotify
         where TMessage : class, IToastMessage
         where TOptions : class, ILibraryOptions, new()
     {
-        protected IMessageContainer<TMessage> _messageContainer;
+        protected IMessageContainer<TMessage> MessageContainer;
 
-        public ToastNotification(IMessageContainerFactory messageContainerFactory)
+        protected ToastNotification(IMessageContainerFactory messageContainerFactory)
         {
-            _messageContainer = messageContainerFactory.Create<TMessage>();
+            MessageContainer = messageContainerFactory.Create<TMessage>();
         }
         public abstract void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null);
         public abstract void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null);
@@ -21,23 +21,23 @@ namespace NToastNotify
         public abstract void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null);
         public IEnumerable<IToastMessage> GetToastMessages()
         {
-            return _messageContainer.GetAll();
+            return MessageContainer.GetAll();
         }
 
         public IEnumerable<IToastMessage> ReadAllMessages()
         {
-            return _messageContainer.ReadAll();
+            return MessageContainer.ReadAll();
         }
 
         public void RemoveAll()
         {
-            _messageContainer.RemoveAll();
+            MessageContainer.RemoveAll();
         }
 
         protected void AddMessage(TMessage toastMessage)
         {
             OptionsHelpers.EnsureSameType<TOptions>(toastMessage.Options);
-            _messageContainer.Add(toastMessage);
+            MessageContainer.Add(toastMessage);
         }
     }
 }

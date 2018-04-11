@@ -12,8 +12,6 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class StartupExtension
     {
-        private const string NToastNotifyCorsPolicy = nameof(NToastNotifyCorsPolicy);
-
         /// <summary>
         /// Add the NToastNotify middleware to handle ajax request.
         /// </summary>
@@ -26,7 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 FileProvider = Utils.GetEmbeddedFileProvider(),
                 RequestPath = new PathString("/ntoastnotify")
             });
-            builder.UseMiddleware<NtoastNotifyMiddleware>();
+            builder.UseMiddleware<NtoastNotifyAjaxToastsMiddleware>();
             return builder;
         }
 
@@ -105,7 +103,7 @@ namespace Microsoft.Extensions.DependencyInjection
             //Add the ToastNotification implementation
             services.AddScoped<IToastNotification, TNotificationImplementation>();
             //Middleware
-            services.AddScoped<NtoastNotifyMiddleware>();
+            services.AddScoped<NtoastNotifyAjaxToastsMiddleware>();
 
             //Addes instances
             services.AddSingleton(library);
