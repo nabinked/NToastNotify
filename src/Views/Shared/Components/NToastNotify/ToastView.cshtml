@@ -1,0 +1,16 @@
+﻿@using Microsoft.Extensions.FileProviders;
+@using NToastNotify.Helpers
+@model NToastNotify.Components.ToastNotificationViewModel
+<script asp-append-version="true" src="~/NToastNotify/js/dist/@(Model.LibraryDetails.VarName).js?v=@Model.Hash"></script>
+<script type="text/javascript" language="javascript">
+            if (nToastNotify && nToastNotify.@Model.LibraryDetails.VarName) {
+                nToastNotify.@(Model.LibraryDetails.VarName).init({
+                    firstLoadEvent: 'DOMContentLoaded',
+                    globalLibOptions: @Html.Raw(Model.GlobalOptionJson),
+                    messages: @Html.Raw(Model.ToastMessagesJson),
+                    responseHeaderKey: '@Model.ResponseHeaderKey',
+                    requestHeaderKey: '@Model.RequestHeaderKey',
+                    libraryDetails:@Html.Raw(Model.LibraryDetails.ToJson())
+                });
+            };
+</script>
