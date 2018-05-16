@@ -24,12 +24,7 @@ namespace Noty.FeatureFolders
                     ProgressBar = true,
                     Timeout = 5000,
                     Theme = "metroui",
-                },
-                new NToastNotifyOption()
-                {
-                    DisableAjaxToasts = true
-                }
-                );
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

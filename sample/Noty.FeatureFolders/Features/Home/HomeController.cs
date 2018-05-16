@@ -17,7 +17,7 @@ namespace Noty.FeatureFolders.Features.Home
         public IActionResult Index()
         {
             _toastNotification.AddSuccessToastMessage();
-            _toastNotification.AddErrorToastMessage("Test", new NotyOptions()
+            _toastNotification.AddErrorToastMessage("Test m'e'ssag'e with single q'oute", new NotyOptions()
             {
                 Timeout = 0,
                 Layout = "topLeft",
@@ -77,20 +77,20 @@ namespace Noty.FeatureFolders.Features.Home
 
         public IActionResult Ajax()
         {
-            _toastNotification.AddInfoToastMessage("This page will make ajax requests and show notifications.");
+            _toastNotification.AddInfoToastMessage("This page will make ajax requests and's show notifications.");
             return View();
         }
 
         public IActionResult AjaxCall()
         {
             System.Threading.Thread.Sleep(2000);
-            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request. AJAX CALL " + DateTime.Now.ToLongTimeString());
+            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax's request. AJAX CALL " + DateTime.Now.ToLongTimeString());
             return PartialView("_PartialView", "Ajax Call");
         }
 
         public IActionResult NormalAjaxCall()
         {
-            return PartialView("_PartialView", "Normal Ajax Call");
+            return PartialView("_PartialView", "Normal Ajax's Call");
         }
 
         public IActionResult ErrorAjaxCall()
