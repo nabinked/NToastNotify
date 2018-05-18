@@ -21,7 +21,7 @@ dotnet CLI - `dotnet add package NToastNotify`
     using NToastNotify.Libraries;
 
 
-    services.AddMvc().AddNToastNotifyToastr(new ToastOption()
+    services.AddMvc().AddNToastNotifyToastr(new ToastrOption()
     {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
@@ -46,7 +46,7 @@ dotnet CLI - `dotnet add package NToastNotify`
     ```
 **Note: Make sure you have necessary using statements.**
 
-The ToastOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
+The ToastrOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
 ## 3. Add the middleware
 ```c#
@@ -218,13 +218,6 @@ public class HomeController : Controller
         }
     }
 ```
-# Screenshots
-![Home Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/home-2-0-1.png)
-##### About Page
-![About Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/about-2-0-1.PNG)
-##### Contact Page
-![Contact Page](https://raw.githubusercontent.com/nabinked/NToastNotify/master/sample/NToastNotify.Toastr/wwwroot/images/contact-2-0-1.PNG)
-
 ## Possible Issue
  - [Cannot find compilation library location for package 'Microsoft.Win32.Registry](https://github.com/dotnet/core-setup/issues/2113)
  
