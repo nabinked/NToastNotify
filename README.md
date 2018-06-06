@@ -21,7 +21,7 @@ dotnet CLI - `dotnet add package NToastNotify`
     using NToastNotify.Libraries;
 
 
-    services.AddMvc().AddNToastNotifyToastr(new ToastrOption()
+    services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
     {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
