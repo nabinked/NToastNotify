@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "webpack --watch",
-    "build": "rimraf js/dist && webpack"
+    "build": "rimraf js/dist && webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -22,12 +22,12 @@
   "homepage": "https://github.com/nabinked/NToastNotify#readme",
   "devDependencies": {
     "@types/toastr": "^2.1.35",
-    "awesome-typescript-loader": "^3.4.1",
+    "awesome-typescript-loader": "5.0.0",
     "noty": "^3.2.0-beta",
     "rimraf": "^2.6.2",
     "toastr": "^2.1.4",
-    "typescript": "^2.6.2",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.1"
+    "typescript": "^2.9.1",
+    "webpack": "^4.11.1",
+    "webpack-command": "^0.2.0"
   }
 }

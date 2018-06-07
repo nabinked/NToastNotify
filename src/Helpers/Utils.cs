@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace NToastNotify.Helpers
 {
-    public class Utils
+    public static class Utils
     {
         private static readonly Assembly ThisAssembly = typeof(NToastNotifyViewComponent).Assembly;
 

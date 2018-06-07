@@ -3,13 +3,12 @@ var webpack = require('webpack');
 
 module.exports = env => {
 
-    const isDevBuild = !(env && env.prod);
-    console.log('env', env, 'isDevBuild', isDevBuild);
-
+    const mode = env.mode;
+    console.log('mode: ', mode);
     return {
         entry: {
-            toastr: './Js/src/toastr/NToastNotifyToastr.ts',
-            noty: './Js/src/noty/NToastNotifyNoty.ts'
+            toastr: './js/src/toastr/NToastNotifyToastr.ts',
+            noty: './js/src/noty/NToastNotifyNoty.ts'
         },
         resolve: {
             extensions: ['.ts', '.js']
@@ -25,20 +24,13 @@ module.exports = env => {
         },
         // Add the loader for .ts files.
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.ts?$/,
                     loader: 'awesome-typescript-loader'
                 }
             ]
         },
-        plugins: [
-        ].concat(isDevBuild ? [
-            // Plugins that apply in development builds only
-        ] : [
-                // Plugins that apply in production builds only
-                new webpack.optimize.UglifyJsPlugin()
-            ]),
-        devtool: 'source-map'
-    }
+        mode
+    };
 };

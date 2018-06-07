@@ -1,5 +1,6 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
   <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
@@ -10,41 +11,29 @@
     <PackageTags>ASP.NET Core MVC toastr toast notification server side rendered </PackageTags>
     <RepositoryUrl>https://github.com/nabinked/NToastNotify</RepositoryUrl>
     <PackageReleaseNotes>https://github.com/nabinked/NToastNotify/releases</PackageReleaseNotes>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>NToastNotify</AssemblyName>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="**\*.resx" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
     <EmbeddedResource Include="js\dist\**\*.js" />
     <EmbeddedResource Include="js\dist\**\*.js.map" />
-    <EmbeddedResource Include="Views\**\*.cshtml;compiler\resources\**\*" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Remove="node_modules\**" />
-    <EmbeddedResource Remove="node_modules\**" />
-    <None Remove="node_modules\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.3" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.1.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="js\test\" />
-  </ItemGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
   </PropertyGroup>
   <Target Name="PreReleaseCompileScript" BeforeTargets="BeforeBuild" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Release'  ">
-    <Exec Command="npm run build -- --env.prod" />
-  </Target>
-  <Target Name="PreDebugCompileScript" BeforeTargets="BeforeBuild" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Debug'  ">
-    <Exec Command="npm run build -- --env.prod" />
+    <Exec Command="npm run build" />
   </Target>
   <Target Name="PostCompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true'">
     <Exec Command="dotnet pack --no-build --output nupkgs" />
