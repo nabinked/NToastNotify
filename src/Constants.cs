@@ -3,6 +3,6 @@
     internal class Constants
     {
         public static readonly string ResponseHeaderKey = "X-NToastNotify-Messages";
-        public static readonly string RequestHeaderKey = "X-NToastNotify-Request-Type";
+        public static readonly string RequestHeaderKey = "X-Requested-With";
     }
 }
