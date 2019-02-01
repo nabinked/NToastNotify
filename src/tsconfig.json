@@ -6,7 +6,8 @@
     "sourceMap": true,
     "target": "es5",
     "lib": [ "es5", "dom", "es2015.promise" ],
-    "noImplicitThis": true
+    "noImplicitThis": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",

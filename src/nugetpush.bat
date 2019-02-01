@@ -6,7 +6,7 @@ IF "%1"=="Debug" (
     )
 )
 IF "%1"=="Release" (
-    IF NOT "%mygetApiKey"=="" (
+    IF NOT "%nugetApiKey"=="" (
     nuget push "%2" %nugetApiKey% -source "nuget.org"    
     )    
 )

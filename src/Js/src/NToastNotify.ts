@@ -56,7 +56,7 @@ export abstract class NToastNotify {
                     resolve();
                 };
                 script.onerror = (e) => {
-                    reject(e.message);
+                    reject(e);
                 };
                 document.head.appendChild(script);
             } else {
@@ -75,7 +75,7 @@ export abstract class NToastNotify {
                     resolve();
                 };
                 link.onerror = (e) => {
-                    reject(e.message);
+                    reject(e);
                 };
                 document.head.appendChild(link);
             } else {
