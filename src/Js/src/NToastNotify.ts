@@ -139,7 +139,6 @@ export abstract class NToastNotify {
         var oldSend: (data: any) => void = XMLHttpRequest.prototype.send;
         // override the native send()
         XMLHttpRequest.prototype.send = function (this: XMLHttpRequest) {
-            this.setRequestHeader(self.options.requestHeaderKey, 'XMLHttpRequest');
             this.addEventListener('load', self.xmlRequestOnLoadHandler.bind(self, this));
             // call the native send()
             oldSend.apply(this, arguments);
