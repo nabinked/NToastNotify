@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NToastNotify.Helpers;
+using System.Net;
 
 namespace NToastNotify
 {
@@ -39,7 +40,7 @@ namespace NToastNotify
 
                     var messagesJson = messages.ToJson();
                     _logger.LogInformation($"Setting response header {Constants.ResponseHeaderKey} with {messagesJson}");
-                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, messagesJson);
+                    httpContext.Response.Headers.Add(Constants.ResponseHeaderKey, WebUtility.UrlEncode(messagesJson));
                 }
             }
             return Task.FromResult(0);

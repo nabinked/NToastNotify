@@ -127,7 +127,7 @@ export abstract class NToastNotify {
     getMessagesFromFetchResponse(response: Response) {
         const messageStr = response.headers.get(this.options.responseHeaderKey);
         if (messageStr) {
-            return JSON.parse(messageStr);
+            return JSON.parse(this.urlDecode(messageStr));
         } else {
             return null;
         }
@@ -153,7 +153,7 @@ export abstract class NToastNotify {
         if (allResponseHeaders.indexOf(this.options.responseHeaderKey) > -1) {
             const messagesStr = xmlHttpRequest.getResponseHeader(this.options.responseHeaderKey);
             if (messagesStr) {
-                return JSON.parse(messagesStr);
+                return JSON.parse(this.urlDecode(messagesStr));
             }
         }
         return null;
@@ -169,6 +169,9 @@ export abstract class NToastNotify {
                 this.showMessage(message);
             });
         }
+    }
+    urlDecode(value: string) {
+        return decodeURIComponent(value.replace(/\+/g, ' '));
     }
     abstract showMessage(message: ToastMessage): void;
     abstract overrideLibDefaults(): void;
