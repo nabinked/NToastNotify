@@ -29,15 +29,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="2.2.0" />
   </ItemGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
-  </PropertyGroup>
-  <Target Name="PreReleaseCompileScript" BeforeTargets="BeforeBuild" Condition=" '$(IsCrossTargetingBuild)' != 'true' AND '$(Configuration)' == 'Release'  ">
-    <Exec Command="npm run build" />
-  </Target>
-  <Target Name="PostCompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true'">
-    <Exec Command="dotnet pack --no-build --output nupkgs" />
-    <Exec Command="call nugetpush $(Configuration) $(MSBuildProjectDirectory)\nupkgs\$(AssemblyName).$(Version).nupkg" />
-  </Target>
 </Project>
