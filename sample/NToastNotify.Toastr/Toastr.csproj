@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\NToastNotify.csproj" />
+    <PackageReference Include="NToastNotify" Version="5.0.9" />
+    <!--<ProjectReference Include="..\..\src\NToastNotify.csproj" />-->
   </ItemGroup>
 </Project>

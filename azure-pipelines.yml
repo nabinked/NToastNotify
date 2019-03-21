@@ -1,16 +1,29 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 pool:
-  vmImage: 'Ubuntu 16.04'
+  name: Hosted VS2017
+  demands: npm
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      workingDir: src
+      verbose: false
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  - task: Npm@1
+    displayName: 'npm build'
+    inputs:
+      command: custom
+      workingDir: src
+      verbose: false
+      customCommand: 'run build'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet build'
+    inputs:
+      arguments: '-c Release'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test'
+    inputs:
+      command: test
+      projects: 'tests/**/*.csproj'
