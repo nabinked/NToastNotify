@@ -34,6 +34,4 @@ steps:
       targetType: filePath
       filePath: './src/nuget-push.ps1'
       workingDirectory: src
-    env:
-      nugetApiKey: oy2lekrra62eooalkoaaqoctldwo2b4uxff7nek25vozza
     condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
