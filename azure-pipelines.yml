@@ -10,7 +10,7 @@ steps:
       verbose: false
 
   - task: Npm@1
-    displayName: 'npm custom'
+    displayName: 'npm build'
     inputs:
       command: custom
       workingDir: src
@@ -27,11 +27,3 @@ steps:
     inputs:
       command: test
       projects: 'tests/**/*.csproj'
-
-  - task: PowerShell@2
-    displayName: 'PowerShell Script'
-    inputs:
-      targetType: filePath
-      filePath: './src/nuget-push.ps1'
-      workingDirectory: src
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
