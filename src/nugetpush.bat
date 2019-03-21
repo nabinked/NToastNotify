@@ -1,13 +1,10 @@
 echo off
 echo "%*"
-IF "%1"=="Debug" (
-    IF NOT "%mygetApiKey"=="" (
-        nuget push "%2" %mygetApiKey% -source "myget-nabin"
-    )
+npm install
+npm build
+dotnet pack -o temp-pack
+IF NOT "%nugetApiKey"=="" (
+	nuget push "%2" %nugetApiKey% -source "nuget.org"    
 )
-IF "%1"=="Release" (
-    IF NOT "%nugetApiKey"=="" (
-    nuget push "%2" %nugetApiKey% -source "nuget.org"    
-    )    
-)
+rd temp-pack /s
 exit 0;
