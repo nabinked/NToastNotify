@@ -44,7 +44,7 @@ dotnet CLI - `dotnet add package NToastNotify`
     //Or Simply go
     services.AddMvc().AddNToastNotifyNoty();
     ```
-**Note: Make sure you have necessary using statements.**
+**Note: Make sure you have the necessary using statements.**
 
 The ToastrOption parameter acts as the global options for the toast library. If no options are  provided the global settings will be the default toastr options.
 
@@ -64,7 +64,7 @@ The ToastrOption parameter acts as the global options for the toast library. If 
  }
 ```
 
-## 4. Add the following line in you html file. Preferably in your Layout Page.
+## 4. Add the following line in your html file. Preferably in your Layout Page.
 ```c#
 @await Component.InvokeAsync("NToastNotify")
 ```
