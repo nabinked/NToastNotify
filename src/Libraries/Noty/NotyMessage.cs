@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Net;
+using Newtonsoft.Json;
 using NToastNotify.Attributes;
 
 namespace NToastNotify
@@ -7,7 +8,7 @@ namespace NToastNotify
     {
         public NotyMessage(string message, ILibraryOptions options = null)
         {
-            Message = message;
+            Message = WebUtility.HtmlEncode(message);
             Options = options;
         }
         [JsonProperty]
