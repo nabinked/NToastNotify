@@ -8,14 +8,14 @@ namespace NToastNotify
 {
     class TempDataWrapper : ITempDataWrapper
     {
-        private readonly HttpContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly JsonSerializerSettings _serializerSettings;
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
 
         public TempDataWrapper(ITempDataDictionaryFactory tempDataDictionaryFactory, IHttpContextAccessor httpContextAccessor)
         {
             _tempDataDictionaryFactory = tempDataDictionaryFactory;
-            _context = httpContextAccessor.HttpContext;
+            _httpContextAccessor = httpContextAccessor;
             _serializerSettings = GetSerializerSettings();
         }
 
@@ -30,7 +30,7 @@ namespace NToastNotify
         /// <summary>
         /// Gets or sets <see cref="ITempDataDictionary"/>/>.
         /// </summary>
-        private ITempDataDictionary TempData => _tempDataDictionaryFactory?.GetTempData(_context);
+        private ITempDataDictionary TempData => _tempDataDictionaryFactory?.GetTempData(_httpContextAccessor.HttpContext);
 
         public T Get<T>(string key) where T : class
         {
