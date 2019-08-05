@@ -16,6 +16,11 @@ steps:
       verbose: false
       customCommand: 'run build'
 
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '2.2.401'
+
   - task: DotNetCoreCLI@2
     displayName: 'dotnet build'
     inputs:
