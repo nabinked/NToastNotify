@@ -1,5 +1,4 @@
 ﻿var path = require('path');
-var webpack = require('webpack');
 
 module.exports = env => {
 
@@ -14,7 +13,7 @@ module.exports = env => {
             extensions: ['.ts', '.js']
         },
         output: {
-            path: path.resolve(__dirname, 'Js/dist'),
+            path: path.resolve(__dirname, 'js/dist'),
             filename: '[name].js',
             libraryTarget: 'window'
         },
