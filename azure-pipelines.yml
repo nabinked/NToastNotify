@@ -1,6 +1,9 @@
 pool:
   vmImage: ubuntu-16.04
 
+variables:
+  buildConfiguration: Release
+
 steps:
   - task: Npm@1
     displayName: 'npm install'
@@ -22,12 +25,29 @@ steps:
       version: '2.2.401'
 
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet build'
+    displayName: 'Restore'
     inputs:
-      arguments: '-c Release'
+      command: restore
 
   - task: DotNetCoreCLI@2
-    displayName: 'dotnet test'
+    displayName: 'Build'
+    inputs:
+      command: build
+      arguments: '-c $(buildConfiguration)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Test'
     inputs:
       command: test
       projects: 'tests/**/*.csproj'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack'
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'develop')))
+    inputs:
+      command: pack
+      arguments: '-c $(buildConfiguration) --no-build -o %Build_ArtifactStagingDirectory%'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      artifactName: 'package'
