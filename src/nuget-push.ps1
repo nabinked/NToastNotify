@@ -1,5 +1,6 @@
 npm install
 npm run build
+dotnet --version
 dotnet build -c Release
 Push-Location ..
 dotnet test
