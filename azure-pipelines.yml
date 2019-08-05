@@ -45,9 +45,11 @@ steps:
     displayName: 'Pack'
     condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'develop')))
     inputs:
+      workingDir: src
       command: pack
       arguments: '-c $(buildConfiguration) --no-build -o %Build_ArtifactStagingDirectory%'
 
   - task: PublishBuildArtifacts@1
+    displayName: 'Publish build artifact'
     inputs:
       artifactName: 'package'
