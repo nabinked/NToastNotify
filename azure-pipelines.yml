@@ -43,11 +43,13 @@ steps:
 
   - task: DotNetCoreCLI@2
     displayName: 'Pack'
-    condition: and(succeeded(), or(eq(variables['Build.SourceBranchName'], 'master'),eq(variables['Build.SourceBranchName'], 'develop')))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
     inputs:
-      workingDir: src
       command: pack
-      arguments: '-c $(buildConfiguration) --no-build -o %Build_ArtifactStagingDirectory%'
+      configuration: $(buildConfiguration)
+      packagesToPack: 'src/*.csproj'
+      nobuild: true
+      arguments: '-o %Build_ArtifactStagingDirectory%'
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish build artifact'
