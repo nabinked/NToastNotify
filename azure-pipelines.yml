@@ -1,7 +1,7 @@
 jobs:
-- job: BuildLibrary
+- job: Build_Library
   pool:
-  vmImage: ubuntu-16.04
+    vmImage: ubuntu-16.04
 
   variables:
     buildConfiguration: Release
@@ -57,7 +57,7 @@ jobs:
       displayName: 'Publish build artifact'
       inputs:
         artifactName: 'package'
-- job: PublishSamples-Toastr
+- job: Build_Samples_Toastr
   pool:
     vmImage: ubuntu-16.04
   
@@ -65,8 +65,7 @@ jobs:
     buildConfiguration: Release
   
   steps:
-    - task:
-      bash: cd samples/Toastr
+    - bash: cd samples/Toastr
 
     - task: UseDotNet@2
       inputs:
@@ -86,7 +85,8 @@ jobs:
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
         artifactName: 'toastr'
-- job: PublishSamples-Noty
+
+- job: PublishSamples_Noty
   pool:
     vmImage: ubuntu-16.04
   
@@ -94,8 +94,7 @@ jobs:
     buildConfiguration: Release
   
   steps:
-    - task:
-      bash: cd samples/Noty
+    - bash: cd samples/Noty
 
     - task: UseDotNet@2
       inputs:
