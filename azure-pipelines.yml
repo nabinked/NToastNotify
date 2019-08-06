@@ -76,7 +76,7 @@ jobs:
       displayName: 'dotnet publish'
       inputs:
         command: publish
-        publishWebProjects: True
+        publishWebProjects: false
         arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: True
 
@@ -105,7 +105,7 @@ jobs:
       displayName: 'dotnet publish'
       inputs:
         command: publish
-        publishWebProjects: True
+        publishWebProjects: false
         arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: True
 
