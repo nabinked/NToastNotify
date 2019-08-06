@@ -4,9 +4,9 @@
  - ##### Supports Feature folder project structure.
  - ##### Supports multiple client libraries: toastr.js & noty.js. Can easily be extended to support more.
  
- # DEMO
-- ## [Noty](http://notyjs.azurewebsites.net/)
-- ## [Toastr](http://toastrjs.azurewebsites.net/)
+ # DEMOs
+- ## [Noty](http://noty.azurewebsites.net/) | [Source](/samples/Noty/) 
+- ## [Toastr](http://toastr.azurewebsites.net/) | [Source](/samples/Toastr/)
 
 # Get Started
 ## 1. Install From [Nuget](https://www.nuget.org/packages/NToastNotify/)
