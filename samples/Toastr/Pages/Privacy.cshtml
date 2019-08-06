@@ -1,0 +1,27 @@
+﻿@page
+@model PrivacyModel
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<h4 id="message">AJAX Messages</h4>
+
+<script>
+    window.addEventListener('load', function () {
+        setTimeout(function () {
+            $('#message').text('Making a native fetch request and show notification.');
+            fetch('/Ajax').then(function (response) {
+                var messages = nToastNotify.getMessagesFromFetchResponse(response);
+                nToastNotify.showMessages(messages);
+                $('#message').text('Making a XMLHTTPRequest (AJAX) and show notification.');
+                $.ajax({
+                    url: '/Ajax',
+                });
+
+            });
+        }, 2000)
+    })
+</script>
