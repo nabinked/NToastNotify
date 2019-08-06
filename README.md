@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/nabinked/NToastNotify/_apis/build/status/nabinked.NToastNotify?branchName=master)](https://dev.azure.com/nabinked/NToastNotify/_build/latest?definitionId=19&branchName=master)
+
 # Features
  - ##### Server side toast notification rendering.
  - ##### Toast notification on AJAX calls. XMLHTTPRequests - Full Support. fetch API - Partial Support (See sample).
