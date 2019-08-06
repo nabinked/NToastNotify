@@ -57,7 +57,7 @@ jobs:
       displayName: 'Publish build artifact'
       inputs:
         artifactName: 'package'
-- job: Build_Samples_Toastr
+- job: Build_Samples
   pool:
     vmImage: ubuntu-16.04
   
@@ -65,8 +65,6 @@ jobs:
     buildConfiguration: Release
   
   steps:
-    - bash: cd samples/Toastr
-
     - task: UseDotNet@2
       inputs:
         packageType: 'sdk'
@@ -76,7 +74,8 @@ jobs:
       displayName: 'dotnet publish'
       inputs:
         command: publish
-        publishWebProjects: false
+        projects: 'samples/**/*.csproj'
+        publishWebProjects: True
         arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: True
 
@@ -84,35 +83,4 @@ jobs:
       displayName: 'Publish Artifact'
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        artifactName: 'toastr'
-
-- job: PublishSamples_Noty
-  pool:
-    vmImage: ubuntu-16.04
-  
-  variables:
-    buildConfiguration: Release
-  
-  steps:
-    - bash: cd samples/Noty
-
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'sdk'
-        version: '2.2.401'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish'
-      inputs:
-        command: publish
-        publishWebProjects: false
-        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: True
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        artifactName: 'noty'
-
-
+        artifactName: 'samples'
