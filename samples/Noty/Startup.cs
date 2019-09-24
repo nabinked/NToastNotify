@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using NToastNotify;
 
 namespace Noty
@@ -33,7 +34,7 @@ namespace Noty
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNToastNotifyNoty(new NotyOptions
                 {
                     ProgressBar = true,
@@ -43,7 +44,7 @@ namespace Noty
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -58,9 +59,10 @@ namespace Noty
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseRouting();
             app.UseCookiePolicy();
             app.UseNToastNotify();
-            app.UseMvc();
+            app.UseEndpoints(x => x.MapRazorPages());
         }
     }
 }
