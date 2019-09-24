@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NToastNotify;
 using NToastNotify.Helpers;
@@ -73,7 +73,7 @@ namespace Microsoft.Extensions.DependencyInjection
             #region Framework Services
             //Add the file provider to the Razor view engine
             var fileProvider = Utils.GetEmbeddedFileProvider();
-            services.Configure<RazorViewEngineOptions>(options =>
+            services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
             {
                 options.FileProviders.Add(fileProvider);
             });
