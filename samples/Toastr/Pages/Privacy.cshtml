@@ -13,14 +13,24 @@
     window.addEventListener('load', function () {
         setTimeout(function () {
             $('#message').text('Making a native fetch request and show notification.');
-            fetch('/Ajax').then(function (response) {
+            fetch('/Ajax?type=fetch').then(function (response) {
                 var messages = nToastNotify.getMessagesFromFetchResponse(response);
                 nToastNotify.showMessages(messages);
-                $('#message').text('Making a XMLHTTPRequest (AJAX) and show notification.');
+                $('#message').text('Making an XMLHTTPRequest (AJAX) and show notification.');
                 $.ajax({
-                    url: '/Ajax',
+                    url: '/Ajax?type=xmlhttp',
+                }).then(function () {
+                    $('#message').text('Again : Making an XMLHTTPRequest (AJAX) and show notification.');
+                    $.ajax({
+                        url: '/Ajax?type=xmlhttp'
+                    }).then(function () {
+                        $('#message').text('Again : native fetch request and show notification.');
+                        fetch('/Ajax?type=fetch').then(function (response) {
+                            var messages = nToastNotify.getMessagesFromFetchResponse(response);
+                            nToastNotify.showMessages(messages);
+                        });
+                    })
                 });
-
             });
         }, 2000)
     })

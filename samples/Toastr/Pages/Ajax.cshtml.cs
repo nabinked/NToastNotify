@@ -13,10 +13,10 @@ namespace Toastr.Pages
         {
             _toastNotification = toastNotification;
         }
-        public JsonResult OnGet()
+        public JsonResult OnGet(string type)
         {
             System.Threading.Thread.Sleep(2000);
-            _toastNotification.AddSuccessToastMessage("This toast is shown on Ajax request. AJAX CALL " + DateTime.Now.ToLongTimeString());
+            _toastNotification.AddSuccessToastMessage($"This toast is shown on Ajax request. Type: {type} " + DateTime.Now.ToLongTimeString());
             return new JsonResult(new { ok = true });
         }
 
