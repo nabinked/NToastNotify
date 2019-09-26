@@ -6,14 +6,14 @@ module.exports = env => {
     console.log('mode: ', mode);
     return {
         entry: {
-            toastr: './js/src/toastr/NToastNotifyToastr.ts',
-            noty: './js/src/noty/NToastNotifyNoty.ts'
+            toastr: './ts/toastr/NToastNotifyToastr.ts',
+            noty: './ts/noty/NToastNotifyNoty.ts'
         },
         resolve: {
             extensions: ['.ts', '.js']
         },
         output: {
-            path: path.resolve(__dirname, 'js/dist'),
+            path: path.resolve(__dirname, 'wwwroot'),
             filename: '[name].js',
             libraryTarget: 'window'
         },

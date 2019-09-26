@@ -27,5 +27,10 @@
         /// If set to true, Ajax toasts will be disabled.
         /// </summary>
         public bool DisableAjaxToasts { get; set; }
+
+        /// <summary>
+        /// The path of the js
+        /// </summary>
+        public string LibraryJsPath { get; set; }
     }
 }
