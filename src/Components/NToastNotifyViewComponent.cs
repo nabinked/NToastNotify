@@ -28,7 +28,7 @@ namespace NToastNotify
                 RequestHeaderKey = Constants.RequestHeaderKey,
                 LibraryDetails = _library,
                 DisableAjaxToasts = _nToastNotifyOption.DisableAjaxToasts,
-                Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_library.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
+                LibraryJsPath = $"/_content/{this.GetType().Assembly.GetName().Name}/{_library.VarName}.js?something"
             };
             return View("Default", model);
         }

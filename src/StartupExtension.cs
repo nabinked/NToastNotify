@@ -19,11 +19,6 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         public static IApplicationBuilder UseNToastNotify(this IApplicationBuilder builder)
         {
-            builder.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = Utils.GetEmbeddedFileProvider(),
-                RequestPath = new PathString("/ntoastnotify")
-            });
             builder.UseMiddleware<NtoastNotifyAjaxToastsMiddleware>();
             return builder;
         }
@@ -71,13 +66,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             #region Framework Services
-            //Add the file provider to the Razor view engine
-            var fileProvider = Utils.GetEmbeddedFileProvider();
-            services.Configure<MvcRazorRuntimeCompilationOptions>(options =>
-            {
-                options.FileProviders.Add(fileProvider);
-            });
-
             //Check if a TempDataProvider is already registered.
             var tempDataProvider = services.FirstOrDefault(d => d.ServiceType == typeof(ITempDataProvider));
             if (tempDataProvider == null)

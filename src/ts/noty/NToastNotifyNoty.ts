@@ -1,4 +1,4 @@
-﻿import { NToastNotify, ToastMessage } from './../NToastNotify'
+﻿import { NToastNotify, ToastMessage } from '../NToastNotify'
 
 class NToastNotifyNoty extends NToastNotify {
     showMessage(message: ToastMessage): void {

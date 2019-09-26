@@ -1,4 +1,4 @@
-﻿import { NToastNotify, ToastMessage } from './../NToastNotify'
+﻿import { NToastNotify, ToastMessage } from '../NToastNotify'
 import { Options as ToastrJsOptions } from './ToastrOptions'
 
 class NToastNotifyToastr extends NToastNotify {
