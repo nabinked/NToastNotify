@@ -34,7 +34,9 @@ namespace Toastr
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddSessionStateTempDataProvider()
                 .AddNToastNotifyToastr();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +57,7 @@ namespace Toastr
             app.UseStaticFiles();
             app.UseRouting();
             app.UseCookiePolicy();
+            app.UseSession();
             app.UseNToastNotify();
             app.UseEndpoints(x => x.MapRazorPages());
         }
