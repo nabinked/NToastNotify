@@ -72,7 +72,6 @@ jobs:
           repository: "nabinked/ntoastnotify-samples-noty"
           command: "buildAndPush"
           Dockerfile: "samples/Noty/Dockerfile"
-          tags: "noty-$(Build.BuildId)"
 
       - task: Docker@2
         displayName: "Docker push image toastr"
@@ -81,4 +80,3 @@ jobs:
           repository: "nabinked/ntoastnotify-samples-toastr"
           command: "buildAndPush"
           Dockerfile: "samples/Toastr/Dockerfile"
-          tags: "toastr-$(Build.BuildId)"
