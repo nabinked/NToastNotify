@@ -81,4 +81,4 @@ jobs:
           repository: "nabinked/ntoastnotify-samples"
           command: "buildAndPush"
           Dockerfile: "samples/Toastr/Dockerfile"
-          tags: "noty-$(Build.BuildId)"
+          tags: "toastr-$(Build.BuildId)"
