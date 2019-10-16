@@ -66,10 +66,10 @@ jobs:
 
     steps:
       - task: Docker@2
-        displayName: "Docker push image toastr"
+        displayName: "Docker push image noty"
         inputs:
           containerRegistry: "DockerHub"
-          repository: "nabinked/ntoastnotify-samples"
+          repository: "nabinked/ntoastnotify-samples-noty"
           command: "buildAndPush"
           Dockerfile: "samples/Noty/Dockerfile"
           tags: "noty-$(Build.BuildId)"
@@ -78,24 +78,7 @@ jobs:
         displayName: "Docker push image toastr"
         inputs:
           containerRegistry: "DockerHub"
-          repository: "nabinked/ntoastnotify-samples"
+          repository: "nabinked/ntoastnotify-samples-toastr"
           command: "buildAndPush"
           Dockerfile: "samples/Toastr/Dockerfile"
           tags: "toastr-$(Build.BuildId)"
-      # - task: UseDotNet@2
-      #   inputs:
-      #     packageType: 'sdk'
-      #     version: '3.0.100'
-      # - task: DotNetCoreCLI@2
-      #   displayName: 'dotnet publish'
-      #   inputs:
-      #     command: publish
-      #     projects: 'samples/**/*.csproj'
-      #     publishWebProjects: True
-      #     arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
-      #     zipAfterPublish: True
-      # - task: PublishBuildArtifacts@1
-      #   displayName: 'Publish Artifact'
-      #   inputs:
-      #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      #     artifactName: 'samples'
