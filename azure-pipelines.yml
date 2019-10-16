@@ -69,14 +69,16 @@ jobs:
         displayName: "Docker push image noty"
         inputs:
           containerRegistry: "DockerHub"
-          repository: "nabinked/ntoastnotify-samples-noty"
+          repository: "nabinked/ntoastnotify-samples"
           command: "buildAndPush"
           Dockerfile: "samples/Noty/Dockerfile"
+          tags: "noty-$(Build.BuildId)"
 
       - task: Docker@2
         displayName: "Docker push image toastr"
         inputs:
           containerRegistry: "DockerHub"
-          repository: "nabinked/ntoastnotify-samples-toastr"
+          repository: "nabinked/ntoastnotify-samples"
           command: "buildAndPush"
           Dockerfile: "samples/Toastr/Dockerfile"
+          tags: "noty-$(Build.BuildId)"
