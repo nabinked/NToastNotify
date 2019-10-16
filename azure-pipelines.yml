@@ -1,93 +1,101 @@
 jobs:
-- job: Build_Library
-  pool:
-    vmImage: ubuntu-16.04
+  - job: Build_Library
+    pool:
+      vmImage: ubuntu-16.04
 
-  variables:
-    buildConfiguration: Release
+    variables:
+      buildConfiguration: Release
 
-  steps:
-    - task: Npm@1
-      displayName: 'npm install'
-      inputs:
-        workingDir: src
-        verbose: false
+    steps:
+      - task: Npm@1
+        displayName: "npm install"
+        inputs:
+          workingDir: src
+          verbose: false
 
-    - task: Npm@1
-      displayName: 'npm build'
-      inputs:
-        command: custom
-        workingDir: src
-        verbose: false
-        customCommand: 'run build'
+      - task: Npm@1
+        displayName: "npm build"
+        inputs:
+          command: custom
+          workingDir: src
+          verbose: false
+          customCommand: "run build"
 
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'sdk'
-        version: '3.0.100'
+      - task: UseDotNet@2
+        inputs:
+          packageType: "sdk"
+          version: "3.0.100"
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore'
-      inputs:
-        command: restore
+      - task: DotNetCoreCLI@2
+        displayName: "Restore"
+        inputs:
+          command: restore
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Build'
-      inputs:
-        command: build
-        arguments: '-c $(buildConfiguration)'
+      - task: DotNetCoreCLI@2
+        displayName: "Build"
+        inputs:
+          command: build
+          arguments: "-c $(buildConfiguration)"
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Test'
-      inputs:
-        command: test
-        projects: 'tests/**/*.csproj'
+      - task: DotNetCoreCLI@2
+        displayName: "Test"
+        inputs:
+          command: test
+          projects: "tests/**/*.csproj"
 
-    - task: DotNetCoreCLI@2
-      displayName: 'Pack'
-      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-      inputs:
-        command: pack
-        configuration: $(buildConfiguration)
-        packagesToPack: 'src/*.csproj'
-        nobuild: true
-        arguments: '-o $(Build.ArtifactStagingDirectory)'
+      - task: DotNetCoreCLI@2
+        displayName: "Pack"
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        inputs:
+          command: pack
+          configuration: $(buildConfiguration)
+          packagesToPack: "src/*.csproj"
+          nobuild: true
+          arguments: "-o $(Build.ArtifactStagingDirectory)"
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish build artifact'
-      inputs:
-        artifactName: 'package'
-- job: Build_Samples
-  pool:
-    vmImage: ubuntu-16.04
-  
-  variables:
-    buildConfiguration: Release
-  
-  steps:
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'DockerHub'
-        repository: 'nabinked/ntoastnotify-samples'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish build artifact"
+        inputs:
+          artifactName: "package"
+  - job: Build_Samples
+    pool:
+      vmImage: ubuntu-16.04
 
-    # - task: UseDotNet@2
-    #   inputs:
-    #     packageType: 'sdk'
-    #     version: '3.0.100'
-    
-    # - task: DotNetCoreCLI@2
-    #   displayName: 'dotnet publish'
-    #   inputs:
-    #     command: publish
-    #     projects: 'samples/**/*.csproj'
-    #     publishWebProjects: True
-    #     arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
-    #     zipAfterPublish: True
+    variables:
+      buildConfiguration: Release
 
-    # - task: PublishBuildArtifacts@1
-    #   displayName: 'Publish Artifact'
-    #   inputs:
-    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    #     artifactName: 'samples'
+    steps:
+      - task: Docker@2
+        displayName: "Docker push image toastr"
+        inputs:
+          containerRegistry: "DockerHub"
+          repository: "nabinked/ntoastnotify-samples"
+          command: "buildAndPush"
+          Dockerfile: "samples/Noty/Dockerfile"
+          tags: "noty-$(Build.BuildId)"
+
+      - task: Docker@2
+        displayName: "Docker push image toastr"
+        inputs:
+          containerRegistry: "DockerHub"
+          repository: "nabinked/ntoastnotify-samples"
+          command: "buildAndPush"
+          Dockerfile: "samples/Toastr/Dockerfile"
+          tags: "toastr-$(Build.BuildId)"
+      # - task: UseDotNet@2
+      #   inputs:
+      #     packageType: 'sdk'
+      #     version: '3.0.100'
+      # - task: DotNetCoreCLI@2
+      #   displayName: 'dotnet publish'
+      #   inputs:
+      #     command: publish
+      #     projects: 'samples/**/*.csproj'
+      #     publishWebProjects: True
+      #     arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
+      #     zipAfterPublish: True
+      # - task: PublishBuildArtifacts@1
+      #   displayName: 'Publish Artifact'
+      #   inputs:
+      #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      #     artifactName: 'samples'
