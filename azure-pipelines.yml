@@ -65,22 +65,29 @@ jobs:
     buildConfiguration: Release
   
   steps:
-    - task: UseDotNet@2
+    - task: Docker@2
       inputs:
-        packageType: 'sdk'
-        version: '3.0.100'
-    
-    - task: DotNetCoreCLI@2
-      displayName: 'dotnet publish'
-      inputs:
-        command: publish
-        projects: 'samples/**/*.csproj'
-        publishWebProjects: True
-        arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: True
+        containerRegistry: 'DockerHub'
+        repository: 'nabinked/ntoastnotify-samples'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
 
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        artifactName: 'samples'
+    # - task: UseDotNet@2
+    #   inputs:
+    #     packageType: 'sdk'
+    #     version: '3.0.100'
+    
+    # - task: DotNetCoreCLI@2
+    #   displayName: 'dotnet publish'
+    #   inputs:
+    #     command: publish
+    #     projects: 'samples/**/*.csproj'
+    #     publishWebProjects: True
+    #     arguments: '-c $(buildConfiguration) -o $(Build.ArtifactStagingDirectory)'
+    #     zipAfterPublish: True
+
+    # - task: PublishBuildArtifacts@1
+    #   displayName: 'Publish Artifact'
+    #   inputs:
+    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    #     artifactName: 'samples'
