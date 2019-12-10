@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NToastNotify" Version="6.0.1" />
+    <PackageReference Include="NToastNotify" Version="6.0.2" />
   </ItemGroup>
 
   <!-- <ItemGroup>
