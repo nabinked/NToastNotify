@@ -5,7 +5,7 @@ using static NToastNotify.Enums;
 
 namespace NToastNotify
 {
-    public class NotyOptions : ILibraryOptions, INotyJsOptions
+    public class NotyOptions : LibraryOptions, INotyJsOptions
     {
         /// <summary>
         /// alert, success, error, warning, info - ClassName generator uses this value → noty_type__${type}
@@ -62,6 +62,6 @@ namespace NToastNotify
         /// </summary>
         public bool? VisibilityControl { get; set; }
 
-        string ILibraryOptions.Json => this.ToJson();
+        public override string Json => this.ToJson();
     }
 }

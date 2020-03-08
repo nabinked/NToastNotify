@@ -4,7 +4,7 @@ using NToastNotify.Helpers;
 
 namespace NToastNotify
 {
-    public class ToastrOptions: IToastrJsOptions, ILibraryOptions
+    public class ToastrOptions: LibraryOptions, IToastrJsOptions
     {
         public bool? TapToDismiss { get; set; }
         public string ToastClass { get; set; }
@@ -50,7 +50,6 @@ namespace NToastNotify
         [JsonConverter(typeof(StringEnumConverter), true)]
         public Enums.NotificationTypesToastr Type { get; set; }
 
-        //ILIbraryoptions
-        string ILibraryOptions.Json => this.ToJson();
+        public override string Json => this.ToJson();
     }
 }

@@ -5,7 +5,7 @@ namespace NToastNotify.Helpers
 {
     internal class OptionsHelpers
     {
-        public static T CastOptionTo<T>(ILibraryOptions options) where T : class, ILibraryOptions, new()
+        public static T CastOptionTo<T>(LibraryOptions options) where T : LibraryOptions, new()
         {
             EnsureSameType<T>(options);
             var opt = (options ?? new T()) as T;
@@ -21,13 +21,13 @@ namespace NToastNotify.Helpers
                 }
             }
         }
-        public static NotyOptions PrepareOptionsNoty(ILibraryOptions options, string message, NotificationTypesNoty type)
+        public static NotyOptions PrepareOptionsNoty(LibraryOptions options, string message, NotificationTypesNoty type)
         {
             var notyOptions = CastOptionTo<NotyOptions>(options);
             notyOptions.Type = type;
             return notyOptions;
         }
-        public static ToastrOptions PrepareOptionsToastr(ILibraryOptions toastrOptions, NotificationTypesToastr type, string defaultTitle)
+        public static ToastrOptions PrepareOptionsToastr(LibraryOptions toastrOptions, NotificationTypesToastr type, string defaultTitle)
         {
             var options = CastOptionTo<ToastrOptions>(toastrOptions);
             options.Type = type;

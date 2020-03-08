@@ -55,7 +55,7 @@ namespace NToastNotify.Tests
 
         [Theory]
         [MemberData(nameof(DefaultOptionsData))]
-        public void ShouldSetOptions(ILibraryOptions libraryOptions, ILibraryOptions expected)
+        public void ShouldSetOptions(LibraryOptions libraryOptions, LibraryOptions expected)
         {
             //Act
             var result = Utils.GetLibraryDetails<ToastrLibrary>(null, libraryOptions);
@@ -65,7 +65,7 @@ namespace NToastNotify.Tests
         }
 
         private static readonly ToastrLibrary ExpectedDefaultValue = new ToastrLibrary();
-        private static readonly ILibraryOptions ToastrOptions = new ToastrOptions();
+        private static readonly LibraryOptions ToastrOptions = new ToastrOptions();
 
         public static IEnumerable<object[]> ScriptScrData =>
             new List<object[]>
