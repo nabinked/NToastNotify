@@ -10,40 +10,40 @@ namespace NToastNotify
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
-        void AddSuccessToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="LibraryOptions"/></param>
+        void AddSuccessToastMessage(string message = null, LibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type info"
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
-        void AddInfoToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="LibraryOptions"/></param>
+        void AddInfoToastMessage(string message = null, LibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type alert"
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
-        void AddAlertToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="LibraryOptions"/></param>
+        void AddAlertToastMessage(string message = null, LibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type warning"
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
-        void AddWarningToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="LibraryOptions"/></param>
+        void AddWarningToastMessage(string message = null, LibraryOptions toastOptions = null);
 
         /// <summary>
         /// Adds a toast message of type error
         /// </summary>
         /// <param name="message">Messsage body</param>
         /// <param name="title">Title of the message</param>
-        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="ILibraryOptions"/></param>
-        void AddErrorToastMessage(string message = null, ILibraryOptions toastOptions = null);
+        /// <param name="toastOptions">Custom option for the message being added. Please provide an instance of the relative options class for the js library that is being used which implements <see cref="LibraryOptions"/></param>
+        void AddErrorToastMessage(string message = null, LibraryOptions toastOptions = null);
 
         /// <summary>
         /// Gets the list of <see cref="IToastMessage"/> added so far.
