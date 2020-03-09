@@ -4,11 +4,11 @@
     <Description>Dot Net abstraction of javascript toastr to create toast notification on ASP.NET Core MVC Projects</Description>
     <Copyright>Nabin Karki Thapa</Copyright>
     <AssemblyTitle>NToastNotify</AssemblyTitle>
-    <VersionPrefix>6.0.2</VersionPrefix>
+    <VersionPrefix>6.0.3</VersionPrefix>
     <Authors>Nabin Kakri Thapa</Authors>
     <PackageProjectUrl>https://github.com/nabinked/NToastNotify</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>ASP.NET Core MVC toastr toast notification server side rendered </PackageTags>
+    <PackageTags>ASP.NET Core MVC toastr toast notification server side rendered</PackageTags>
     <RepositoryUrl>https://github.com/nabinked/NToastNotify</RepositoryUrl>
     <PackageReleaseNotes>https://github.com/nabinked/NToastNotify/releases</PackageReleaseNotes>
     <AssemblyName>NToastNotify</AssemblyName>
