@@ -11,7 +11,7 @@ namespace NToastNotify
         {
             _defaultNtoastNotifyOptions = nToastNotifyOptions;
         }
-        public override void AddSuccessToastMessage(string message = null, LibraryOptions toastOptions = null)
+        public override void AddSuccessToastMessage(string message = null, NotyOptions toastOptions = null)
         {
             var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Success);
             var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultSuccessMessage, options);
@@ -19,28 +19,28 @@ namespace NToastNotify
         }
 
 
-        public override void AddInfoToastMessage(string message = null, LibraryOptions toastOptions = null)
+        public override void AddInfoToastMessage(string message = null, NotyOptions toastOptions = null)
         {
             var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Info);
             var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultInfoMessage, options);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddAlertToastMessage(string message = null, LibraryOptions toastOptions = null)
+        public override void AddAlertToastMessage(string message = null, NotyOptions toastOptions = null)
         {
             var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Alert);
             var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultAlertMessage, options);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddWarningToastMessage(string message = null, LibraryOptions toastOptions = null)
+        public override void AddWarningToastMessage(string message = null, NotyOptions toastOptions = null)
         {
             var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Warning);
             var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultWarningTitle, options);
             AddMessage(successNotyMessage);
         }
 
-        public override void AddErrorToastMessage(string message = null, LibraryOptions toastOptions = null)
+        public override void AddErrorToastMessage(string message = null, NotyOptions toastOptions = null)
         {
             var options = OptionsHelpers.PrepareOptionsNoty(toastOptions, message, Enums.NotificationTypesNoty.Error);
             var successNotyMessage = new NotyMessage(message ?? _defaultNtoastNotifyOptions.DefaultErrorMessage, options);
