@@ -9,8 +9,8 @@
     <PackageReference Include="NToastNotify" Version="6.0.2" />
   </ItemGroup>
 
-  <!-- <ItemGroup>
+   <!--<ItemGroup>
     <ProjectReference Include="..\..\src\NToastNotify.csproj" />
-  </ItemGroup> -->
+  </ItemGroup>--> 
 
 </Project>
