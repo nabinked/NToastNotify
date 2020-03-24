@@ -2,10 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NToastNotify;
-using NToastNotify.Helpers;
 using NToastNotify.MessageContainers;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -43,7 +41,10 @@ namespace Microsoft.Extensions.DependencyInjection
                                                                                                     NToastNotifyOption nToastNotifyOptions)
             where TNotificationImplementation : class, IToastNotification
         {
-            if (mvcCoreBuilder == null) return null;
+            if (mvcCoreBuilder == null)
+            {
+                return null;
+            }
 
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
             mvcCoreBuilder.AddRazorViewEngine(o =>
