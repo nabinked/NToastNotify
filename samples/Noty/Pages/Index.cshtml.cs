@@ -6,10 +6,12 @@ namespace Noty.Pages
     public class IndexModel : PageModel
     {
         private readonly IToastNotification _toastNotification;
+        //private readonly NotyNotification _toastNotification;
 
         public IndexModel(IToastNotification toastNotification)
         {
             _toastNotification = toastNotification;
+            //_toastNotification = toastNotification as NotyNotification;
         }
         public void OnGet()
         {
