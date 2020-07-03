@@ -13,7 +13,7 @@ namespace NToastNotify.Helpers
 
         public static string ToJson(this object obj)
         {
-            return obj != null ? JsonConvert.SerializeObject(obj, JsonSerializerSettings) : null;
+            return JsonConvert.SerializeObject(obj, JsonSerializerSettings);
         }
     }
 

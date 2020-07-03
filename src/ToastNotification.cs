@@ -14,32 +14,32 @@ namespace NToastNotify
         {
             MessageContainer = messageContainerFactory.Create<TMessage>();
         }
-        void IToastNotification.AddAlertToastMessage(string message = null, LibraryOptions toastOptions = null)
+        void IToastNotification.AddAlertToastMessage(string? message, LibraryOptions? toastOptions)
         {
             AddAlertToastMessage(message, toastOptions as TOptions);
         }
-        void IToastNotification.AddErrorToastMessage(string message = null, LibraryOptions toastOptions = null)
+        void IToastNotification.AddErrorToastMessage(string? message, LibraryOptions? toastOptions)
         {
             AddErrorToastMessage(message, toastOptions as TOptions);
         }
-        void IToastNotification.AddInfoToastMessage(string message = null, LibraryOptions toastOptions = null)
+        void IToastNotification.AddInfoToastMessage(string? message, LibraryOptions? toastOptions)
         {
             AddInfoToastMessage(message, toastOptions as TOptions);
         }
-        void IToastNotification.AddSuccessToastMessage(string message = null, LibraryOptions toastOptions = null)
+        void IToastNotification.AddSuccessToastMessage(string? message, LibraryOptions? toastOptions)
         {
             AddSuccessToastMessage(message, toastOptions as TOptions);
         }
-        void IToastNotification.AddWarningToastMessage(string message = null, LibraryOptions toastOptions = null)
+        void IToastNotification.AddWarningToastMessage(string? message, LibraryOptions? toastOptions)
         {
             AddWarningToastMessage(message, toastOptions as TOptions);
         }
 
-        public abstract void AddAlertToastMessage(string message = null, TOptions toastOptions = null);
-        public abstract void AddErrorToastMessage(string message = null, TOptions toastOptions = null);
-        public abstract void AddInfoToastMessage(string message = null, TOptions toastOptions = null);
-        public abstract void AddSuccessToastMessage(string message = null, TOptions toastOptions = null);
-        public abstract void AddWarningToastMessage(string message = null, TOptions toastOptions = null);
+        public abstract void AddAlertToastMessage(string? message = null, TOptions? toastOptions = null);
+        public abstract void AddErrorToastMessage(string? message = null, TOptions? toastOptions = null);
+        public abstract void AddInfoToastMessage(string? message = null, TOptions? toastOptions = null);
+        public abstract void AddSuccessToastMessage(string? message = null, TOptions? toastOptions = null);
+        public abstract void AddWarningToastMessage(string? message = null, TOptions? toastOptions = null);
         public IEnumerable<IToastMessage> GetToastMessages()
         {
             return MessageContainer.GetAll();

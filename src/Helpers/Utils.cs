@@ -12,7 +12,7 @@ namespace NToastNotify.Helpers
             return new EmbeddedFileProvider(ThisAssembly, "NToastNotify");
         }
 
-        public static ILibrary GetLibraryDetails<T>(NToastNotifyOption nToastNotifyOptions, LibraryOptions defaultOptions) where T : class, ILibrary, new()
+        public static ILibrary GetLibraryDetails<T>(NToastNotifyOption? nToastNotifyOptions, LibraryOptions? defaultOptions) where T : class, ILibrary, new()
         {
             var library = new T();
             if (nToastNotifyOptions != null)

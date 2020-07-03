@@ -3,6 +3,6 @@
     public interface IToastMessage
     {
         string Message { get; }
-        LibraryOptions Options { get; }
+        LibraryOptions? Options { get; }
     }
 }

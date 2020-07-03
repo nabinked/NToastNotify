@@ -15,6 +15,6 @@
         /// </summary>
         string StyleHref { get; set; }
 
-        LibraryOptions Options { get; set; }
+        LibraryOptions? Options { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using static NToastNotify.Enums;
 
 namespace NToastNotify
 {
-    public class NotyOptions : LibraryOptions, INotyJsOptions
+    public class NotyOptions : LibraryOptions
     {
         /// <summary>
         /// alert, success, error, warning, info - ClassName generator uses this value → noty_type__${type}
@@ -15,15 +15,15 @@ namespace NToastNotify
         /// <summary>
         /// top, topLeft, topCenter, topRight, center, centerLeft, centerRight, bottom, bottomLeft, bottomCenter, bottomRight - ClassName generator uses this value → noty_layout__${layout}
         /// </summary>
-        public string Layout { get; set; }
+        public string? Layout { get; set; }
         /// <summary>
         /// relax, mint, metroui - ClassName generator uses this value → noty_theme__${theme}
         /// </summary>
-        public string Theme { get; set; }
+        public string? Theme { get; set; }
         /// <summary>
         /// This string can contain HTML too. But be careful and don't pass user inputs to this parameter.
         /// </summary>
-        public string Text { get; set; }
+        public string? Text { get; set; }
         /// <summary>
         /// 0, 1000, 3000, 3500, etc. Delay for closing event in milliseconds (ms). Set 0 for sticky notifications.
         /// </summary>
@@ -36,7 +36,7 @@ namespace NToastNotify
         /// <summary>
         /// click, button
         /// </summary>
-        public string[] CloseWith { get; set; }
+        public string[]? CloseWith { get; set; }
         /// <summary>
         /// v3.1.0-beta Behaves like v2 but more stable
         /// </summary>
@@ -44,7 +44,7 @@ namespace NToastNotify
         /// <summary>
         /// You can use this id with querySelectors. Generated automatically if false.
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
         /// <summary>
         /// DOM insert method depends on this parameter. If false uses append, if true uses prepend.
         /// </summary>
@@ -52,11 +52,11 @@ namespace NToastNotify
         /// <summary>
         /// NEW Named queue system. Details are https://ned.im/noty/#/api.
         /// </summary>
-        public string Queue { get; set; }
+        public string? Queue { get; set; }
         /// <summary>
         /// Custom container selector string. Like '.my-custom-container'. Layout parameter will be ignored.
         /// </summary>
-        public string Container { get; set; }
+        public string? Container { get; set; }
         /// <summary>
         /// If true Noty uses PageVisibility API to handle timeout. To ensure that users do not miss their notifications.
         /// </summary>

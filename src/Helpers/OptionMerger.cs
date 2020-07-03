@@ -21,9 +21,9 @@
             }
             foreach (var pi in typeof(T).GetProperties())
             {
-                var priValue = pi.GetGetMethod().Invoke(primary, null);
-                var secValue = pi.GetGetMethod().Invoke(secondary, null);
-                if (priValue == null)
+                var priValue = pi.GetGetMethod()?.Invoke(primary, null);
+                var secValue = pi.GetGetMethod()?.Invoke(secondary, null);
+                if (priValue is null)
                 {
                     pi.GetSetMethod()?.Invoke(primary, new[] { secValue });
                 }
