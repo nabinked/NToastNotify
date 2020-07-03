@@ -21,13 +21,13 @@
   },
   "homepage": "https://github.com/nabinked/NToastNotify#readme",
   "devDependencies": {
-    "@types/toastr": "^2.1.35",
-    "awesome-typescript-loader": "5.2.1",
+    "@types/toastr": "^2.1.38",
+    "awesome-typescript-loader": "^5.2.1",
     "noty": "^3.2.0-beta",
-    "rimraf": "2.6.3",
+    "rimraf": "^3.0.2",
     "toastr": "^2.1.4",
-    "typescript": "3.3.1",
-    "webpack": "4.29.0",
-    "webpack-command": "0.4.2"
+    "typescript": "^3.9.6",
+    "webpack": "^4.43.0",
+    "webpack-command": "^0.5.0"
   }
 }
