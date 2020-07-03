@@ -7,13 +7,13 @@
     <RuntimeFrameworkName>Microsoft.AspNetCore.App</RuntimeFrameworkName>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <PackageReference Include="NToastNotify" Version="6.1.3" />
-  </ItemGroup>
+  </ItemGroup>-->
 
-   <!-- <ItemGroup>
-   // Comment out before pushing changes
+  <!--Comment out before pushing changes-->
+   <ItemGroup>
     <ProjectReference Include="..\..\src\NToastNotify.csproj" />
-  </ItemGroup>  -->
+  </ItemGroup>  
 
 </Project>

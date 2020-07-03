@@ -2,17 +2,14 @@
 import { Options as ToastrJsOptions } from './ToastrOptions'
 
 class NToastNotifyToastr extends NToastNotify {
-    showMessage(message: ToastMessage): void {
-        const args: any[] = [];
-        const options = message.options as ToastrJsOptions;
-
-        args.push(message.message);
-        args.push(options.title);
-        if (message.options) {
-            args.push(message.options);
-        }
+    showMessage({ message, options }: ToastMessage): void {
+        const { title, ...restOptions } = options as ToastrJsOptions;
         if (toastr) {
-            toastr[options.type.toLowerCase()](...args);
+            const displayMethod = toastr[options.type.toLowerCase() as ToastrType];
+            if (displayMethod)
+                displayMethod(message, title, restOptions);
+            else
+                console.warn('Invalid type: ' + options.type.toLowerCase())
         }
     }
     overrideLibDefaults(): void {
