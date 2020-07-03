@@ -5,7 +5,7 @@ namespace NToastNotify
 {
     public class NotyMessage : IToastMessage
     {
-        public NotyMessage(string message, LibraryOptions options = null)
+        public NotyMessage(string message, LibraryOptions? options = null)
         {
             Message = message;
             Options = options;
@@ -14,6 +14,6 @@ namespace NToastNotify
         public string Message { get; private set; }
         [JsonProperty]
         [JsonConverter(typeof(ConcreteTypeConverter<NotyOptions>))]
-        public LibraryOptions Options { get; private set; }
+        public LibraryOptions? Options { get; private set; }
     }
 }

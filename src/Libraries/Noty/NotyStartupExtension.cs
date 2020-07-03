@@ -13,8 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="nToastNotifyOptions"></param>
         /// <returns></returns>
         public static IMvcBuilder AddNToastNotifyNoty(this IMvcBuilder mvcBuilder,
-                                                        NotyOptions defaultOptions = null,
-                                                        NToastNotifyOption nToastNotifyOptions = null)
+                                                        NotyOptions? defaultOptions = null,
+                                                        NToastNotifyOption? nToastNotifyOptions = null)
         {
             nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
             var library = Utils.GetLibraryDetails<NotyLibrary>(nToastNotifyOptions, defaultOptions);
@@ -29,8 +29,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="nToastNotifyOptions"></param>
         /// <returns></returns>
         public static IMvcCoreBuilder AddNToastNotifyNoty(this IMvcCoreBuilder mvcBuilder,
-                                                            NotyOptions defaultOptions = null,
-                                                            NToastNotifyOption nToastNotifyOptions = null)
+                                                            NotyOptions? defaultOptions = null,
+                                                            NToastNotifyOption? nToastNotifyOptions = null)
         {
             nToastNotifyOptions = nToastNotifyOptions ?? new NToastNotifyOption();
             var library = Utils.GetLibraryDetails<NotyLibrary>(nToastNotifyOptions, defaultOptions);

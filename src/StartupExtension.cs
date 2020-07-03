@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
             where TNotificationImplementation : class, IToastNotification
         {
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
-            mvcBuilder?.AddRazorOptions(o =>
+            mvcBuilder.AddRazorOptions(o =>
             {
                 o.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
             });
@@ -41,11 +41,6 @@ namespace Microsoft.Extensions.DependencyInjection
                                                                                                     NToastNotifyOption nToastNotifyOptions)
             where TNotificationImplementation : class, IToastNotification
         {
-            if (mvcCoreBuilder == null)
-            {
-                return null;
-            }
-
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
             mvcCoreBuilder.AddRazorViewEngine(o =>
             {

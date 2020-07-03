@@ -25,29 +25,29 @@ namespace NToastNotify
             {
                 TypeNameHandling = TypeNameHandling.Auto
             };
-    }
+        }
 
         /// <summary>
         /// Gets or sets <see cref="ITempDataDictionary"/>/>.
         /// </summary>
-        private ITempDataDictionary TempData => _tempDataDictionaryFactory?.GetTempData(_httpContextAccessor.HttpContext);
+        private ITempDataDictionary TempData => _tempDataDictionaryFactory.GetTempData(_httpContextAccessor.HttpContext);
 
-        public T Get<T>(string key) where T : class
+        public T? Get<T>(string key) where T : class
         {
-            if (TempData.ContainsKey(key))
+            if (TempData.ContainsKey(key) && TempData[key] is string json)
             {
-                return JsonConvert.DeserializeObject<T>(TempData[key] as string);
+                return JsonConvert.DeserializeObject<T>(json);
             }
-            return default(T);
+            return null;
         }
 
-        public T Peek<T>(string key) where T : class
+        public T? Peek<T>(string key) where T : class
         {
-            if (TempData.ContainsKey(key))
+            if (TempData.ContainsKey(key) && TempData.Peek(key) is string json)
             {
-                return JsonConvert.DeserializeObject<T>(TempData.Peek(key) as string);
+                return JsonConvert.DeserializeObject<T>(json);
             }
-            return default(T);
+            return null;
         }
 
         public void Add(string key, object value)
