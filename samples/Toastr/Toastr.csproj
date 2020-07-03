@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NToastNotify" Version="6.1.3" />
+    <PackageReference Include="NToastNotify" Version="7.0.0" />
   </ItemGroup>
 
   <!--Comment before pushing changes-->
