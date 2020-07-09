@@ -221,6 +221,6 @@ public class HomeController : Controller
     }
 ```
 ## Possible Issue
- - [Cannot find compilation library location for package 'Microsoft.Win32.Registry](https://github.com/dotnet/core-setup/issues/2113)
+ - Toast not shown after POST-REDIRECT
  
-    **Fix** : https://github.com/dotnet/core-setup/issues/2113#issuecomment-337341068  
+ **FIX** If you are using CookieTempDataProvider (this is the default) you need to accept cookie policy prompt.
