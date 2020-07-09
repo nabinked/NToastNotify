@@ -1,0 +1,19 @@
+﻿@page
+@model Toastr.Pages.FormPostModel
+@{
+    ViewData["Title"] = "FormPost";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>FormPost</h1>
+<form method="post">
+    <div>
+        <label>Input</label>
+        <input name="input" type="text" />
+    </div>
+    <div>
+        <label>Redirect after post</label>
+        <input name="redirect" type="checkbox" />
+    </div>
+    <button type="submit">Submit</button>
+</form>
