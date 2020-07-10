@@ -224,3 +224,5 @@ public class HomeController : Controller
  - Toast not shown after POST-REDIRECT
  
  **FIX** If you are using CookieTempDataProvider (this is the default) you need to accept cookie policy prompt.
+
+# [Become a patreon](https://www.patreon.com/nabinkt)
