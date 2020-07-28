@@ -1,6 +1,6 @@
 ﻿@using NToastNotify.Helpers
 @model NToastNotify.Components.ToastNotificationViewModel
-<script src="~/NToastNotify/js/dist/@(Model.LibraryDetails.VarName).js?v=@Model.Hash"></script>
+<script src=@Url.Content(@Model.LibraryJsPath) type="text/javascript"></script>
 <script>
     if (nToastNotify) {
         nToastNotify.init({

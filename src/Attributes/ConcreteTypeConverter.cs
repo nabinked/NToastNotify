@@ -3,7 +3,7 @@ using System;
 
 namespace NToastNotify.Attributes
 {
-    internal class ConcreteTypeConverter<TConcrete> : JsonConverter
+    internal class ConcreteTypeConverter<TConcrete> : JsonConverter where TConcrete : new()
     {
         public override bool CanConvert(Type objectType)
         {
@@ -11,13 +11,13 @@ namespace NToastNotify.Attributes
             return true;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
             //explicitly specify the concrete type we want to create
-            return serializer.Deserialize<TConcrete>(reader);
+            return serializer.Deserialize<TConcrete>(reader) ?? new TConcrete();
         }
 
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
             //use the default serialization - it works fine
             serializer.Serialize(writer, value);

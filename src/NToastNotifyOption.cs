@@ -55,8 +55,8 @@
         /// </summary>
         public bool DisableAjaxToasts { get; set; } = false;
         #region LibraryDetails
-        public string ScriptSrc { get; set; }
-        public string StyleHref { get; set; }
+        public string? ScriptSrc { get; set; }
+        public string? StyleHref { get; set; }
         #endregion
     }
 }

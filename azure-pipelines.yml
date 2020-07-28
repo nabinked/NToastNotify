@@ -1,29 +1,84 @@
-pool:
-  name: Hosted VS2017
-  demands: npm
+jobs:
+  - job: Build_Library
+    pool:
+      vmImage: ubuntu-16.04
 
-steps:
-  - task: Npm@1
-    displayName: 'npm install'
-    inputs:
-      workingDir: src
-      verbose: false
+    variables:
+      buildConfiguration: Release
 
-  - task: Npm@1
-    displayName: 'npm build'
-    inputs:
-      command: custom
-      workingDir: src
-      verbose: false
-      customCommand: 'run build'
+    steps:
+      - task: Npm@1
+        displayName: "npm install"
+        inputs:
+          workingDir: src
+          verbose: false
 
-  - task: DotNetCoreCLI@2
-    displayName: 'dotnet build'
-    inputs:
-      arguments: '-c Release'
+      - task: Npm@1
+        displayName: "npm build"
+        inputs:
+          command: custom
+          workingDir: src
+          verbose: false
+          customCommand: "run build"
 
-  - task: DotNetCoreCLI@2
-    displayName: 'dotnet test'
-    inputs:
-      command: test
-      projects: 'tests/**/*.csproj'
+      - task: UseDotNet@2
+        inputs:
+          packageType: "sdk"
+          version: "3.1.301"
+
+      - task: DotNetCoreCLI@2
+        displayName: "Restore"
+        inputs:
+          command: restore
+
+      - task: DotNetCoreCLI@2
+        displayName: "Build"
+        inputs:
+          command: build
+          arguments: "-c $(buildConfiguration)"
+
+      - task: DotNetCoreCLI@2
+        displayName: "Test"
+        inputs:
+          command: test
+          projects: "tests/**/*.csproj"
+
+      - task: DotNetCoreCLI@2
+        displayName: "Pack"
+        condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+        inputs:
+          command: pack
+          configuration: $(buildConfiguration)
+          packagesToPack: "src/*.csproj"
+          nobuild: true
+          arguments: "-o $(Build.ArtifactStagingDirectory)"
+
+      - task: PublishBuildArtifacts@1
+        displayName: "Publish build artifact"
+        inputs:
+          artifactName: "package"
+  - job: Build_Samples
+    pool:
+      vmImage: ubuntu-16.04
+
+    variables:
+      buildConfiguration: Release
+
+    steps:
+      - task: Docker@2
+        displayName: "Docker push image noty"
+        inputs:
+          containerRegistry: "DockerHub"
+          repository: "nabinked/ntoastnotify-samples"
+          command: "buildAndPush"
+          Dockerfile: "samples/Noty/Dockerfile"
+          tags: "noty-$(Build.BuildId)"
+
+      - task: Docker@2
+        displayName: "Docker push image toastr"
+        inputs:
+          containerRegistry: "DockerHub"
+          repository: "nabinked/ntoastnotify-samples"
+          command: "buildAndPush"
+          Dockerfile: "samples/Toastr/Dockerfile"
+          tags: "toastr-$(Build.BuildId)"

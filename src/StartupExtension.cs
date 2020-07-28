@@ -2,10 +2,8 @@
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using NToastNotify;
-using NToastNotify.Helpers;
 using NToastNotify.MessageContainers;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -19,11 +17,6 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns></returns>
         public static IApplicationBuilder UseNToastNotify(this IApplicationBuilder builder)
         {
-            builder.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = Utils.GetEmbeddedFileProvider(),
-                RequestPath = new PathString("/ntoastnotify")
-            });
             builder.UseMiddleware<NtoastNotifyAjaxToastsMiddleware>();
             return builder;
         }
@@ -34,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
             where TNotificationImplementation : class, IToastNotification
         {
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
-            mvcBuilder?.AddRazorOptions(o =>
+            mvcBuilder.AddRazorOptions(o =>
             {
                 o.ViewLocationFormats.Add("/Views/Shared/{0}.cshtml");
             });
@@ -48,8 +41,6 @@ namespace Microsoft.Extensions.DependencyInjection
                                                                                                     NToastNotifyOption nToastNotifyOptions)
             where TNotificationImplementation : class, IToastNotification
         {
-            if (mvcCoreBuilder == null) return null;
-
             //This is a fix for Feature folders based project structure. Add the view location to ViewLocationExpanders.
             mvcCoreBuilder.AddRazorViewEngine(o =>
             {
@@ -71,13 +62,6 @@ namespace Microsoft.Extensions.DependencyInjection
             }
 
             #region Framework Services
-            //Add the file provider to the Razor view engine
-            var fileProvider = Utils.GetEmbeddedFileProvider();
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                options.FileProviders.Add(fileProvider);
-            });
-
             //Check if a TempDataProvider is already registered.
             var tempDataProvider = services.FirstOrDefault(d => d.ServiceType == typeof(ITempDataProvider));
             if (tempDataProvider == null)

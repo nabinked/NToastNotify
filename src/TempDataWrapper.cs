@@ -8,14 +8,14 @@ namespace NToastNotify
 {
     class TempDataWrapper : ITempDataWrapper
     {
-        private readonly HttpContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly JsonSerializerSettings _serializerSettings;
         private readonly ITempDataDictionaryFactory _tempDataDictionaryFactory;
 
         public TempDataWrapper(ITempDataDictionaryFactory tempDataDictionaryFactory, IHttpContextAccessor httpContextAccessor)
         {
             _tempDataDictionaryFactory = tempDataDictionaryFactory;
-            _context = httpContextAccessor.HttpContext;
+            _httpContextAccessor = httpContextAccessor;
             _serializerSettings = GetSerializerSettings();
         }
 
@@ -25,29 +25,29 @@ namespace NToastNotify
             {
                 TypeNameHandling = TypeNameHandling.Auto
             };
-    }
+        }
 
         /// <summary>
         /// Gets or sets <see cref="ITempDataDictionary"/>/>.
         /// </summary>
-        private ITempDataDictionary TempData => _tempDataDictionaryFactory?.GetTempData(_context);
+        private ITempDataDictionary TempData => _tempDataDictionaryFactory.GetTempData(_httpContextAccessor.HttpContext);
 
-        public T Get<T>(string key) where T : class
+        public T? Get<T>(string key) where T : class
         {
-            if (TempData.ContainsKey(key))
+            if (TempData.ContainsKey(key) && TempData[key] is string json)
             {
-                return JsonConvert.DeserializeObject<T>(TempData[key] as string);
+                return JsonConvert.DeserializeObject<T>(json);
             }
-            return default(T);
+            return null;
         }
 
-        public T Peek<T>(string key) where T : class
+        public T? Peek<T>(string key) where T : class
         {
-            if (TempData.ContainsKey(key))
+            if (TempData.ContainsKey(key) && TempData.Peek(key) is string json)
             {
-                return JsonConvert.DeserializeObject<T>(TempData.Peek(key) as string);
+                return JsonConvert.DeserializeObject<T>(json);
             }
-            return default(T);
+            return null;
         }
 
         public void Add(string key, object value)

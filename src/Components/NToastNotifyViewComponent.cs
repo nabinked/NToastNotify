@@ -2,7 +2,6 @@
 using NToastNotify.Components;
 using NToastNotify.Helpers;
 
-// ReSharper disable once CheckNamespace
 namespace NToastNotify
 {
     [ViewComponent(Name = "NToastNotify")]
@@ -21,15 +20,15 @@ namespace NToastNotify
 
         public IViewComponentResult Invoke()
         {
-            var model = new ToastNotificationViewModel
-            {
-                ToastMessagesJson = JsonOrUndefined(_toastNotification.ReadAllMessages()),
-                ResponseHeaderKey = Constants.ResponseHeaderKey,
-                RequestHeaderKey = Constants.RequestHeaderKey,
-                LibraryDetails = _library,
-                DisableAjaxToasts = _nToastNotifyOption.DisableAjaxToasts,
-                Hash = Utils.GetEmbeddedFileProvider().GetFileInfo($"js.dist.{_library.VarName}.js").LastModified.DateTime.ToString("yyyyMMddhhss")
-            };
+            var assemblyName = GetType().Assembly.GetName();
+            var model = new ToastNotificationViewModel(
+                toastMessagesJson: JsonOrUndefined(_toastNotification.ReadAllMessages()),
+                requestHeaderKey: Constants.RequestHeaderKey,
+                responseHeaderKey: Constants.ResponseHeaderKey,
+                libraryDetails: _library,
+                disableAjaxToasts: _nToastNotifyOption.DisableAjaxToasts,
+                libraryJsPath: $"~/_content/{assemblyName.Name}/{_library.VarName}.js?{assemblyName.Version}");
+
             return View("Default", model);
         }
 

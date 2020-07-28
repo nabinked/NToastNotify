@@ -6,7 +6,7 @@ namespace NToastNotify
 {
     public class ToastrMessage : IToastMessage
     {
-        public ToastrMessage(string message, ILibraryOptions options = null)
+        public ToastrMessage(string message, LibraryOptions? options = null)
         {
             Message = WebUtility.HtmlEncode(message);
             Options = options;
@@ -15,7 +15,7 @@ namespace NToastNotify
         public string Message { get; private set; }
         [JsonProperty]
         [JsonConverter(typeof(ConcreteTypeConverter<ToastrOptions>))]
-        public ILibraryOptions Options { get; private set; }
+        public LibraryOptions? Options { get; private set; }
 
     }
 }

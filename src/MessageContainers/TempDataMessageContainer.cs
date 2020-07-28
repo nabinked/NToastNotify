@@ -29,7 +29,7 @@ namespace NToastNotify.MessageContainers
 
         public IList<TMessage> GetAll()
         {
-            return _tempDataWrapper.Peek<List<TMessage>>(Key);
+            return _tempDataWrapper.Peek<List<TMessage>>(Key) ?? new List<TMessage>();
         }
 
         public IList<TMessage> ReadAll()

@@ -1,12 +1,14 @@
+[![Build Status](https://dev.azure.com/nabinked/NToastNotify/_apis/build/status/nabinked.NToastNotify?branchName=master)](https://dev.azure.com/nabinked/NToastNotify/_build/latest?definitionId=19&branchName=master)
+
 # Features
  - ##### Server side toast notification rendering.
  - ##### Toast notification on AJAX calls. XMLHTTPRequests - Full Support. fetch API - Partial Support (See sample).
  - ##### Supports Feature folder project structure.
  - ##### Supports multiple client libraries: toastr.js & noty.js. Can easily be extended to support more.
  
- # DEMO
-- ## [Noty](http://notyjs.azurewebsites.net/)
-- ## [Toastr](http://toastrjs.azurewebsites.net/)
+ # DEMOs
+- ## [Noty](http://noty.azurewebsites.net/) | [Source](/samples/Noty/) 
+- ## [Toastr](http://toastr.azurewebsites.net/) | [Source](/samples/Toastr/)
 
 # Get Started
 ## 1. Install From [Nuget](https://www.nuget.org/packages/NToastNotify/)
@@ -219,6 +221,8 @@ public class HomeController : Controller
     }
 ```
 ## Possible Issue
- - [Cannot find compilation library location for package 'Microsoft.Win32.Registry](https://github.com/dotnet/core-setup/issues/2113)
+ - Toast not shown after POST-REDIRECT
  
-    **Fix** : https://github.com/dotnet/core-setup/issues/2113#issuecomment-337341068  
+ **FIX** If you are using CookieTempDataProvider (this is the default) you need to accept cookie policy prompt.
+
+# [Become a patreon](https://www.patreon.com/nabinkt)

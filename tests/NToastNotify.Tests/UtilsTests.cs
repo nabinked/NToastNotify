@@ -55,22 +55,21 @@ namespace NToastNotify.Tests
 
         [Theory]
         [MemberData(nameof(DefaultOptionsData))]
-        public void ShouldSetOptions(ILibraryOptions libraryOptions, ILibraryOptions expected)
+        public void ShouldSetOptions(LibraryOptions libraryOptions, LibraryOptions expected)
         {
             //Act
             var result = Utils.GetLibraryDetails<ToastrLibrary>(null, libraryOptions);
 
             //Assert
-            Assert.Equal(expected.ToJson(), result.Options.ToJson());
+            Assert.Equal(expected.ToJson(), result.Options?.ToJson());
         }
 
         private static readonly ToastrLibrary ExpectedDefaultValue = new ToastrLibrary();
-        private static readonly ILibraryOptions ToastrOptions = new ToastrOptions();
+        private static readonly LibraryOptions ToastrOptions = new ToastrOptions();
 
         public static IEnumerable<object[]> ScriptScrData =>
             new List<object[]>
             {
-                new object[] {null, ExpectedDefaultValue.ScriptSrc},
                 new object[] {"", ExpectedDefaultValue.ScriptSrc},
                 new object[] {"dummyValue", "dummyValue"}
             };
@@ -78,7 +77,6 @@ namespace NToastNotify.Tests
         public static IEnumerable<object[]> StyleHrefData =>
             new List<object[]>
             {
-                new object[] {null, ExpectedDefaultValue.StyleHref},
                 new object[] {"", ExpectedDefaultValue.StyleHref},
                 new object[] {"dummyValue", "dummyValue"}
             };
@@ -86,7 +84,6 @@ namespace NToastNotify.Tests
         public static IEnumerable<object[]> DefaultOptionsData =>
             new List<object[]>
             {
-                new object[] {null, ExpectedDefaultValue.Options},
                 new object[] {ToastrOptions, ToastrOptions}
             };
     }
