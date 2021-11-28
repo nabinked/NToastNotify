@@ -1,7 +1,7 @@
 jobs:
   - job: Build_Library
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     variables:
       buildConfiguration: Release
@@ -59,7 +59,7 @@ jobs:
           artifactName: "package"
   - job: Build_Samples
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     variables:
       buildConfiguration: Release
