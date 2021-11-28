@@ -53,14 +53,14 @@ export abstract class NToastNotify {
                 const script = document.createElement('script');
                 script.setAttribute('src', this.options.libraryDetails.scriptSrc);
                 script.onload = () => {
-                    resolve();
+                    resolve(true);
                 };
                 script.onerror = (e) => {
                     reject(e);
                 };
                 document.head.appendChild(script);
             } else {
-                resolve();
+                resolve(true);
             }
         });
     }
@@ -72,14 +72,14 @@ export abstract class NToastNotify {
                 link.type = 'text/css';
                 link.href = this.options.libraryDetails.styleHref;
                 link.onload = () => {
-                    resolve();
+                    resolve(true);
                 };
                 link.onerror = (e) => {
                     reject(e);
                 };
                 document.head.appendChild(link);
             } else {
-                resolve();
+                resolve(true);
             }
         });
     }

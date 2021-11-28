@@ -34,7 +34,7 @@ namespace Noty
             });
 
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            services.AddMvc()
                 .AddNToastNotifyNoty(new NotyOptions
                 {
                     ProgressBar = true,

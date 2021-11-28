@@ -1,7 +1,7 @@
 jobs:
   - job: Build_Library
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     variables:
       buildConfiguration: Release
@@ -24,7 +24,7 @@ jobs:
       - task: UseDotNet@2
         inputs:
           packageType: "sdk"
-          version: "3.1.301"
+          version: "6.x"
 
       - task: DotNetCoreCLI@2
         displayName: "Restore"
@@ -59,7 +59,7 @@ jobs:
           artifactName: "package"
   - job: Build_Samples
     pool:
-      vmImage: ubuntu-16.04
+      vmImage: ubuntu-latest
 
     variables:
       buildConfiguration: Release

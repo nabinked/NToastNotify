@@ -1,5 +1,9 @@
 ﻿@using NToastNotify.Helpers
 @model NToastNotify.Components.ToastNotificationViewModel
+@{
+    if(Model is null)
+        throw new Exception();
+}
 <script src=@Url.Content(@Model.LibraryJsPath) type="text/javascript"></script>
 <script>
     if (nToastNotify) {

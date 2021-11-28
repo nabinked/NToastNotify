@@ -1,4 +1,5 @@
-﻿using NToastNotify;
+﻿using System;
+using NToastNotify;
 using NToastNotify.Helpers;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -12,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="defaultOptions"></param>
         /// <param name="nToastNotifyOptions"></param>
         /// <returns></returns>
+        [Obsolete("noty.js has been deprecated. Please use toastr instead")]
         public static IMvcBuilder AddNToastNotifyNoty(this IMvcBuilder mvcBuilder,
                                                         NotyOptions? defaultOptions = null,
                                                         NToastNotifyOption? nToastNotifyOptions = null)
@@ -28,6 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="defaultOptions"></param>
         /// <param name="nToastNotifyOptions"></param>
         /// <returns></returns>
+        [Obsolete("noty.js has been deprecated. Please use toastr instead")]
         public static IMvcCoreBuilder AddNToastNotifyNoty(this IMvcCoreBuilder mvcBuilder,
                                                             NotyOptions? defaultOptions = null,
                                                             NToastNotifyOption? nToastNotifyOptions = null)
