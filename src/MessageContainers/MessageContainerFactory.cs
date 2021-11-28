@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using Microsoft.AspNetCore.Http;
 using NToastNotify.Helpers;
 
 namespace NToastNotify.MessageContainers
@@ -19,14 +20,11 @@ namespace NToastNotify.MessageContainers
         public IMessageContainer<TMessage> Create<TMessage>()
             where TMessage : class, IToastMessage
         {
-            if (_httpContextAccessor.HttpContext.Request.IsNtoastNotifyAjaxRequest())
+            if (_httpContextAccessor.HttpContext?.Request.IsNtoastNotifyAjaxRequest() ?? throw new ArgumentNullException("HttpContext"))
             {
                 return new InMemoryMessageContainer<TMessage>();
             }
-            else
-            {
-                return new TempDataMessageContainer<TMessage>(_tempDataWrapper);
-            }
+            return new TempDataMessageContainer<TMessage>(_tempDataWrapper);
         }
     }
 }

@@ -3,8 +3,8 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RuntimeFrameworkName>Microsoft.AspNetCore.App</RuntimeFrameworkName>
+    <LangVersion>latest</LangVersion>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
