@@ -24,7 +24,7 @@ jobs:
       - task: UseDotNet@2
         inputs:
           packageType: "sdk"
-          version: "3.1.301"
+          version: "6.x"
 
       - task: DotNetCoreCLI@2
         displayName: "Restore"
