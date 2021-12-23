@@ -23,5 +23,13 @@ namespace NToastNotify
             Alert
 
         }
+        public enum NotificationTypesGeneric
+        {
+            Success,
+            Warning,
+            Info,
+            Error,
+            Custom
+        }
     }
 }

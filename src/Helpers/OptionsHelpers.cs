@@ -34,5 +34,12 @@ namespace NToastNotify.Helpers
             options.Title ??= defaultTitle;
             return options;
         }
+        public static TOption PrepareOptionsGeneric<TOption>(LibraryOptions? genericOptions, NotificationTypesGeneric type)
+             where TOption : GenericOptions, new()
+        {
+            var options = CastOptionTo<TOption>(genericOptions);
+            options.Type = type;
+            return options;
+        }
     }
 }
