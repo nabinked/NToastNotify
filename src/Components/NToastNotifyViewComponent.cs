@@ -18,7 +18,7 @@ namespace NToastNotify
             _nToastNotifyOption = nToastNotifyOption;
         }
 
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(string? nonce = null)
         {
             var assemblyName = GetType().Assembly.GetName();
             var model = new ToastNotificationViewModel(
@@ -27,7 +27,8 @@ namespace NToastNotify
                 responseHeaderKey: Constants.ResponseHeaderKey,
                 libraryDetails: _library,
                 disableAjaxToasts: _nToastNotifyOption.DisableAjaxToasts,
-                libraryJsPath: $"~/_content/{assemblyName.Name}/{_library.VarName}.js?{assemblyName.Version}");
+                libraryJsPath: $"~/_content/{assemblyName.Name}/{_library.VarName}.js?{assemblyName.Version}",
+                nonce: nonce);
 
             return View("Default", model);
         }

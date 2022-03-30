@@ -5,7 +5,7 @@
         throw new Exception();
 }
 <script src=@Url.Content(@Model.LibraryJsPath) type="text/javascript"></script>
-<script>
+<script nonce=@Model.Nonce>
     if (nToastNotify) {
         nToastNotify.init({
             firstLoadEvent: 'DOMContentLoaded',
