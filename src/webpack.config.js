@@ -7,7 +7,8 @@ module.exports = env => {
     return {
         entry: {
             toastr: './ts/toastr/NToastNotifyToastr.ts',
-            noty: './ts/noty/NToastNotifyNoty.ts'
+            noty: './ts/noty/NToastNotifyNoty.ts',
+            generic: './ts/generic/NToastNotifyGeneric.ts'
         },
         resolve: {
             extensions: ['.ts', '.js']
