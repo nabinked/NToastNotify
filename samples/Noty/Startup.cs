@@ -33,7 +33,7 @@ namespace Noty
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+#pragma warning disable 618
             services.AddMvc()
                 .AddNToastNotifyNoty(new NotyOptions
                 {

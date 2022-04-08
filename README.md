@@ -226,7 +226,12 @@ public class HomeController : Controller
  **FIX** If you are using CookieTempDataProvider (this is the default) you need to accept cookie policy prompt.
 
 ## Running the repo locally
-
+ - `npm install`
+ - `npm build`
+ - `dotnet restore`
+ - `dotnet build`
+ 
+ Run any sample project using `dotnet run` from sample project dir
 
 # [Become a patreon](https://www.patreon.com/nabinkt)
 
