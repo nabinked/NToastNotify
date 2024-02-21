@@ -34,5 +34,11 @@ namespace NToastNotify.Helpers
             options.Title ??= defaultTitle;
             return options;
         }
+        public static BootstrapOptions PrepareOptionsBootstrap(LibraryOptions? bootstrapOptions, NotificationTypesBootstrap type)
+        {
+            var options = CastOptionTo<BootstrapOptions>(bootstrapOptions);
+            options.Type = type;
+            return options;
+        }
     }
 }

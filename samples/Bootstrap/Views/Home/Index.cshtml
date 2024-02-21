@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<form asp-action="ShowToast">
+    <div class="mb-3">
+        <label for="toastText" class="form-label"></label>
+        <input name="Text" class="form-control" aria-describedby="toastText" id="toastText" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis rutrum.">
+    </div>
+
+    <button type="submit" class="btn btn-info" name="notificationTypesBootstrap" value="Info">Info</button>
+    <button type="submit" class="btn btn-primary" name="notificationTypesBootstrap" value="Alert">Alert</button>
+    <button type="submit" class="btn btn-success" name="notificationTypesBootstrap" value="Success">Success</button>
+    <button type="submit" class="btn btn-warning" name="notificationTypesBootstrap" value="Warning">Warning</button>
+    <button type="submit" class="btn btn-danger" name="notificationTypesBootstrap" value="Error">Error</button>
+</form>
