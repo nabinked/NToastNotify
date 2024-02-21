@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
     public static class ToastrStartupExtension
     {
         /// <summary>
-        /// Add Noty based toast notification services
+        /// Add Toastr based toast notification services
         /// </summary>
         /// <param name="mvcBuilder"></param>
         /// <param name="defaultOptions"></param>
@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Add Noty based toast notification services
+        /// Add Toastr based toast notification services
         /// </summary>
         /// <param name="mvcBuilder"></param>
         /// <param name="defaultOptions"></param>

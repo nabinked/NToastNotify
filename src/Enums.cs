@@ -21,7 +21,15 @@ namespace NToastNotify
             Info,
             Error,
             Alert
+        }
 
+        public enum NotificationTypesBootstrap
+        {
+            Success,
+            Warning,
+            Info,
+            Danger,
+            Primary
         }
     }
 }
